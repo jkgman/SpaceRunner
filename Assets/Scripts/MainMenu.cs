@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Basic menu behaviour
+/// </summary>
 public class MainMenu : MonoBehaviour {
 
     public AudioClip onPress;
 
-
     /// <summary>
-    /// Load the first scene
+    /// Loads the first scene
+    /// sfx for funzies
     /// </summary>
     public void StartGame()
     {
@@ -18,13 +21,21 @@ public class MainMenu : MonoBehaviour {
     }
 
     /// <summary>
-    /// Set volume to used audio sources
+    /// Mutes music audio source
     /// </summary>
     /// <param name="volume"></param>
-    public void SetVolume( float volume)
+    public void MuteMusic()
     {
-        SoundManager.Instance.sfxSource.volume = volume;
-        SoundManager.Instance.musicSource.volume = volume;
+        SoundManager.Instance.musicSource.mute = !SoundManager.Instance.musicSource.mute;
+    }
+
+    /// <summary>
+    /// Mutes sound effect audio source
+    /// </summary>
+    public void MuteSfx()
+    {
+        SoundManager.Instance.sfxSource.mute = !SoundManager.Instance.sfxSource.mute;
+        
     }
 
     /// <summary>

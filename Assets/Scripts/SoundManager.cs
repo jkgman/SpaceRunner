@@ -28,6 +28,10 @@ public class SoundManager : MonoBehaviour {
     }
 
 
+    /// <summary>
+    /// Plays the parameter clip once
+    /// </summary>
+    /// <param name="clip"></param>
     public void PlaySfx(AudioClip clip)
     {
         sfxSource.clip = clip;
@@ -35,6 +39,10 @@ public class SoundManager : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Loops the clip sent as parameter
+    /// </summary>
+    /// <param name="musicClip"></param>
     public void PlayMusic(AudioClip musicClip)
     {
         musicSource.clip = musicClip;
