@@ -114,7 +114,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   haztype: 1
-  player: {fileID: 0}
 --- !u!114 &114563451233814478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7297c762a37fd44285f8cc96b894ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestructInSec: 10
+  destructInSec: 8
 --- !u!136 &136623404895475814
 CapsuleCollider:
   m_ObjectHideFlags: 1
