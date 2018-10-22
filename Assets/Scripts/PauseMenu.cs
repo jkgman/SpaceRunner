@@ -13,6 +13,11 @@ public class PauseMenu : MonoBehaviour {
         Time.timeScale = 1;
     }
 
+    private void OnEnable()
+    {
+        Time.timeScale = 0;
+    }
+
     /// <summary>
     /// Stops the game
     /// </summary>
