@@ -17,6 +17,10 @@ public class PlayerHandle : MonoBehaviour {
     public float speed;
     public float gravity;
     private float vertVelocity;
+    private InputHandle input;
+    public float maxMovePerSecond;
+    public float movementDeadZone = 1;
+    public bool godMode = false;
     #endregion
 
     #region Implementations
@@ -26,19 +30,23 @@ public class PlayerHandle : MonoBehaviour {
     void Start () {
         character = GetComponent<CharacterController>();
         z = transform.position.z;
-	}
+        input = InputHandle.instance;
+        input.onMovement += MovementCalc;
+    }
 
     /// <summary>
     /// Calls Movement every frame, 
     /// and looks if weve lost too many speed levels to die
     /// </summary>
 	void Update () {
-        MovementCalc();
         if(speedLevel>= maxSpeedLevel)
         {
             Die();
         }
-
+        MovementCalc();
+            
+        
+        
     }
     #endregion
 
@@ -46,9 +54,15 @@ public class PlayerHandle : MonoBehaviour {
     /// <summary>
     /// Gets inputs and moves character accordingly
     /// </summary>
+    private void MovementCalc(Vector2 endPos, Vector2 direction, float distance) {
+        moveVector.x = (direction * distance).x * speed;
+        if(moveVector.x > -movementDeadZone && moveVector.x < movementDeadZone)
+        {
+            moveVector.x = 1* Mathf.Sign(moveVector.x);
+        }
+        Debug.Log("Start vector:" + moveVector.x);
+    }
     private void MovementCalc() {
-        moveVector = Vector3.zero;
-
         if(character.isGrounded)
         {
             vertVelocity = -.5f;
@@ -56,12 +70,17 @@ public class PlayerHandle : MonoBehaviour {
         {
             vertVelocity -= gravity * Time.deltaTime;
         }
-
-        moveVector.x = Input.GetAxisRaw("Horizontal") * speed;
+        if(moveVector.x > -movementDeadZone && moveVector.x < movementDeadZone)
+        {
+            moveVector.x = 0;
+        }
         moveVector.y = vertVelocity;
-
-        character.Move(moveVector * Time.deltaTime);
+        Vector3 move = new Vector3(Mathf.Min(Mathf.Abs(moveVector.x), maxMovePerSecond) * Mathf.Sign(moveVector.x), moveVector.y, moveVector.z)*Time.deltaTime;
+        character.Move(move);
         transform.position = new Vector3(transform.position.x, transform.position.y, z);
+        moveVector.x -= move.x;
+        Debug.Log("Updated vector:" + moveVector.x);
+        
     }
     #endregion
 
@@ -70,14 +89,20 @@ public class PlayerHandle : MonoBehaviour {
     /// adds count to speedlevel and adjusts the locked z
     /// </summary>
     public void Slow() {
-        speedLevel++;
-        z = z - speedLevelOffset;
+        if(!godMode)
+        {
+            speedLevel++;
+            z = z - speedLevelOffset;
+        }
     }
     /// <summary>
     /// Destroys game object and call game over sequence
     /// </summary>
     public void Die() {
-        Destroy(gameObject);
+        if(!godMode)
+        {
+            Destroy(gameObject);
+        }
     }
     #endregion
 }

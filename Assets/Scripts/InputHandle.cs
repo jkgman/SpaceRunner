@@ -21,6 +21,22 @@ public class InputHandle : MonoBehaviour {
     private float _touchDeltaTime;
     #endregion
 
+    #region Singleton and Delegate
+    public delegate void OnMovement(Vector2 endPos, Vector2 direction, float distance);
+    public OnMovement onMovement;
+    public static InputHandle instance;
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Debug.LogWarning("More than one instance of InputHandle found");
+            return;
+        }
+        instance = this;
+    }
+    #endregion
+
+
     // Use this for initialization
     void Start () {
         //Input.backButtonLeavesApp = true;
@@ -80,6 +96,7 @@ public class InputHandle : MonoBehaviour {
                     
                 }
                 _pointerParticle.gameObject.SetActive(false);
+                onMovement.Invoke(_touchEndPos, _swipeDir, _swipeLength);
             }
 
             // Finger movement was miniscule, assumed as tap
@@ -88,7 +105,7 @@ public class InputHandle : MonoBehaviour {
                 _touchEndPos = _touch.position;
                 Debug.Log("Tap input at " + _touchEndPos);
                 hasMoved = false;
-                
+                onMovement.Invoke(_touchEndPos, _swipeDir, _swipeLength);
             }
             _pointerParticle.transform.position = GetTouchPlanePos(_touch.position);
             _swipeLength = 0;

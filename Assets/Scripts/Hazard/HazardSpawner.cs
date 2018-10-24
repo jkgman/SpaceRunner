@@ -87,7 +87,7 @@ public class HazardSpawner : MonoBehaviour
                 Hazard hazard = Instantiate(Hazards[Random.Range(0, Hazards.Length)]);
                 hazard.transform.parent = rotater.transform;
                 hazard.transform.position = lanePoints[i] + rotater.transform.position;
-                hazard.transform.rotation = Quaternion.FromToRotation(Vector3.forward, Vector3.up);
+                hazard.transform.rotation = Quaternion.FromToRotation(Vector3.down, rotater.transform.position - hazard.transform.position);
                 hazard.Player = player;
             }
         }
