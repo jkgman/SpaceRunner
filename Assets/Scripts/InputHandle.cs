@@ -6,6 +6,7 @@ public class InputHandle : MonoBehaviour {
 
     #region public variables
     public ParticleSystem _pointerParticle;
+    [Tooltip("Multiplier for minimum swipe length based on screen width")]
     public float _swipeDeadzone;
     public GameObject _pause;
     #endregion
@@ -23,7 +24,7 @@ public class InputHandle : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //Input.backButtonLeavesApp = true;
-        
+        _swipeDeadzone = Screen.width * _swipeDeadzone;
     }
 
     // Update is called once per frame
@@ -82,7 +83,7 @@ public class InputHandle : MonoBehaviour {
             }
 
             // Finger movement was miniscule, assumed as tap
-            if (_touch.phase == TouchPhase.Ended && _swipeLength<30)
+            if (_touch.phase == TouchPhase.Ended && _swipeLength<_swipeDeadzone/4)
             {
                 _touchEndPos = _touch.position;
                 Debug.Log("Tap input at " + _touchEndPos);
@@ -100,7 +101,6 @@ public class InputHandle : MonoBehaviour {
         
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Debug.Log("escape");
             if (!_pause.activeSelf)
             {
                 _pause.SetActive(true);

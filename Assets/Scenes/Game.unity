@@ -578,7 +578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointerParticle: {fileID: 603934403}
-  _swipeDeadzone: 400
+  _swipeDeadzone: 0.25
   _pause: {fileID: 1407205554}
 --- !u!1 &328213689
 GameObject:
