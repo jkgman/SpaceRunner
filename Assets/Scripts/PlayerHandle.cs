@@ -21,6 +21,8 @@ public class PlayerHandle : MonoBehaviour {
     public float maxMovePerSecond;
     public float movementDeadZone = 1;
     public bool godMode = false;
+    public Vector3[] lanePoints;
+    private int currentLane = 2;
     #endregion
 
     #region Implementations
@@ -55,12 +57,41 @@ public class PlayerHandle : MonoBehaviour {
     /// Gets inputs and moves character accordingly
     /// </summary>
     private void MovementCalc(Vector2 endPos, Vector2 direction, float distance) {
-        moveVector.x = (direction * distance).x * speed;
-        if(moveVector.x > -movementDeadZone && moveVector.x < movementDeadZone)
+        //moveVector.x = (direction * distance).x * speed;
+
+        //gonna clean and move this later to inputhandle and only pass the type of swipe ie. left, up etc.
+        if( Mathf.Abs(direction.x )> Mathf.Abs(direction.y)) { 
+            if (direction.x > 0 )
+            {
+                if (currentLane+1 < lanePoints.Length)
+                {
+                    currentLane++;
+                }
+            } else if(direction.x < 0)
+            {
+                if (currentLane > 0)
+                {
+                    currentLane--;
+                }
+            }
+        } else
         {
-            moveVector.x = 1* Mathf.Sign(moveVector.x);
+            if (direction.y > 0)
+            {
+                
+                Debug.Log("Up");
+            }
+            else if (direction.y < 0)
+            {
+                Debug.Log("Down");
+            }
         }
-        Debug.Log("Start vector:" + moveVector.x);
+
+        //if (moveVector.x > -movementDeadZone && moveVector.x < movementDeadZone)
+        //{
+        //    moveVector.x = 1 * Mathf.Sign(moveVector.x);
+        //}
+        //Debug.Log("Start vector:" + moveVector.x);
     }
     private void MovementCalc() {
         if(character.isGrounded)
@@ -74,13 +105,27 @@ public class PlayerHandle : MonoBehaviour {
         {
             moveVector.x = 0;
         }
+
         moveVector.y = vertVelocity;
-        Vector3 move = new Vector3(Mathf.Min(Mathf.Abs(moveVector.x), maxMovePerSecond) * Mathf.Sign(moveVector.x), moveVector.y, moveVector.z)*Time.deltaTime;
-        character.Move(move);
+        //Vector3 move = new Vector3(Mathf.Min(Mathf.Abs(moveVector.x), maxMovePerSecond) * Mathf.Sign(moveVector.x), moveVector.y, moveVector.z) * Time.deltaTime;
+
+
+        Vector3 target = new Vector3( lanePoints[currentLane].x,moveVector.y, transform.position.z) ;
+        var offset = target - transform.position ;
+        //Get the difference.
+        if (offset.magnitude > .1f)
+        {
+            //If we're further away than .1 unit, move towards the target.
+            offset = offset.normalized * speed ;
+            //normalize it and account for movement speed.
+            character.Move(offset * Time.deltaTime * 10);
+        }
+
+
         transform.position = new Vector3(transform.position.x, transform.position.y, z);
-        moveVector.x -= move.x;
-        Debug.Log("Updated vector:" + moveVector.x);
-        
+        //moveVector.x -= move.x;
+        //Debug.Log("Updated vector:" + moveVector.x);
+
     }
     #endregion
 

@@ -39,6 +39,7 @@ public class HazardSpawner : MonoBehaviour
         rotater = GetComponent<Rotate>();
         PlaceLanes();
         Spawn();
+        player.lanePoints = lanePoints;
         rightGutter.transform.localPosition = new Vector3(-gutterWidth / 2, 0, 0);
         leftGutter.transform.localPosition = new Vector3(gutterWidth / 2, 0, 0);
     }

@@ -252,7 +252,7 @@ Prefab:
     - target: {fileID: 114906583333073432, guid: 7410741cd416e9142bdcc7d7694d3cf1,
         type: 2}
       propertyPath: speed
-      value: 0.033
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114906583333073432, guid: 7410741cd416e9142bdcc7d7694d3cf1,
         type: 2}
@@ -262,6 +262,16 @@ Prefab:
     - target: {fileID: 114906583333073432, guid: 7410741cd416e9142bdcc7d7694d3cf1,
         type: 2}
       propertyPath: godMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114906583333073432, guid: 7410741cd416e9142bdcc7d7694d3cf1,
+        type: 2}
+      propertyPath: gravity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 143007168105969094, guid: 7410741cd416e9142bdcc7d7694d3cf1,
+        type: 2}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -603,7 +613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointerParticle: {fileID: 603934403}
-  _swipeDeadzone: 0.25
+  _swipeDeadzone: 0.1
   _pause: {fileID: 1407205554}
 --- !u!1 &328213689
 GameObject:

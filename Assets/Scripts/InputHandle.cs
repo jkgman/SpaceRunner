@@ -37,6 +37,12 @@ public class InputHandle : MonoBehaviour {
     #endregion
 
 
+    //enum Swipetype { 
+    //    Right = 
+    //    Left,
+    //    Up
+    //};
+
     // Use this for initialization
     void Start () {
         //Input.backButtonLeavesApp = true;
@@ -61,7 +67,6 @@ public class InputHandle : MonoBehaviour {
         if (Input.touchCount > 0)
         {
             
-            _pointerParticle.gameObject.SetActive(true);
             Touch _touch = Input.GetTouch(0);
             //Beginning of touch, save pos and finger id to eliminate false swipe with other finger
             if (_touch.phase == TouchPhase.Began)
@@ -92,11 +97,9 @@ public class InputHandle : MonoBehaviour {
                 // Swipe was longer than publicly declared minimum length
                 if ( _swipeLength > _swipeDeadzone)
                 {
-                    Debug.Log("Succesful swipe in direction " + _swipeDir);
-                    
+                    onMovement.Invoke(_touchEndPos, _swipeDir, _swipeLength);
+                    //Debug.Log("Succesful swipe in direction " + _swipeDir);
                 }
-                _pointerParticle.gameObject.SetActive(false);
-                onMovement.Invoke(_touchEndPos, _swipeDir, _swipeLength);
             }
 
             // Finger movement was miniscule, assumed as tap
@@ -105,11 +108,12 @@ public class InputHandle : MonoBehaviour {
                 _touchEndPos = _touch.position;
                 Debug.Log("Tap input at " + _touchEndPos);
                 hasMoved = false;
-                onMovement.Invoke(_touchEndPos, _swipeDir, _swipeLength);
+                //onMovement.Invoke(_touchEndPos, _swipeDir, _swipeLength);
             }
-            _pointerParticle.transform.position = GetTouchPlanePos(_touch.position);
             _swipeLength = 0;
         }
+
+
     }
 
 
