@@ -13,24 +13,22 @@ public class Hazard : MonoBehaviour {
     #region Variables
     [SerializeField]
     private HazardType haztype;
+    public bool canSlideUnder = false;
+    public bool canJumpOver = false;
     private PlayerHandle player;
-    private float spawnDist;
-    #endregion
-
-    #region Getters and Setters
-    public PlayerHandle Player
-    {
-        private get {
-            return player;
-        }
-
-        set {
-            player = value;
-        }
-    }
+    public GameObject model;
+    public int Length;
+    public bool useOnlyOnce;
+    public bool hasPreferedLane;
+    public int preferedLane;
     #endregion
 
     #region Implementations
+    private void Start()
+    {
+        player = PlayerHandle.instance;
+        //Change collider for jumping and sliding
+    }
     /// <summary>
     /// When collided with player checks its hazard type and calls apropriate response in player class
     /// Then destroys self
@@ -42,14 +40,27 @@ public class Hazard : MonoBehaviour {
         {
             if(haztype == HazardType.Slow)
             {
-                Player.Slow();
+                player.Slow();
             } else
             {
-                Player.Die();
+                player.Die();
+            }
+            if(model)
+            {
+                Destroy(model);
             }
             Destroy(gameObject);
+            //or call destroy anim
         }
     }
     #endregion
-
+    public bool Traversible() {
+        if(canSlideUnder == true || canJumpOver == true)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
 }
