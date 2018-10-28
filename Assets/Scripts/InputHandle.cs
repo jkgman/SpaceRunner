@@ -37,8 +37,8 @@ public class InputHandle : MonoBehaviour {
     #endregion
 
 
-    //enum Swipetype { 
-    //    Right = 
+    //enum Swipetype {
+    //    Right =
     //    Left,
     //    Up
     //};
@@ -59,14 +59,14 @@ public class InputHandle : MonoBehaviour {
     /// <summary>
     /// Listen to touch gestures
     /// Minimum swipe length defined in public variables
-    /// particle in place as a visual cue for testing 
+    /// particle in place as a visual cue for testing
     /// In pixel lenghts, can be changed to get world positions and length with GetTouchPlanePos function
     /// </summary>
     private void TouchInput()
     {
         if (Input.touchCount > 0)
         {
-            
+
             Touch _touch = Input.GetTouch(0);
             //Beginning of touch, save pos and finger id to eliminate false swipe with other finger
             if (_touch.phase == TouchPhase.Began)
@@ -77,7 +77,7 @@ public class InputHandle : MonoBehaviour {
 
             }
             //Finger has moved since beginning of touch
-            else if (_touch.phase == TouchPhase.Moved && _fingerId == _touch.fingerId ) 
+            else if (_touch.phase == TouchPhase.Moved && _fingerId == _touch.fingerId )
             {
                 hasMoved = true;
 
@@ -88,7 +88,7 @@ public class InputHandle : MonoBehaviour {
                 _touchEndPos = _touch.position;
                 _swipeDir = (_touchEndPos - _touchStartPos).normalized;
                 _swipeLength = (_touchEndPos - _touchStartPos).magnitude;
-                
+
                 hasMoved = false;
                 //Debug.Log("Swipe ended" + _swipeEndPos);
                 //Debug.Log(" Direction " + _swipeDir);
@@ -119,7 +119,7 @@ public class InputHandle : MonoBehaviour {
 
     private void BackButton()
     {
-        
+
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             if (!_pause.activeSelf)
@@ -159,6 +159,6 @@ public class InputHandle : MonoBehaviour {
         return _touchPosN;
     }
 
-    
+
 
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 public class Distance : MonoBehaviour {
 
     #region Variables
-    private Rotate rotater;
+    private LevelController controller;
     private TextMeshProUGUI text;
     #endregion
 
@@ -18,12 +18,12 @@ public class Distance : MonoBehaviour {
     /// </summary>
     void Start () {
         text = gameObject.GetComponent<TextMeshProUGUI>();
-        rotater = FindObjectOfType<Rotate>();
+        controller = LevelController.instance;
         if(!text)
         {
             Debug.LogError("Distance Missing TextMeshProUGUI reference");
         }
-        if(!rotater)
+        if(!controller)
         {
             Debug.LogError("Distance Missing Rotater reference");
         }
@@ -33,7 +33,7 @@ public class Distance : MonoBehaviour {
     /// Update distance ran in ui
     /// </summary>
 	void Update () {
-        text.text = Mathf.RoundToInt(rotater.Distance) + " m";
+        text.text = Mathf.RoundToInt(controller.distance) + " m";
     }
     #endregion
 

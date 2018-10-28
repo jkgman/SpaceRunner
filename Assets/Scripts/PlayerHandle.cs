@@ -23,7 +23,42 @@ public class PlayerHandle : MonoBehaviour {
     public bool godMode = false;
     public Vector3[] lanePoints;
     private int currentLane = 2;
+    private bool control = false;
+
     #endregion
+
+    #region Singleton
+    public static PlayerHandle instance;
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Debug.LogWarning("More than one instance of player found");
+            return;
+        }
+        instance = this;
+    }
+    #endregion
+
+
+
+
+    public void ActivateControl(){
+        control = true;
+        z = transform.position.z;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     #region Implementations
     /// <summary>
@@ -31,24 +66,21 @@ public class PlayerHandle : MonoBehaviour {
     /// </summary>
     void Start () {
         character = GetComponent<CharacterController>();
-        z = transform.position.z;
         input = InputHandle.instance;
         input.onMovement += MovementCalc;
     }
 
     /// <summary>
-    /// Calls Movement every frame, 
+    /// Calls Movement every frame,
     /// and looks if weve lost too many speed levels to die
     /// </summary>
-	void Update () {
-        if(speedLevel>= maxSpeedLevel)
+	void Update()
+    {
+        if(speedLevel >= maxSpeedLevel)
         {
             Die();
         }
         MovementCalc();
-            
-        
-        
     }
     #endregion
 
@@ -60,7 +92,7 @@ public class PlayerHandle : MonoBehaviour {
         //moveVector.x = (direction * distance).x * speed;
 
         //gonna clean and move this later to inputhandle and only pass the type of swipe ie. left, up etc.
-        if( Mathf.Abs(direction.x )> Mathf.Abs(direction.y)) { 
+        if( Mathf.Abs(direction.x )> Mathf.Abs(direction.y)) {
             if (direction.x > 0 )
             {
                 if (currentLane+1 < lanePoints.Length)
@@ -78,7 +110,7 @@ public class PlayerHandle : MonoBehaviour {
         {
             if (direction.y > 0)
             {
-                
+
                 Debug.Log("Up");
             }
             else if (direction.y < 0)
@@ -94,12 +126,25 @@ public class PlayerHandle : MonoBehaviour {
         //Debug.Log("Start vector:" + moveVector.x);
     }
     private void MovementCalc() {
-        if(character.isGrounded)
+        if(control)
         {
-            vertVelocity = -.5f;
-        } else
-        {
-            vertVelocity -= gravity * Time.deltaTime;
+            if(character.isGrounded)
+            {
+                vertVelocity = -.5f;
+            } else
+            {
+                vertVelocity -= gravity * Time.deltaTime;
+            }
+            if(moveVector.x > -movementDeadZone && moveVector.x < movementDeadZone)
+            {
+                moveVector.x = 0;
+            }
+            moveVector.y = vertVelocity;
+            Vector3 move = new Vector3(Mathf.Min(Mathf.Abs(moveVector.x), maxMovePerSecond) * Mathf.Sign(moveVector.x), moveVector.y, moveVector.z) * Time.deltaTime;
+            character.Move(move);
+            transform.position = new Vector3(transform.position.x, transform.position.y, z);
+            moveVector.x -= move.x;
+            Debug.Log("Updated vector:" + moveVector.x);
         }
         if(moveVector.x > -movementDeadZone && moveVector.x < movementDeadZone)
         {
