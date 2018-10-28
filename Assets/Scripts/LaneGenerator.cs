@@ -16,7 +16,6 @@ public class LaneGenerator : MonoBehaviour {
 
     public void Generate(PlanetController planet)
     {
-        
         currentLaneCount = Mathf.Clamp(planet.laneCount, 1, maxLanes);
         for(int i = 0; i < currentLaneCount; i++)
         {

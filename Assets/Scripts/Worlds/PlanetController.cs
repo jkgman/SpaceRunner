@@ -20,6 +20,7 @@ public class PlanetController : MonoBehaviour {
     public HazardGroup hazardSet;
     public Vector3 playerPoint;
     private LevelController controller;
+
     void Start () {
         controller = LevelController.instance;
         rightGutter.transform.localPosition = new Vector3(-gutterWidth / 2, 0, 0);

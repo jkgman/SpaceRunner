@@ -38,6 +38,10 @@ public class Hazard : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
+            if(canSlideUnder && player.Sliding)
+            {
+                return;
+            }
             if(haztype == HazardType.Slow)
             {
                 player.Slow();

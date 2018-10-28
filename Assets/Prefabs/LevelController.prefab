@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1519506208357482}
+  m_IsPrefabAsset: 1
+--- !u!1 &1519506208357482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4888848404611470}
+  - component: {fileID: 65997658973605882}
+  - component: {fileID: 114737993585213554}
+  - component: {fileID: 114393548914776356}
+  - component: {fileID: 114182874324560960}
+  m_Layer: 0
+  m_Name: LevelController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4888848404611470
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519506208357482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2713668, y: 11.251639, z: 0.86185265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65997658973605882
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519506208357482}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 100, z: 100}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114182874324560960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519506208357482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a55f2b7cbde4a4489bcb03eac1b0c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaler: 0.05
+--- !u!114 &114393548914776356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519506208357482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f1ef4cc1528ec48bc6b570d9eb442c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LanePositions: []
+  maxLanes: 7
+  angleAroundPlanet: 90
+  currentLaneCount: 0
+--- !u!114 &114737993585213554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519506208357482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55eb5d7860b47e74d80c43ac8920e6cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  desiredLevelLength: 3
+  planets:
+  - {fileID: 1724643152847970, guid: c8340a90d6f12f842abdaafce76e9968, type: 2}
+  - {fileID: 1656613555312336, guid: 9aadd4a578c539e4091596e94778f2e2, type: 2}
+  - {fileID: 1533275058164668, guid: e2da2c892f2b2964594cd7ba3f79ae45, type: 2}
+  hazardSpawner: {fileID: 0}
+  distance: 0

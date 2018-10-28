@@ -73,6 +73,7 @@ ModelImporter:
     7400000: Default Take
     7400002: JUMP
     7400004: RUN
+    7400006: Slide
     9500000: //RootNode
     13700000: body
     2186277476908879412: ImportLogs
@@ -105,10 +106,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Default Take
-      takeName: Default Take
-      firstFrame: 0
-      lastFrame: 39
+      name: Slide
+      takeName: Slide
+      firstFrame: -1
+      lastFrame: 23
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
