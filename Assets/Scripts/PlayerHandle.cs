@@ -26,6 +26,7 @@ public class PlayerHandle : MonoBehaviour {
     private LaneGenerator lane;
     public Animator anim;
     public bool Sliding = false;
+    private LevelController controller;
     #endregion
 
     #region Singleton
@@ -54,6 +55,7 @@ public class PlayerHandle : MonoBehaviour {
     void Start () {
         lane = FindObjectOfType<LaneGenerator>();
         character = GetComponent<CharacterController>();
+        controller = LevelController.instance;
         input = InputHandle.instance;
         input.onMovement += MovementCalc;
     }
@@ -161,8 +163,10 @@ public class PlayerHandle : MonoBehaviour {
     /// Destroys game object and call game over sequence
     /// </summary>
     public void Die() {
+        
         if(!godMode)
         {
+            controller.FailPlanet();
             Destroy(gameObject);
         }
     }

@@ -100,12 +100,15 @@ public class LevelController : MonoBehaviour {
         player.ActivateControl();
     }
 
-    /*EndPlanet(){
-     * Hazard.Stop();
-     * planetsinLevel[currentPlanet].spawnLevelExit;
-     * 
-     * }
-     */
+    public void EndPlanet(){
+      //Hazard.Stop();
+      //planetsinLevel[currentPlanet].spawnLevelExit;
+      
+    }
+    public void FailPlanet() {
+        InputHandle.instance.Pause();
+    }
+     
 
     /*NextPlanet(){
      * Destroy(currentPlanet)

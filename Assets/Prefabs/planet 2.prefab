@@ -28,7 +28,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1656613555312336
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4115625337611418
 Transform:
   m_ObjectHideFlags: 1
@@ -273,15 +273,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneCount: 5
-  gutterWidth: 0.75
+  gutterWidth: 0.6
   rightGutter: {fileID: 1180391036189590}
   leftGutter: {fileID: 1841033013162152}
   rotVec: {x: -1, y: 0, z: 0}
-  speed: 15
+  speed: 20
   planetRadius: 10
   hazardSet: {fileID: 114843751915788868, guid: 2c6a815f85c3eda4893af84f2533f70f,
     type: 2}
   playerPoint: {x: 0, y: 0.5, z: -0.25}
+  modifier: 0.1
 --- !u!135 &135492699951458512
 SphereCollider:
   m_ObjectHideFlags: 1

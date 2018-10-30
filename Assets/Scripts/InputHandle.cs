@@ -115,7 +115,9 @@ public class InputHandle : MonoBehaviour {
 
 
     }
-
+    public void Pause() {
+        _pause.SetActive(true);
+    }
 
     private void BackButton()
     {

@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4402120499332618}
   - component: {fileID: 33066465211440914}
   - component: {fileID: 23161087201242658}
-  - component: {fileID: 114409402925561772}
   m_Layer: 0
   m_Name: Satellite
   m_TagString: Untagged
@@ -67,13 +66,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1498294315489084}
-  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -0.25, y: -0.2, z: 0}
-  m_LocalScale: {x: 35, y: 35, z: 35}
+  m_LocalRotation: {x: -0.59958375, y: -0.38774717, z: -0.56799006, w: 0.40931508}
+  m_LocalPosition: {x: 1.65, y: -0.13, z: 0.01}
+  m_LocalScale: {x: 70, y: 70, z: 70}
   m_Children: []
   m_Father: {fileID: 4082125635248898}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -111.36, y: -86.9, z: 0}
 --- !u!23 &23161087201242658
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -141,22 +140,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 4.3, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114409402925561772
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1498294315489084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 626673bb6b9eafd4e937097f35d6527c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPoint: {x: 0, y: 20, z: 0}
-  endPoint: {x: 0, y: -0.2, z: 0}
-  moveTimeLength: 2
 --- !u!114 &114759901634566038
 MonoBehaviour:
   m_ObjectHideFlags: 1

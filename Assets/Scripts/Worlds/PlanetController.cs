@@ -20,7 +20,8 @@ public class PlanetController : MonoBehaviour {
     public HazardGroup hazardSet;
     public Vector3 playerPoint;
     private LevelController controller;
-
+    public float modifier= .1f;
+    private float currentSpeed;
     void Start () {
         controller = LevelController.instance;
         rightGutter.transform.localPosition = new Vector3(-gutterWidth / 2, 0, 0);
@@ -30,11 +31,13 @@ public class PlanetController : MonoBehaviour {
 	
 	
 	void Update () {
+        currentSpeed = speed + (distance * modifier);
         if(track)
         {
-            controller.distance += circumfrence * (speed * Time.deltaTime / 360);
+            controller.distance += circumfrence * (currentSpeed * Time.deltaTime / 360);
+            distance = controller.distance;
         }
-        transform.Rotate(rotVec * speed * Time.deltaTime);
+        transform.Rotate(rotVec * currentSpeed * Time.deltaTime);
     }
 
     public void Begin(){
