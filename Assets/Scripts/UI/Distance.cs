@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 /// <summary>
-/// Displays Rotater distance to a textmesh pro text object
+/// Displays distance ran to a textmesh pro text object
 /// </summary>
 public class Distance : MonoBehaviour {
 
@@ -33,7 +33,7 @@ public class Distance : MonoBehaviour {
     /// Update distance ran in ui
     /// </summary>
 	void Update () {
-        text.text = Mathf.RoundToInt(controller.distance) + " m";
+        text.text = Mathf.RoundToInt(controller.Distance) + " m";
     }
     #endregion
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// Destroy object after DestructInSeconds
+/// Destroy object after DestructInSeconds 
 /// </summary>
 public class SelfDestruct : MonoBehaviour {
 
@@ -13,9 +13,6 @@ public class SelfDestruct : MonoBehaviour {
     #endregion
 
     #region Implementations
-    /// <summary>
-    /// Track elapsed time and destroy self after it passed DestructInSeconds
-    /// </summary>
     void Update () {
         time += Time.deltaTime;
         if(time>=destructInSec)

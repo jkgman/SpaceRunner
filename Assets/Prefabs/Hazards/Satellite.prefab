@@ -156,8 +156,7 @@ MonoBehaviour:
   haztype: 0
   canSlideUnder: 1
   canJumpOver: 0
-  model: {fileID: 1498294315489084}
-  Length: 2
+  length: 2
   useOnlyOnce: 1
   hasPreferedLane: 1
   preferedLane: 0

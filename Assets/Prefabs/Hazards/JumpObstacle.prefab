@@ -9,76 +9,77 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1708826834093616}
+  m_RootGameObject: {fileID: 1561674293290864}
   m_IsPrefabAsset: 1
---- !u!1 &1177902726640098
+--- !u!1 &1561674293290864
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4794013311816128}
-  - component: {fileID: 33287322175860934}
-  - component: {fileID: 23138992657159104}
+  - component: {fileID: 4057391321328952}
+  - component: {fileID: 65323087176517942}
+  - component: {fileID: 54987185942472802}
+  - component: {fileID: 114869487537121816}
   m_Layer: 0
-  m_Name: Rock4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1708826834093616
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4189696507921542}
-  - component: {fileID: 54702861066255868}
-  - component: {fileID: 114979195905649648}
-  - component: {fileID: 65900364411144878}
-  m_Layer: 0
-  m_Name: Rock 4
+  m_Name: JumpObstacle
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4189696507921542
+--- !u!1 &1820339733051234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4823869499217736}
+  - component: {fileID: 33705558021488214}
+  - component: {fileID: 23348806594213306}
+  - component: {fileID: 65563749886278208}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4057391321328952
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1708826834093616}
+  m_GameObject: {fileID: 1561674293290864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.742, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4794013311816128}
+  - {fileID: 4823869499217736}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4794013311816128
+--- !u!4 &4823869499217736
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1177902726640098}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.036, y: -0.2, z: 0}
-  m_LocalScale: {x: 30, y: 30, z: 30}
+  m_GameObject: {fileID: 1820339733051234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.22, z: 1}
   m_Children: []
-  m_Father: {fileID: 4189696507921542}
+  m_Father: {fileID: 4057391321328952}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23138992657159104
+--- !u!23 &23348806594213306
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1177902726640098}
+  m_GameObject: {fileID: 1820339733051234}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -88,7 +89,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: c589ab05a1535444f895817aadcd4f71, type: 2}
+  - {fileID: 2100000, guid: 1fab31012fee2fa4d8c4f53f31065572, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,19 +109,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33287322175860934
+--- !u!33 &33705558021488214
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1177902726640098}
-  m_Mesh: {fileID: 4300000, guid: d8b82d7a995e51a4eaa8804619f49b4f, type: 3}
---- !u!54 &54702861066255868
+  m_GameObject: {fileID: 1820339733051234}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54987185942472802
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1708826834093616}
+  m_GameObject: {fileID: 1561674293290864}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -130,32 +131,44 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65900364411144878
+--- !u!65 &65323087176517942
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1708826834093616}
+  m_GameObject: {fileID: 1561674293290864}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.29, z: 0}
+--- !u!65 &65563749886278208
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820339733051234}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114979195905649648
+--- !u!114 &114869487537121816
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1708826834093616}
+  m_GameObject: {fileID: 1561674293290864}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1dea5900b941d8947a19a7afac071c2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  haztype: 0
+  haztype: 1
   canSlideUnder: 0
-  canJumpOver: 0
+  canJumpOver: 1
   length: 1
   useOnlyOnce: 0
   hasPreferedLane: 0

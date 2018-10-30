@@ -1,20 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Handles transition from one planet to another
+/// </summary>
 public class TransitionController : MonoBehaviour {
 
-    public float scaler;
+    #region Variables
+    [SerializeField, Tooltip("Determines transition speed")]
+    private float scaler;
     LevelController level;
+    #endregion
 
+    #region Implementations
     private void Start()
     {
         level = LevelController.instance;
     }
+    #endregion
+
+    #region Public Functions
+    /// <summary>
+    /// Transitions player from current position to planet based on distance and calls level begin
+    /// </summary>
+    /// <param name="planet"></param>
+    /// <param name="player"></param>
     public void ToWorld(PlanetController planet, PlayerHandle player) {
         StartCoroutine(Mover(planet, player));
     }
+    #endregion
 
+    #region Coroutines
     IEnumerator Mover(PlanetController planet, PlayerHandle player) {
         float time = 0;
         Vector3 start = player.transform.position;
@@ -26,6 +42,8 @@ public class TransitionController : MonoBehaviour {
             player.transform.position = Vector3.Lerp(start, end, time / (totalDist * scaler));
             yield return null;
         }
+        //TODO: call a landdown animation here
         level.Begin();
     }
+    #endregion
 }
