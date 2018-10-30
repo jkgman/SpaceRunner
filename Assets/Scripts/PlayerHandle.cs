@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerHandle : MonoBehaviour {
 
     #region Variables
+    //TODO: add descriptions for exposed vars
     private CharacterController character;
     private Vector3 moveVector;
     private float z;
@@ -25,7 +26,8 @@ public class PlayerHandle : MonoBehaviour {
     private bool control = false;
     private LaneGenerator lane;
     public Animator anim;
-    public bool Sliding = false;
+    public bool sliding = false;
+    public bool jumping = false;
     private LevelController controller;
     #endregion
 
@@ -42,15 +44,9 @@ public class PlayerHandle : MonoBehaviour {
     }
     #endregion
 
-
-    public void ActivateControl(){
-        control = true;
-        z = transform.position.z;
-    }
-
     #region Implementations
     /// <summary>
-    /// get references, and set initial z
+    /// get references, set initial z, and subscribes this class to input
     /// </summary>
     void Start () {
         lane = FindObjectOfType<LaneGenerator>();
@@ -74,10 +70,6 @@ public class PlayerHandle : MonoBehaviour {
     }
     #endregion
 
-
-
-
-
     #region Private Functions
     /// <summary>
     /// Gets inputs and moves character accordingly
@@ -86,14 +78,12 @@ public class PlayerHandle : MonoBehaviour {
         //moveVector.x = (direction * distance).x * speed;
         if(control)
         {
-
-
             //gonna clean and move this later to inputhandle and only pass the type of swipe ie. left, up etc.
             if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             {
                 if(direction.x > 0)
                 {
-                    if(currentLane + 1 < lane.currentLaneCount)
+                    if(currentLane + 1 < lane.CurrentLaneCount)
                     {
                         currentLane++;
                     }
@@ -109,7 +99,7 @@ public class PlayerHandle : MonoBehaviour {
                 if(direction.y > 0)
                 {
 
-                    Debug.Log("Up");
+                    StartCoroutine("Jump");
                 } else if(direction.y < 0)
                 {
                     StartCoroutine("Slide");
@@ -126,12 +116,10 @@ public class PlayerHandle : MonoBehaviour {
     private void MovementCalc() {
         if(control)
         {
-
             if(moveVector.x > -movementDeadZone && moveVector.x < movementDeadZone)
             {
                 moveVector.x = 0;
             }
-
             moveVector.y = -gravity;
             Vector3 target = new Vector3(lane.LanePositions[currentLane].x, transform.position.y + moveVector.y, transform.position.z);
             var offset = target - transform.position;
@@ -150,7 +138,17 @@ public class PlayerHandle : MonoBehaviour {
 
     #region Public Functions
     /// <summary>
-    /// adds count to speedlevel and adjusts the locked z
+    /// Activates control inputs and sets the current Z reference
+    /// </summary>
+    public void ActivateControl() {
+        control = true;
+        z = transform.position.z;
+    }
+    public void DeactivateControl() {
+        control = false;
+    }
+    /// <summary>
+    /// Adds count to speedlevel and adjusts the locked z
     /// </summary>
     public void Slow() {
         if(!godMode)
@@ -163,7 +161,6 @@ public class PlayerHandle : MonoBehaviour {
     /// Destroys game object and call game over sequence
     /// </summary>
     public void Die() {
-        
         if(!godMode)
         {
             controller.FailPlanet();
@@ -172,15 +169,32 @@ public class PlayerHandle : MonoBehaviour {
     }
     #endregion
 
-
+    #region Coroutines
+    //todo: see if i can make this with passing in the animation name and a reference to a bool
+    //These both play an animation and set a bool on while doing so
     IEnumerator Slide()
     {
         float time = 0;
         anim.Play("Slide");
-        Sliding = true;
-        while(!anim.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+        sliding = true;
+        while(anim.GetCurrentAnimatorStateInfo(0).length > time)
         {
+            time += Time.deltaTime;
             yield return null;
         }
+        sliding = false;
     }
+    IEnumerator Jump()
+    {
+        float time = 0;
+        anim.Play("Jump");
+        jumping = true;
+        while(anim.GetCurrentAnimatorStateInfo(0).length > time)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+        jumping = false;
+    }
+    #endregion
 }

@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1519506208357482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2713668, y: 11.251639, z: 0.86185265}
+  m_LocalPosition: {x: 0, y: 0, z: 15.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,7 +53,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 50, y: 100, z: 100}
+  m_Size: {x: 31.11, y: 70.8, z: 147.09}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114182874324560960
 MonoBehaviour:
@@ -78,10 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f1ef4cc1528ec48bc6b570d9eb442c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LanePositions: []
-  maxLanes: 7
   angleAroundPlanet: 90
-  currentLaneCount: 0
 --- !u!114 &114737993585213554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,4 +96,5 @@ MonoBehaviour:
   - {fileID: 1656613555312336, guid: 9aadd4a578c539e4091596e94778f2e2, type: 2}
   - {fileID: 1533275058164668, guid: e2da2c892f2b2964594cd7ba3f79ae45, type: 2}
   hazardSpawner: {fileID: 0}
-  distance: 0
+  initialDistBetweenWorldChange: 100
+  worldChangeScaler: 1

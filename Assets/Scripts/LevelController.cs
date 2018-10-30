@@ -1,27 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/// <summary>
+/// controlls the game state
+/// </summary>
 [RequireComponent(typeof(BoxCollider),typeof(LaneGenerator),typeof(TransitionController))]
 public class LevelController : MonoBehaviour {
 
+    #region Variables
     [SerializeField]
     private int desiredLevelLength;
     [SerializeField]
     private GameObject[] planets;//pool of total planets
-
     private GameObject[] planetsToSpawn;//planets selected to spawn
     private PlanetController[] planetsInLevel;//planets once spawned
     private BoxCollider spawnCollider;
-
     private LaneGenerator lane;
     private TransitionController transitionController;
     [SerializeField]
     private HazardSpawner hazardSpawner;
     private PlayerHandle player;
-    private int currentPlanet = -1;
-    public float distance;
+    private int currentPlanet;
+    private float distance;
+    public float initialDistBetweenWorldChange;
+    public float worldChangeScaler;
 
-    #region Singleton and Delegate
+    public float Distance
+    {
+        get {
+            return distance;
+        }
+
+        set {
+            distance = value;
+        }
+    }
+    #endregion
+
+    #region Singleton
     public static LevelController instance;
     private void Awake()
     {
@@ -34,6 +50,7 @@ public class LevelController : MonoBehaviour {
     }
     #endregion
 
+    #region Implementations
     void Start () {
         lane = GetComponent<LaneGenerator>();
         transitionController = GetComponent<TransitionController>();
@@ -44,15 +61,84 @@ public class LevelController : MonoBehaviour {
         BeginPlanet(planetsInLevel[0], player);
     }
 
+    //Switches planets after a certain distance
+    void Update()
+    {
+        if(Distance > initialDistBetweenWorldChange + initialDistBetweenWorldChange * currentPlanet * worldChangeScaler)
+        {
+            if(planetsInLevel.Length > currentPlanet + 1)
+            {
+                EndPlanet();
+            }
+        }
+    }
+
+    // Shows the spawning box for planets
+    private void OnDrawGizmos()
+    {
+        if(spawnCollider)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawCube(spawnCollider.center + transform.position, spawnCollider.size);
+        } else
+        {
+            spawnCollider = GetComponent<BoxCollider>();
+        }
+    }
+    #endregion
+
+    #region public Functions
+    /// <summary>
+    /// returns current planet that were on or that were headed to
+    /// </summary>
+    /// <returns></returns>
     public PlanetController GetCurrentPlanet() {
         return planetsInLevel[currentPlanet];
     }
-    void Update () {
-        //if(Distance > worlddistance * multiplier){
-        //    EndPlanet(); 
-        //}
+
+    /// <summary>
+    /// Starts planet tracking, hazards spawning, and activates player control
+    /// </summary>
+    public void Begin()
+    {
+        planetsInLevel[currentPlanet].Begin();
+        hazardSpawner.Begin();
+        player.ActivateControl();
     }
 
+    /// <summary>
+    /// Stops planet tracking hazard spawning and increase the planet were on
+    /// </summary>
+    public void EndPlanet()
+    {
+        hazardSpawner.Stop();
+        planetsInLevel[currentPlanet].End();
+        currentPlanet++;
+    }
+
+    /// <summary>
+    /// Calls whatever fail state we want
+    /// </summary>
+    public void FailPlanet()
+    {
+        //TODO: add a fail state
+        InputHandle.instance.Pause();
+    }
+
+    /// <summary>
+    /// Calls to set up next planet and begin next planet after
+    /// </summary>
+    public void NextPlanet()
+    {
+        SetupPlanet(planetsInLevel[currentPlanet]);
+        BeginPlanet(planetsInLevel[currentPlanet], player);
+    }
+    #endregion
+
+    #region Private Functions
+    /// <summary>
+    /// Shuffles our list of planets and calls generate
+    /// </summary>
     void ShufflePlanets(int levelLength){
         planetsToSpawn = new GameObject[levelLength];
         planetsInLevel = new PlanetController[levelLength];
@@ -67,8 +153,14 @@ public class LevelController : MonoBehaviour {
         }
     }
 
-
-    void GenerateLevelField(GameObject[] planets, BoxCollider spawnArea){
+    /// <summary>
+    /// Picks a list of planets from the array to spawn and add to planetsInLevel. Spwaning randomly in field
+    /// </summary>
+    /// <param name="planets"></param>
+    /// <param name="spawnArea"></param>
+    void GenerateLevelField(GameObject[] planets, BoxCollider spawnArea)
+    {
+        //TODO: make sure the planets dont spawn closer than radius
         Vector3[] planetsPos = new Vector3[planets.Length];
         for(int i = 0; i < planets.Length; i++)
         {
@@ -82,50 +174,27 @@ public class LevelController : MonoBehaviour {
         }
         SetupPlanet(planetsInLevel[0]);
     }
-     
 
-    void SetupPlanet(PlanetController planet){
+
+    /// <summary>
+    /// tells lane and hazards to generate accourding to passed in planet
+    /// </summary>
+    /// <param name="planet"></param>
+    void SetupPlanet(PlanetController planet)
+    {
         lane.Generate(planet);
         hazardSpawner.Generate(planet);
     }
-     
 
-    void BeginPlanet(PlanetController planet, PlayerHandle player){
-        transitionController.ToWorld(planet, player);
-        currentPlanet++;
-    }
-    public void Begin() {
-        planetsInLevel[currentPlanet].Begin();
-        hazardSpawner.Begin();
-        player.ActivateControl();
-    }
-
-    public void EndPlanet(){
-      //Hazard.Stop();
-      //planetsinLevel[currentPlanet].spawnLevelExit;
-      
-    }
-    public void FailPlanet() {
-        InputHandle.instance.Pause();
-    }
-     
-
-    /*NextPlanet(){
-     * Destroy(currentPlanet)
-     * SetUpPlanet(currentplanet++)
-     * BeginPlanet(currentplanet++);
-     * }
-     */
-    private void OnDrawGizmos()
+    /// <summary>
+    /// call transition to planet
+    /// </summary>
+    /// <param name="planet"></param>
+    /// <param name="player"></param>
+    void BeginPlanet(PlanetController planet, PlayerHandle player)
     {
-        if(spawnCollider)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawCube(spawnCollider.center + transform.position, spawnCollider.size);
-        } else
-        {
-            spawnCollider = GetComponent<BoxCollider>();
-        }
+        transitionController.ToWorld(planet, player);
     }
+    #endregion
 
 }
