@@ -74,11 +74,11 @@ public class PlayerHandle : MonoBehaviour {
     /// <summary>
     /// Gets inputs and moves character accordingly
     /// </summary>
-    private void MovementCalc(Vector2 endPos, Vector2 direction, float distance) {
-        //moveVector.x = (direction * distance).x * speed;
+    private void MovementCalc( Vector2 endPos, Vector2 direction, float distance) {
         if(control)
         {
-            //gonna clean and move this later to inputhandle and only pass the type of swipe ie. left, up etc.
+            
+            
             if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             {
                 if(direction.x > 0)
@@ -98,19 +98,12 @@ public class PlayerHandle : MonoBehaviour {
             {
                 if(direction.y > 0)
                 {
-
                     StartCoroutine("Jump");
                 } else if(direction.y < 0)
                 {
                     StartCoroutine("Slide");
                 }
             }
-
-            //if (moveVector.x > -movementDeadZone && moveVector.x < movementDeadZone)
-            //{
-            //    moveVector.x = 1 * Mathf.Sign(moveVector.x);
-            //}
-            //Debug.Log("Start vector:" + moveVector.x);
         }
     }
     private void MovementCalc() {

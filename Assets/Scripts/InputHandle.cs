@@ -17,7 +17,9 @@ public class InputHandle : MonoBehaviour {
     private Vector2 _swipeDir;
     private float _swipeLength;
     private int _fingerId;
+    private bool isNewSwipe = false;
     private bool hasMoved = false;
+    private bool swiped = false;
     private float _touchDeltaTime;
     #endregion
 
@@ -37,11 +39,7 @@ public class InputHandle : MonoBehaviour {
     #endregion
 
 
-    //enum Swipetype {
-    //    Right =
-    //    Left,
-    //    Up
-    //};
+
 
     // Use this for initialization
     void Start () {
@@ -66,55 +64,57 @@ public class InputHandle : MonoBehaviour {
     {
         if (Input.touchCount > 0)
         {
-
+            
             Touch _touch = Input.GetTouch(0);
             //Beginning of touch, save pos and finger id to eliminate false swipe with other finger
             if (_touch.phase == TouchPhase.Began)
             {
                 _fingerId = _touch.fingerId;
                 _touchStartPos = _touch.position;
-                //Debug.Log("Swipe begun" + _touchStartPos);
+                isNewSwipe = true;
 
             }
             //Finger has moved since beginning of touch
-            else if (_touch.phase == TouchPhase.Moved && _fingerId == _touch.fingerId )
+            else if (_touch.phase == TouchPhase.Moved && _fingerId == _touch.fingerId && isNewSwipe )
             {
                 hasMoved = true;
+                Vector2 _tempTouchEndPos = _touch.position;
+                float _length = (_tempTouchEndPos - _touchStartPos).magnitude;
+                if (_length > _swipeDeadzone) {
+                    swiped = true;
+                }
+            }
 
+
+            // Finger movement was miniscule, assumed as tap
+            if (_touch.phase == TouchPhase.Ended && _swipeLength < _swipeDeadzone / 4 && !swiped && _fingerId == _touch.fingerId && isNewSwipe)
+            {
+                isNewSwipe = false;
+                Debug.Log("Tap input at " + _touchEndPos);
             }
             //touch ended with the same finger it was started and was confirmed to be have moved
-            else if (_touch.phase == TouchPhase.Ended && hasMoved && _fingerId == _touch.fingerId)
+             else if (swiped && hasMoved && _fingerId == _touch.fingerId && isNewSwipe)
             {
+                
                 _touchEndPos = _touch.position;
                 _swipeDir = (_touchEndPos - _touchStartPos).normalized;
                 _swipeLength = (_touchEndPos - _touchStartPos).magnitude;
-
+                _touchEndPos = _touchStartPos;
                 hasMoved = false;
-                //Debug.Log("Swipe ended" + _swipeEndPos);
-                //Debug.Log(" Direction " + _swipeDir);
-                //Debug.Log("Length " + _swipeLength);
-
+                swiped = false;
+                isNewSwipe = false;
+                
                 // Swipe was longer than publicly declared minimum length
                 if ( _swipeLength > _swipeDeadzone)
                 {
                     onMovement.Invoke(_touchEndPos, _swipeDir, _swipeLength);
-                    //Debug.Log("Succesful swipe in direction " + _swipeDir);
-                }
+                    _swipeLength = 0;
+                }   
             }
-
-            // Finger movement was miniscule, assumed as tap
-            if (_touch.phase == TouchPhase.Ended && _swipeLength<_swipeDeadzone/4)
-            {
-                _touchEndPos = _touch.position;
-                Debug.Log("Tap input at " + _touchEndPos);
-                hasMoved = false;
-                //onMovement.Invoke(_touchEndPos, _swipeDir, _swipeLength);
-            }
-            _swipeLength = 0;
         }
-
-
     }
+
+
     public void Pause() {
         _pause.SetActive(true);
     }
