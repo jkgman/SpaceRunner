@@ -5,17 +5,21 @@ using UnityEngine;
 public class Collectable : MonoBehaviour {
 
     public CollectableType type;
+    public AudioClip _cue;
 
     public enum CollectableType
     {
         Coin,
-        SpeedUp,
+        SlowDown,
+        Magnet,
+        Invincibility
 
     }
 
     public virtual void Pickup()
     {
-        ItemManager.instance.AddToInv(this);
+        //SoundManager.Instance.PlaySfx(_cue);
+        ItemManager.instance.SendCollectionMessage(type);
         Destroy(gameObject);
     }
 

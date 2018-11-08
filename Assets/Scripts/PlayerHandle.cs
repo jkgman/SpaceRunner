@@ -54,6 +54,7 @@ public class PlayerHandle : MonoBehaviour {
         controller = LevelController.instance;
         input = InputHandle.instance;
         input.onMovement += MovementCalc;
+        EventSystemListeners.main.AddListener(gameObject);
     }
 
     /// <summary>

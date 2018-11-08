@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ItemManager : MonoBehaviour {
-
-    public Collectable.CollectableType[] _powerUps;
+public class ItemManager : MonoBehaviour
+{
 
     #region Singleton
     public static ItemManager instance;
@@ -19,19 +20,12 @@ public class ItemManager : MonoBehaviour {
     }
     #endregion
 
-    public void AddToInv(Collectable collectable)
+    public void SendCollectionMessage(Collectable.CollectableType _type)
     {
-         
+        foreach (GameObject listener in EventSystemListeners.main.listeners)
+        {
+            ExecuteEvents.Execute<IitemEvents>
+                (listener, null, (x, y) => x.ItemCollected(_type));
+        }
     }
-
-
-    // Use this for initialization
-    void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
