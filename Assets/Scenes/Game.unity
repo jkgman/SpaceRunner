@@ -595,6 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  UiTexture: {fileID: 0}
   _cue: {fileID: 8300000, guid: 5a1a386165b7add4eb63b9a6d92799b4, type: 3}
 --- !u!54 &269882369
 Rigidbody:
@@ -2952,7 +2953,7 @@ GameObject:
   - component: {fileID: 1803108795}
   - component: {fileID: 1803108794}
   m_Layer: 0
-  m_Name: EventListenerSystem
+  m_Name: EventSystemListener
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
