@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// Handles movement, dying and such
 /// </summary>
-public class PlayerHandle : MonoBehaviour {
+public class PlayerHandle : MonoBehaviour, IitemEvents {
 
     #region Variables
     //TODO: add descriptions for exposed vars
@@ -190,5 +191,14 @@ public class PlayerHandle : MonoBehaviour {
         }
         jumping = false;
     }
+
+
     #endregion
+
+
+    //Do the stuff that powerups do
+    public void ItemCollected(Collectable.CollectableType type)
+    {
+        Debug.Log("playerhandle: Message received");
+    }
 }

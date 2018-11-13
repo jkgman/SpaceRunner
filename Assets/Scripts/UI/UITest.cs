@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.EventSystems;
 using System;
 
 public class UITest : MonoBehaviour, IitemEvents {
@@ -10,7 +9,6 @@ public class UITest : MonoBehaviour, IitemEvents {
 
     public void ItemCollected(Collectable.CollectableType type)
     {
-        Debug.Log("what");
         text.text = type.ToString();
     }
 

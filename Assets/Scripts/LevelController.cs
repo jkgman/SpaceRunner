@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 /// <summary>
 /// controlls the game state
 /// </summary>
@@ -106,6 +107,21 @@ public class LevelController : MonoBehaviour {
         player.ActivateControl();
     }
 
+    
+    /// <summary>
+    /// Send message that a collectable was collected to player and item manager
+    /// </summary>
+    /// <param name="_type">The type of collectable that was collected</param>
+    public void SendCollectionMessage(Collectable.CollectableType _type)
+    {
+        foreach (GameObject listener in EventSystemListeners.main.listeners)
+        {
+            ExecuteEvents.Execute<IitemEvents>
+                (listener, null, (x, y) => x.ItemCollected(_type));
+            Debug.Log("lvlcontroller: message sent");
+        }
+    }
+
     /// <summary>
     /// Stops planet tracking hazard spawning and increase the planet were on
     /// </summary>
@@ -175,6 +191,7 @@ public class LevelController : MonoBehaviour {
         SetupPlanet(planetsInLevel[0]);
     }
 
+    
 
     /// <summary>
     /// tells lane and hazards to generate accourding to passed in planet

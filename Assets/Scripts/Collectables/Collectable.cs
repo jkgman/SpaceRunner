@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour {
 
+    #region public variables
     public CollectableType type;
+    public Texture2D UiTexture;
     public AudioClip _cue;
+
+    #endregion
 
     public enum CollectableType
     {
@@ -19,7 +23,7 @@ public class Collectable : MonoBehaviour {
     public virtual void Pickup()
     {
         //SoundManager.Instance.PlaySfx(_cue);
-        ItemManager.instance.SendCollectionMessage(type);
+        LevelController.instance.SendCollectionMessage(type);
         Destroy(gameObject);
     }
 

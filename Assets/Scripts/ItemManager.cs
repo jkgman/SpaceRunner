@@ -2,30 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class ItemManager : MonoBehaviour
+public class ItemManager : MonoBehaviour, IitemEvents
 {
-
-    #region Singleton
-    public static ItemManager instance;
-    private void Awake()
+    private void Start()
     {
-        if (instance != null)
-        {
-            Debug.LogWarning("More than one instance of Itemcontroller found");
-            return;
-        }
-        instance = this;
+        EventSystemListeners.main.AddListener(gameObject);
     }
-    #endregion
 
-    public void SendCollectionMessage(Collectable.CollectableType _type)
+    
+    public void ItemCollected(Collectable.CollectableType type)
     {
-        foreach (GameObject listener in EventSystemListeners.main.listeners)
-        {
-            ExecuteEvents.Execute<IitemEvents>
-                (listener, null, (x, y) => x.ItemCollected(_type));
-        }
+        Debug.Log("itemmanager: message received");
+        
     }
+
+
 }

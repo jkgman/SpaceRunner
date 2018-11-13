@@ -16,9 +16,7 @@ public class Coin : Collectable {
     public override void Pickup()
     {
         //SoundManager.Instance.PlaySfx(_cue);
-        //item specific logic
         // OR listen with player and do stuff then 
-        // Coins do nuthin bro
 
         base.Pickup();
         
