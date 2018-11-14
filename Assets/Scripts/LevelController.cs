@@ -111,13 +111,13 @@ public class LevelController : MonoBehaviour {
     /// <summary>
     /// Send message that a collectable was collected to player and item manager
     /// </summary>
-    /// <param name="_type">The type of collectable that was collected</param>
-    public void SendCollectionMessage(Collectable.CollectableType _type)
+    /// <param name="_collectable">The type of collectable that was collected</param>
+    public void SendConsumeMessage(Collectable _collectable)
     {
         foreach (GameObject listener in EventSystemListeners.main.listeners)
         {
             ExecuteEvents.Execute<IitemEvents>
-                (listener, null, (x, y) => x.ItemCollected(_type));
+                (listener, null, (x, y) => x.ItemCollected(_collectable));
             Debug.Log("lvlcontroller: message sent");
         }
     }

@@ -1,21 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using System;
+using UnityEngine;
 
-public class UITest : MonoBehaviour, IitemEvents {
+public class LevelUi : MonoBehaviour, IitemEvents {
+
+
     private TextMeshProUGUI text;
+    private Collectable[] levelInventory;
 
     public void ItemCollected(Collectable _collectable)
     {
         text.text = _collectable.type.ToString();
+        levelInventory = new Collectable[2];
     }
 
 
     // Use this for initialization
     void Start () {
-        text = gameObject.GetComponent<TextMeshProUGUI>();
         EventSystemListeners.main.AddListener(gameObject);
     }
 	
@@ -23,7 +25,4 @@ public class UITest : MonoBehaviour, IitemEvents {
 	void Update () {
 		
 	}
-
-    
-    
 }

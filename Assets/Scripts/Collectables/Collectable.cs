@@ -6,8 +6,8 @@ public class Collectable : MonoBehaviour {
 
     #region public variables
     public CollectableType type;
-    public Texture2D UiTexture;
-    public AudioClip _cue;
+    public Sprite UiTexture;
+    //public AudioClip _cue;
 
     #endregion
 
@@ -23,12 +23,9 @@ public class Collectable : MonoBehaviour {
     public virtual void Pickup()
     {
         //SoundManager.Instance.PlaySfx(_cue);
-        LevelController.instance.SendCollectionMessage(type);
+        LevelController.instance.SendConsumeMessage(this);
         Destroy(gameObject);
     }
 
-    public virtual CollectableType GetColType()
-    {
-        return type;
-    }
+
 }

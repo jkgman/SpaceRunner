@@ -197,8 +197,23 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
 
 
     //Do the stuff that powerups do
-    public void ItemCollected(Collectable.CollectableType type)
+    public void ItemCollected(Collectable _collectable)
     {
-        Debug.Log("playerhandle: Message received");
+        Debug.Log("playerhandle: Message received " + _collectable.type.ToString());
+        Collectable.CollectableType itemType = _collectable.type;
+
+        switch(itemType) { 
+
+            case Collectable.CollectableType.SlowDown:
+                Time.timeScale = 0.25f;
+                break;
+            case Collectable.CollectableType.Magnet:
+                
+                break;
+            case Collectable.CollectableType.Invincibility:
+                
+                break;
+        }
+
     }
 }

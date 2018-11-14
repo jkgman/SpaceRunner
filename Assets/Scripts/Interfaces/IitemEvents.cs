@@ -8,6 +8,6 @@ using UnityEngine.EventSystems;
 /// </summary>
 public interface IitemEvents : IEventSystemHandler  {
 
-    void ItemCollected( Collectable.CollectableType type);
+    void ItemCollected( Collectable _collectable);
     
 }
