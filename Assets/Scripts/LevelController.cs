@@ -23,7 +23,10 @@ public class LevelController : MonoBehaviour {
     private int currentPlanet;
     private float distance;
     public float initialDistBetweenWorldChange;
+    public bool onWorld;
     public float worldChangeScaler;
+    private int currentLane = 2;
+    private bool exitspawned = false;
 
     public float Distance
     {
@@ -59,6 +62,7 @@ public class LevelController : MonoBehaviour {
         ShufflePlanets(desiredLevelLength);
         GenerateLevelField(planetsToSpawn, spawnCollider);
         BeginPlanet(planetsInLevel[0], player);
+        InputHandle.instance.onMovement += MovementCalc;
     }
 
     //Switches planets after a certain distance
@@ -66,7 +70,7 @@ public class LevelController : MonoBehaviour {
     {
         if(Distance > initialDistBetweenWorldChange + initialDistBetweenWorldChange * currentPlanet * worldChangeScaler)
         {
-            if(planetsInLevel.Length > currentPlanet + 1)
+            if(planetsInLevel.Length > currentPlanet + 1 && !exitspawned)
             {
                 EndPlanet();
             }
@@ -104,6 +108,8 @@ public class LevelController : MonoBehaviour {
         planetsInLevel[currentPlanet].Begin();
         hazardSpawner.Begin();
         player.ActivateControl();
+        currentLane = 2;
+        onWorld = true;
     }
 
     /// <summary>
@@ -111,9 +117,9 @@ public class LevelController : MonoBehaviour {
     /// </summary>
     public void EndPlanet()
     {
+        exitspawned = true;
         hazardSpawner.Stop();
         planetsInLevel[currentPlanet].End();
-        currentPlanet++;
     }
 
     /// <summary>
@@ -130,6 +136,9 @@ public class LevelController : MonoBehaviour {
     /// </summary>
     public void NextPlanet()
     {
+        onWorld = false;
+        currentPlanet++;
+        exitspawned = false;
         SetupPlanet(planetsInLevel[currentPlanet]);
         BeginPlanet(planetsInLevel[currentPlanet], player);
     }
@@ -194,6 +203,27 @@ public class LevelController : MonoBehaviour {
     void BeginPlanet(PlanetController planet, PlayerHandle player)
     {
         transitionController.ToWorld(planet, player);
+    }
+
+    private void MovementCalc(Vector2 endPos, Vector2 direction, float distance)
+    {
+        if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            if(onWorld)
+            {
+                if(direction.x < 0 && currentLane < 4)
+                {
+                    planetsInLevel[currentPlanet].RotateLane(lane.unitLanePositions[currentLane], lane.unitLanePositions[currentLane + 1]);
+                    currentLane++;
+                } else if(direction.x > 0 && currentLane > 0)
+                {
+                    planetsInLevel[currentPlanet].RotateLane(lane.unitLanePositions[currentLane], lane.unitLanePositions[currentLane - 1]);
+                    currentLane--;
+                }
+            }
+            //if space 
+                //player move x right or left
+        }
     }
     #endregion
 

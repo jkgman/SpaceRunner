@@ -17,14 +17,10 @@ public class PlayerHandle : MonoBehaviour {
     private int speedLevel = 0;
     public float speed;
     public float gravity;
-    private float vertVelocity = -1;
     private InputHandle input;
-    public float maxMovePerSecond;
     public float movementDeadZone = 1;
     public bool godMode = false;
-    private int currentLane = 2;
     private bool control = false;
-    private LaneGenerator lane;
     public Animator anim;
     public bool sliding = false;
     public bool jumping = false;
@@ -49,7 +45,6 @@ public class PlayerHandle : MonoBehaviour {
     /// get references, set initial z, and subscribes this class to input
     /// </summary>
     void Start () {
-        lane = FindObjectOfType<LaneGenerator>();
         character = GetComponent<CharacterController>();
         controller = LevelController.instance;
         input = InputHandle.instance;
@@ -77,24 +72,7 @@ public class PlayerHandle : MonoBehaviour {
     private void MovementCalc( Vector2 endPos, Vector2 direction, float distance) {
         if(control)
         {
-            
-            
-            if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-            {
-                if(direction.x > 0)
-                {
-                    if(currentLane + 1 < lane.CurrentLaneCount)
-                    {
-                        currentLane++;
-                    }
-                } else if(direction.x < 0)
-                {
-                    if(currentLane > 0)
-                    {
-                        currentLane--;
-                    }
-                }
-            } else
+            if(Mathf.Abs(direction.x) < Mathf.Abs(direction.y))
             {
                 if(direction.y > 0)
                 {
@@ -114,7 +92,7 @@ public class PlayerHandle : MonoBehaviour {
                 moveVector.x = 0;
             }
             moveVector.y = -gravity;
-            Vector3 target = new Vector3(lane.LanePositions[currentLane].x, transform.position.y + moveVector.y, transform.position.z);
+            Vector3 target = new Vector3(transform.position.x, transform.position.y + moveVector.y, z);
             var offset = target - transform.position;
             //Get the difference.
             if(offset.magnitude > .1f)
@@ -124,7 +102,6 @@ public class PlayerHandle : MonoBehaviour {
                 //normalize it and account for movement speed.
                 character.Move(offset * Time.deltaTime * 10);
             }
-            transform.position = new Vector3(transform.position.x, transform.position.y, z);
         }
     }
     #endregion

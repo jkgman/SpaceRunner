@@ -765,6 +765,18 @@ Prefab:
       propertyPath: maxLanes
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114737993585213554, guid: 7945766bd7b5d4743a4733ffed7bc297,
+        type: 2}
+      propertyPath: planets.Array.data[1]
+      value: 
+      objectReference: {fileID: 1724643152847970, guid: 8ac1b7db529a1f042a86929eab68bf86,
+        type: 2}
+    - target: {fileID: 114737993585213554, guid: 7945766bd7b5d4743a4733ffed7bc297,
+        type: 2}
+      propertyPath: planets.Array.data[2]
+      value: 
+      objectReference: {fileID: 1724643152847970, guid: 8ac1b7db529a1f042a86929eab68bf86,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7945766bd7b5d4743a4733ffed7bc297, type: 2}
   m_IsPrefabAsset: 0
@@ -2216,7 +2228,6 @@ MonoBehaviour:
   maxSpeedLevel: 3
   speed: 3.56
   gravity: 3.71
-  maxMovePerSecond: 1.03
   movementDeadZone: 1
   godMode: 1
   anim: {fileID: 808172690}

@@ -84,9 +84,17 @@ public class PlanetController : MonoBehaviour {
         {
             controller.Distance += circumfrence * (currentSpeed * Time.deltaTime / 360);
         }
-        transform.Rotate(rotVec * currentSpeed * Time.deltaTime);
+        Rotate(currentSpeed);
     }
     #endregion
+
+    private void Rotate(float currentSpeed) {
+        //ROT AROUND X
+        //Quaternion quat = transform.rotation * Quaternion.FromToRotation(rotVec, Vector3.up);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, quat, (currentSpeed * Time.deltaTime)/360);
+        transform.Rotate(new Vector3(-1 * currentSpeed * Time.deltaTime, 0, 0));
+    }
+
 
     #region Public Functions
     /// <summary>
@@ -105,6 +113,13 @@ public class PlanetController : MonoBehaviour {
         exitPrefab.transform.parent = controller.GetCurrentPlanet().transform;
         exitPrefab.transform.position = LaneGenerator.instance.LanePositions[2];
         exitPrefab.transform.rotation = Quaternion.LookRotation(Vector3.up, exitPrefab.transform.position - controller.GetCurrentPlanet().transform.position);
+    }
+
+    public void RotateLane(Vector3 from, Vector3 to) {
+        //ROT FROM ABSOLUTE Y TO X
+        Debug.Log((from - transform.position) + " "+ (to - transform.position));
+        transform.Rotate(0, 0, Vector3.SignedAngle(from-transform.position, to - transform.position, Vector3.forward), Space.World);
+        //transform.rotation = transform.rotation * Quaternion.FromToRotation(Vector3.up, to);
     }
     #endregion
 

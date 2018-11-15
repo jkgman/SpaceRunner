@@ -115,7 +115,7 @@ public class Hazard : MonoBehaviour {
             {
                 player.Die();
             }
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
             //TODO: (Mandatory) Make call to destroy animation when we have them and make anim variable
         }
     }

@@ -9,6 +9,7 @@ public class LaneGenerator : MonoBehaviour {
 
     #region Variables
     private Vector3[] lanePositions;
+    public Vector3[] unitLanePositions;
     [SerializeField, Tooltip("Establishes the max lanes a planet can have")]
     private int maxLanes;
     [SerializeField, Tooltip("Angle offset for were lanes start, this is used for spawning")]
@@ -69,6 +70,7 @@ public class LaneGenerator : MonoBehaviour {
         }
         instance = this;
         LanePositions = new Vector3[MaxLanes];
+        unitLanePositions = new Vector3[MaxLanes];
     }
     #endregion
 
@@ -85,8 +87,8 @@ public class LaneGenerator : MonoBehaviour {
             float x = ((-planet.GutterWidth / 2) + (planet.GutterWidth / (CurrentLaneCount + 1)) * (i + 1)) * 2;
             float y = Mathf.Sqrt(1 * 1 - x * x);
             Quaternion quat = Quaternion.Euler(AngleAroundPlanet, 0, 0);
-            Vector3 vec = quat * (new Vector3(x, y, 0)) * planet.planetRadius + planet.transform.position;
-            LanePositions[i] = vec;
+            unitLanePositions[i] = (new Vector3(x, y, 0)) * planet.planetRadius + planet.transform.position;
+            LanePositions[i] = quat * (new Vector3(x, y, 0)) * planet.planetRadius + planet.transform.position;
         }
     }
     #endregion

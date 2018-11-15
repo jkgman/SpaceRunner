@@ -14,6 +14,7 @@ public class PlanetExit : MonoBehaviour {
         if(other.tag == "Player")
         {
             PlayerHandle.instance.DeactivateControl();
+            
             StartCoroutine("LeavePlanet");
         }
     }
