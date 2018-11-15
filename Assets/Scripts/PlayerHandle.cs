@@ -201,11 +201,11 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     {
         Debug.Log("playerhandle: Message received " + _collectable.type.ToString());
         Collectable.CollectableType itemType = _collectable.type;
-
+        //Ignore Coins
         switch(itemType) { 
 
             case Collectable.CollectableType.SlowDown:
-                Time.timeScale = 0.25f;
+                //Time.timeScale = 0.25f;
                 break;
             case Collectable.CollectableType.Magnet:
                 
