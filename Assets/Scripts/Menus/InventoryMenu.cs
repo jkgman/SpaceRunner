@@ -6,11 +6,21 @@ using UnityEngine.EventSystems;
 
 public class InventoryMenu : MonoBehaviour, IDragHandler, IEndDragHandler, IDropHandler, IInitializePotentialDragHandler
 {
+    private Collectable[] _items;
+    public int _itemSlotQ;
+    public int _allItems;
     private GameObject _selectedObject;
     private Vector2 _ogPosition;
 
-    public GameObject _itemSlot1;
-    public GameObject _itemSlot2;
+    public GameObject _itemSlot1, _itemSlot2;
+
+    
+
+
+    private void Start()
+    {
+        _items = new Collectable[_itemSlotQ];
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -51,4 +61,19 @@ public class InventoryMenu : MonoBehaviour, IDragHandler, IEndDragHandler, IDrop
             _ogPosition = _selectedObject.transform.position;
         }
     }
+
+    private void AddItemToSlot(MenuItem item, int itemslot)
+    {
+        
+
+
+    }
+
+}
+
+public class MenuItem {
+
+    public Collectable _item;
+    
+
 }
