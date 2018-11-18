@@ -16,7 +16,10 @@ public class Collectable : MonoBehaviour {
         Coin,
         SlowDown,
         Magnet,
-        Invincibility
+        Invincibility,
+        Refresh,
+        Resurrect,
+        Shield
 
     }
 

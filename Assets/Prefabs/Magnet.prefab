@@ -125,4 +125,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  UiTexture: {fileID: 21300000, guid: e6ddf12305a2a034693b90551f491fe9, type: 3}
+  UiTexture: {fileID: 21300000, guid: ba27712a9dffe954ca2e811ca976295e, type: 3}

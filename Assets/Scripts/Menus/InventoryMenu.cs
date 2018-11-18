@@ -3,77 +3,89 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class InventoryMenu : MonoBehaviour, IDragHandler, IEndDragHandler, IDropHandler, IInitializePotentialDragHandler
+public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDropHandler, IInitializePotentialDragHandler*/
 {
-    private Collectable[] _items;
+    public Collectable[] _items;
     public int _itemSlotQ;
-    public int _allItems;
     private GameObject _selectedObject;
     private Vector2 _ogPosition;
 
-    public GameObject _itemSlot1, _itemSlot2;
-
+    public GameObject item_f, item_s;
+    private GameObject[] _itemslots;
     
 
 
     private void Start()
     {
         _items = new Collectable[_itemSlotQ];
+        _itemslots = new GameObject[_itemSlotQ];
+        _itemslots[0] = item_f;
+        _itemslots[1] = item_s;
+
+
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (_selectedObject != null) { 
-            _selectedObject.transform.position = eventData.position;
-        }
-    }
+    #region Drag code if needed
 
-    public void OnDrop(PointerEventData eventData)
+    //public void OnDrag(PointerEventData eventData)
+    //{
+    //    if (_selectedObject != null) { 
+    //        _selectedObject.transform.position = eventData.position;
+    //    }
+    //}
+
+    //public void OnDrop(PointerEventData eventData)
+    //{
+    //    if (eventData.hovered.Contains(_itemSlot1))
+    //    {
+    //        _selectedObject.transform.position = (Vector2)_itemSlot1.transform.position;
+    //        _selectedObject = null;
+    //    } else if (eventData.hovered.Contains(_itemSlot2))
+    //    {
+    //        _selectedObject.transform.position = (Vector2)_itemSlot2.transform.position;
+    //        _selectedObject = null;
+    //    }
+    //    else if (_selectedObject != null) {
+    //        Transform _buttonPos = _selectedObject.transform;
+    //        _buttonPos.transform.position = Vector2.Lerp(_selectedObject.transform.position, _ogPosition, 1f);
+    //    }
+    //}
+
+
+    //public void OnEndDrag(PointerEventData eventData)
+    //{
+    //    _selectedObject = null;
+    //}
+
+    //public void OnInitializePotentialDrag(PointerEventData eventData)
+    //{
+    //    GameObject _pointerObj = eventData.pointerPressRaycast.gameObject;
+    //    if ( _pointerObj != _itemSlot1 && _pointerObj != _itemSlot2) { 
+
+    //        _selectedObject = _pointerObj;
+    //        _ogPosition = _selectedObject.transform.position;
+
+    //    }
+    //}
+    #endregion
+
+    public void AddItemToSlot(Collectable item)
     {
-        if (eventData.hovered.Contains(_itemSlot1))
+        for (int i = 0; i < _items.Length; i++)
         {
-            _selectedObject.transform.position = (Vector2)_itemSlot1.transform.position;
-            _selectedObject = null;
-        } else if (eventData.hovered.Contains(_itemSlot2))
-        {
-            _selectedObject.transform.position = (Vector2)_itemSlot2.transform.position;
-            _selectedObject = null;
+            if (_items[i]==null)
+            {
+                _items[i] = item;
+                _itemslots[i].GetComponent<Image>().sprite = _items[i].UiTexture;
+                _itemslots[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                break;
+            }
         }
-        else if (_selectedObject != null) {
-            Transform _buttonPos = _selectedObject.transform;
-            _buttonPos.transform.position = Vector2.Lerp(_selectedObject.transform.position, _ogPosition, 1f);
-        }
-    }
-
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        _selectedObject = null;
-    }
-
-    public void OnInitializePotentialDrag(PointerEventData eventData)
-    {
-        GameObject _pointerObj = eventData.pointerPressRaycast.gameObject;
-        if ( _pointerObj != _itemSlot1 && _pointerObj != _itemSlot2) { 
-            
-            _selectedObject = _pointerObj;
-            _ogPosition = _selectedObject.transform.position;
-        }
-    }
-
-    private void AddItemToSlot(MenuItem item, int itemslot)
-    {
-        
-
+        GameManager.Instance.itemSlots = _items;
 
     }
 
 }
 
-public class MenuItem {
-
-    public Collectable _item;
-    
-
-}
