@@ -1,16 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using System.IO;
 
+/// <summary>
+/// Class for inventory, energy, level and rating tracking.
+/// Saving gamedata as json 
+/// 
+/// </summary>
 public class GameManager : MonoBehaviour {
 
     #region private variables
     private string gameDataFileName = "gamedata";
     #endregion
+
+    #region public variables
     public Collectable[] itemSlots;
-    public TextMeshProUGUI text;
+    public GameData gData;
+    #endregion
+
     #region singleton
     public static GameManager Instance = null;
 
@@ -33,16 +41,13 @@ public class GameManager : MonoBehaviour {
     }
     #endregion
 
-    // Use this for initialization
-    void Start () {
-           
-	}
 	
 	// Update is called once per frame
+    //Debug testing the saving and loadign
 	void Update () {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            SaveData(new GameData());
+            SaveData(gData);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -52,7 +57,11 @@ public class GameManager : MonoBehaviour {
     }
 
 
-
+    /// <summary>
+    /// Loads data from json file. returns Gamedata which includes progression
+    /// Returns error if no file is found
+    /// </summary>
+    /// <returns></returns>
     public GameData LoadData()
     {
         GameData loadedData;
@@ -70,6 +79,12 @@ public class GameManager : MonoBehaviour {
         return loadedData;
     }
 
+
+    /// <summary>
+    /// save the parameter sent game data as json file.
+    /// No encryption for now
+    /// </summary>
+    /// <param name="gdata"></param>
     public void SaveData(GameData gdata)
     {
         string filePath = Path.Combine(Application.persistentDataPath, gameDataFileName + ".json");
@@ -80,10 +95,14 @@ public class GameManager : MonoBehaviour {
 
 }
 
+/// <summary>
+/// Gamedata class. Here for now
+/// </summary>
 [System.Serializable]
 public class GameData
 {
     public int progression;
     public int energy;
-    public List<Collectable> inventoryData = new List<Collectable>();
+    public int inventorySize;
+    public Collectable[] inventoryData;
 }

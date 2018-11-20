@@ -18,7 +18,6 @@ public class SlowDown : Collectable
     public override void Pickup()
     {
         //SoundManager.Instance.PlaySfx(_cue);
-        // OR listen with player and do stuff then 
 
         base.Pickup();
 

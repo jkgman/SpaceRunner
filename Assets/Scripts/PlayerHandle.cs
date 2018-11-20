@@ -197,6 +197,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
 
 
     //Do the stuff that powerups do
+    //Or use as a waypoint to somewhere where logic is done
     public void ItemCollected(Collectable _collectable)
     {
         Debug.Log("playerhandle: Message received " + _collectable.type.ToString());
@@ -212,6 +213,15 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
                 break;
             case Collectable.CollectableType.Invincibility:
                 
+                break;
+            case Collectable.CollectableType.Shield:
+
+                break;
+            case Collectable.CollectableType.Refresh:
+
+                break;
+            case Collectable.CollectableType.Resurrect:
+
                 break;
         }
 

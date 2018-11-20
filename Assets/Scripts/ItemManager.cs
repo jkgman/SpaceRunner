@@ -8,42 +8,49 @@ using TMPro;
 public class ItemManager : MonoBehaviour, IitemEvents
 {
 
-    public Collectable[] itemSlots;
-
     
-
     #region public variables
     public Button powerUpSlot_f;
     public Button powerUpSlot_s;
     public TextMeshProUGUI text;
+    public Collectable[] itemSlots;
     #endregion
     private int coinQ;
 
     private void Start()
     {
         if (GameManager.Instance.itemSlots!=null) { 
-        itemSlots = GameManager.Instance.itemSlots;
+            itemSlots = GameManager.Instance.itemSlots;
         }
         EventSystemListeners.main.AddListener(gameObject);
 
         if(itemSlots!=null) { 
-        powerUpSlot_f.onClick.AddListener(delegate { ConsumeItem(0); });
-        powerUpSlot_s.onClick.AddListener(delegate { ConsumeItem(1); });
+            powerUpSlot_f.onClick.AddListener(delegate { ConsumeItem(0); });
+            powerUpSlot_s.onClick.AddListener(delegate { ConsumeItem(1); });
 
-        powerUpSlot_f.gameObject.GetComponent<Image>().sprite = itemSlots[0].UiTexture;
-        powerUpSlot_s.gameObject.GetComponent<Image>().sprite = itemSlots[1].UiTexture;
+            powerUpSlot_f.gameObject.GetComponent<Image>().sprite = itemSlots[0].UiTexture;
+            powerUpSlot_s.gameObject.GetComponent<Image>().sprite = itemSlots[1].UiTexture;
         }
         text.text = coinQ.ToString();
     }
 
-
+    /// <summary>
+    /// Use item in the level inventory slot
+    /// </summary>
+    /// <param name="slot"></param>
     void ConsumeItem(int slot)
     {
-        if (itemSlots[slot]!=null) { 
-        LevelController.instance.SendConsumeMessage(itemSlots[slot]);
+         if (itemSlots[slot]!=null) { 
+            LevelController.instance.SendConsumeMessage(itemSlots[slot]);
+            itemSlots[slot] = null;
+
         }
     }
     
+    /// <summary>
+    /// Item was collected
+    /// </summary>
+    /// <param name="_collectable"></param>
     public void ItemCollected(Collectable _collectable)
     {
         Debug.Log("itemmanager: message received " + _collectable.type.ToString());
@@ -52,6 +59,7 @@ public class ItemManager : MonoBehaviour, IitemEvents
         {
             coinQ++;
         }
+        //for now
         text.text = coinQ.ToString();
     }
 

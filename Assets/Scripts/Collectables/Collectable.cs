@@ -11,6 +11,9 @@ public class Collectable : MonoBehaviour {
 
     #endregion
 
+    /// <summary>
+    /// Type for collectables
+    /// </summary>
     public enum CollectableType
     {
         Coin,
@@ -29,6 +32,4 @@ public class Collectable : MonoBehaviour {
         LevelController.instance.SendConsumeMessage(this);
         Destroy(gameObject);
     }
-
-
 }
