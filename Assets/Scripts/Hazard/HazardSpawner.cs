@@ -197,8 +197,9 @@ public class HazardSpawner : MonoBehaviour
             if(finalLocations[i] > 0)
             {
                 Hazard hazard = Instantiate(hazardsToSpawn[finalLocations[i]-1]);
-                hazard.transform.parent = controller.GetCurrentPlanet().transform;
                 hazard.transform.position = lane.LanePositions[i];
+                hazard.transform.RotateAround(LevelController.instance.GetCurrentPlanet().transform.position,new Vector3(0,0,1), Vector3.SignedAngle(lane.LanePositions[2] - LevelController.instance.GetCurrentPlanet().transform.position, lane.LanePositions[LevelController.instance.currentLane] - LevelController.instance.GetCurrentPlanet().transform.position, Vector3.forward));
+                hazard.transform.parent = controller.GetCurrentPlanet().transform;
                 hazard.transform.rotation = Quaternion.LookRotation(Vector3.up, hazard.transform.position - controller.GetCurrentPlanet().transform.position);
             }
         }

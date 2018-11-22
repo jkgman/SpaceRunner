@@ -25,7 +25,7 @@ public class LevelController : MonoBehaviour {
     public float initialDistBetweenWorldChange;
     public bool onWorld;
     public float worldChangeScaler;
-    private int currentLane = 2;
+    public int currentLane = 2;
     private bool exitspawned = false;
 
     public float Distance

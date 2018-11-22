@@ -351,6 +351,7 @@ MonoBehaviour:
   gutterWidth: 0.6
   rotVec: {x: 0, y: 0, z: 1}
   speed: 20
+  lanespeed: 0
   planetRadius: 10
   hazardSet: {fileID: 114843751915788868, guid: 2c6a815f85c3eda4893af84f2533f70f,
     type: 2}
