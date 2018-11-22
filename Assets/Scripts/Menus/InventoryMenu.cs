@@ -5,26 +5,38 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class for inventory handling before actual game scene
+/// Remove selected items from saved gama data inventory an onto level item slots
+/// 
+/// </summary>
 public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDropHandler, IInitializePotentialDragHandler*/
 {
+    #region public variables
     public Collectable[] _items;
     public int _itemSlotQ;
+    public GameObject item_f, item_s;
+    #endregion
+
+    #region private variables
     private GameObject _selectedObject;
     private Vector2 _ogPosition;
-
-    public GameObject item_f, item_s;
-    private GameObject[] _itemslots;
-    
-
+    private Collectable[] itemSlots;
+    #endregion
 
     private void Start()
     {
-        _items = new Collectable[_itemSlotQ];
-        _itemslots = new GameObject[_itemSlotQ];
-        _itemslots[0] = item_f;
-        _itemslots[1] = item_s;
+        _items = GameManager.Instance.gData.inventoryData;
+        PopulateInventoryUI(_items);
+        itemSlots = new Collectable[2];
+    }
+    
 
-
+    // Remove level items from saved game inventory
+    // check that moved to level and not back to menu
+    private void OnDisable()
+    {
+        GameManager.Instance.itemSlots = itemSlots;
     }
 
     #region Drag code if needed
@@ -71,19 +83,33 @@ public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDro
     //}
     #endregion
 
+
+    /// <summary>
+    /// Placeholder function for handling moving items from inventory to level item slots
+    /// </summary>
+    /// <param name="item"></param>
     public void AddItemToSlot(Collectable item)
     {
-        for (int i = 0; i < _items.Length; i++)
+        if (itemSlots[0]== null)
         {
-            if (_items[i]==null)
-            {
-                _items[i] = item;
-                _itemslots[i].GetComponent<Image>().sprite = _items[i].UiTexture;
-                _itemslots[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
-                break;
-            }
+            itemSlots[0] = item;
+            item_f.GetComponent<Image>().sprite = item.UiTexture;
+            item_f.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        } else if (itemSlots[1] == null)
+        {
+            itemSlots[1] = item;
+            item_s.GetComponent<Image>().sprite = item.UiTexture;
+            item_s.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         }
-        GameManager.Instance.itemSlots = _items;
+
+    }
+
+
+    private void PopulateInventoryUI(Collectable[] items)
+    {
+
+
+
 
     }
 

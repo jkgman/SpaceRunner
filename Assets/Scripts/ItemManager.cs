@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// In level stored item handling/consumption
+/// </summary>
 public class ItemManager : MonoBehaviour, IitemEvents
 {
 
@@ -16,9 +19,12 @@ public class ItemManager : MonoBehaviour, IitemEvents
     public Collectable[] itemSlots;
     #endregion
     private int coinQ;
+    private GameObject[] items;
 
+    //Spaghetti
     private void Start()
     {
+        items = new GameObject[2];
         if (GameManager.Instance.itemSlots!=null) { 
             itemSlots = GameManager.Instance.itemSlots;
         }
@@ -28,8 +34,13 @@ public class ItemManager : MonoBehaviour, IitemEvents
             powerUpSlot_f.onClick.AddListener(delegate { ConsumeItem(0); });
             powerUpSlot_s.onClick.AddListener(delegate { ConsumeItem(1); });
 
+            items[0] = powerUpSlot_f.gameObject;
+            items[1] = powerUpSlot_s.gameObject;
+
             powerUpSlot_f.gameObject.GetComponent<Image>().sprite = itemSlots[0].UiTexture;
             powerUpSlot_s.gameObject.GetComponent<Image>().sprite = itemSlots[1].UiTexture;
+            powerUpSlot_f.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            powerUpSlot_s.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         }
         text.text = coinQ.ToString();
     }
@@ -43,6 +54,7 @@ public class ItemManager : MonoBehaviour, IitemEvents
          if (itemSlots[slot]!=null) { 
             LevelController.instance.SendConsumeMessage(itemSlots[slot]);
             itemSlots[slot] = null;
+            Destroy(items[slot]);
 
         }
     }

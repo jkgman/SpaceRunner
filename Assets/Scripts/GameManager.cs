@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Text;
+using System;
+using System.Security.Cryptography;
+using System.Xml.Serialization;
 
 /// <summary>
 /// Class for inventory, energy, level and rating tracking.
@@ -41,18 +45,40 @@ public class GameManager : MonoBehaviour {
     }
     #endregion
 
-	
-	// Update is called once per frame
-    //Debug testing the saving and loadign
-	void Update () {
+    private void Start()
+    {
+        itemSlots = null;
+        if (LoadData() != null) { 
+        gData = LoadData();
+        } else
+        {
+            GameData newData = new GameData();
+            newData.energy = 100;
+            newData.inventorySize = 5;
+            newData.levelProgression = new int[0];
+            newData.inventorySize = 3;
+
+            InitNewData( newData );
+            gData = newData;
+        }
+    }
+
+    /// <summary>
+    /// Initialize new save data
+    /// </summary>
+    /// <param name="newData"></param>
+    private void InitNewData(GameData newData)
+    {
+        SaveData(newData);
+    }
+
+
+    private void Update()
+    {
+        //for save testing
         if (Input.GetKeyDown(KeyCode.A))
         {
             SaveData(gData);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            LoadData();
-            
         }
     }
 
@@ -68,8 +94,9 @@ public class GameManager : MonoBehaviour {
         string filePath = Path.Combine(Application.persistentDataPath, gameDataFileName + ".json").Replace("\\", "/");
         if (File.Exists(filePath))
         {
-            string dataAsJson = File.ReadAllText(filePath);
-            loadedData = JsonUtility.FromJson<GameData>(dataAsJson);
+            byte[] dataAsJson = File.ReadAllBytes(filePath);
+            string stringData = Decrypt(dataAsJson);
+            loadedData = JsonUtility.FromJson<GameData>(stringData);
         }
         else
         {
@@ -89,20 +116,63 @@ public class GameManager : MonoBehaviour {
     {
         string filePath = Path.Combine(Application.persistentDataPath, gameDataFileName + ".json");
         string jsonData = JsonUtility.ToJson(gdata);
-        File.WriteAllText(filePath, jsonData);
+
+        File.WriteAllBytes(filePath, Encrypt(jsonData));
         Debug.Log("Saved!");
     }
 
+    //Encryption key
+    private static string hash = "sp4c3runn3r!";
+
+    //Encrypt
+    /// <summary>
+    /// Encrypts serialized string data as byte array data to the json save file
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    private byte[] Encrypt(string input)
+    {
+
+        byte[] data = UTF8Encoding.UTF8.GetBytes(input);
+        using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
+        {
+            byte[] key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(hash));
+            using (TripleDESCryptoServiceProvider trip = new TripleDESCryptoServiceProvider() { Key = key, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
+            {
+                ICryptoTransform tr = trip.CreateEncryptor();
+                byte[] results = tr.TransformFinalBlock(data, 0, data.Length);
+                return results;
+            }
+        }
+
+
+    }
+
+    //Decrypt
+    /// <summary>
+    /// Decrypts encrypted byte array data back to json data
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    private string Decrypt(byte[] input)
+    {
+        byte[] data = input;
+        
+        using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
+        {
+            byte[] key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(hash));
+            using (TripleDESCryptoServiceProvider trip = new TripleDESCryptoServiceProvider() { Key = key, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
+            {
+                ICryptoTransform tr = trip.CreateDecryptor();
+                byte[] results = tr.TransformFinalBlock(data, 0, data.Length);
+                //return results;
+                return UTF8Encoding.UTF8.GetString(results);
+            }
+        }
+
+
+    }
+
+
 }
 
-/// <summary>
-/// Gamedata class. Here for now
-/// </summary>
-[System.Serializable]
-public class GameData
-{
-    public int progression;
-    public int energy;
-    public int inventorySize;
-    public Collectable[] inventoryData;
-}

@@ -2436,12 +2436,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2190df532012a5459aa92691cdaea6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSlots:
-  - {fileID: 114543050148370830, guid: c18b96f30849f75408ea0809b1fa32b4, type: 2}
-  - {fileID: 114495110765681150, guid: 7e388072a420bb1488dfe853cb1f6bf0, type: 2}
   powerUpSlot_f: {fileID: 1268318736}
   powerUpSlot_s: {fileID: 1386343171}
   text: {fileID: 704567828}
+  itemSlots:
+  - {fileID: 114543050148370830, guid: c18b96f30849f75408ea0809b1fa32b4, type: 2}
+  - {fileID: 114495110765681150, guid: 7e388072a420bb1488dfe853cb1f6bf0, type: 2}
 --- !u!1 &1251469340
 GameObject:
   m_ObjectHideFlags: 0
@@ -2562,7 +2562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2866,7 +2866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
