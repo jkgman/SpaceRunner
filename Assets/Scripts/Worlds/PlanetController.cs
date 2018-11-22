@@ -15,6 +15,8 @@ public class PlanetController : MonoBehaviour {
     private Vector3 rotVec;
     [SerializeField, Tooltip("Rotation per second in degrees")]
     private float speed;
+    [SerializeField, Tooltip("Rotation per second in degrees")]
+    private float lanespeed;
     [Tooltip("Radius of planet in unity doesn't account for scale")]
     public float planetRadius;
     [SerializeField, Tooltip("Hazard set with hazards that will spawn on this planet")]
@@ -25,12 +27,13 @@ public class PlanetController : MonoBehaviour {
     public float modifier = .1f;
     [Tooltip("Prefab spawned for the level ending")]
     public PlanetExit exit;
-
+    public delegate void OnPlanetRot(Vector3 eul, float angle, Transform planet);
+    public OnPlanetRot onPlanetRot;
     Vector3 planetPosition;
     private bool track;
     private float circumfrence;
     private LevelController controller;
-
+    private Vector3 targetLaneRot = Vector3.zero;
     #region Getters and Setters
     public int LaneCount
     {
@@ -75,6 +78,7 @@ public class PlanetController : MonoBehaviour {
     void Start () {
         controller = LevelController.instance;
         circumfrence = 2 * Mathf.PI * planetRadius;
+        lanespeed = FindObjectOfType<PlayerHandle>().speed;
     }
 	
     //Rotates planet and tracks rotation when track is ture
@@ -92,7 +96,25 @@ public class PlanetController : MonoBehaviour {
         //ROT AROUND X
         //Quaternion quat = transform.rotation * Quaternion.FromToRotation(rotVec, Vector3.up);
         //transform.rotation = Quaternion.Slerp(transform.rotation, quat, (currentSpeed * Time.deltaTime)/360);
-        transform.Rotate(new Vector3(-1 * currentSpeed * Time.deltaTime, 0, 0));
+        Vector3 eulerrot = new Vector3(-1 * currentSpeed * Time.deltaTime, 0, 0);
+        transform.Rotate(eulerrot);
+        if(onPlanetRot != null)
+        {
+            onPlanetRot.Invoke(eulerrot, (eulerrot.x / circumfrence) * 360, transform);
+        }
+        if(targetLaneRot.z != 0)
+        {
+            float target = targetLaneRot.z * Time.deltaTime * speed;
+            if(targetLaneRot.z >= 0)
+            {
+                target = Mathf.Min(targetLaneRot.z, target);
+            } else if(targetLaneRot.z <= 0)
+            {
+                target = Mathf.Max(targetLaneRot.z, target);
+            }
+            targetLaneRot = new Vector3(0,0, targetLaneRot.z - target);
+            transform.Rotate(0, 0, target, Space.World);
+        }
     }
 
 
@@ -117,8 +139,8 @@ public class PlanetController : MonoBehaviour {
 
     public void RotateLane(Vector3 from, Vector3 to) {
         //ROT FROM ABSOLUTE Y TO X
-        Debug.Log((from - transform.position) + " "+ (to - transform.position));
-        transform.Rotate(0, 0, Vector3.SignedAngle(from-transform.position, to - transform.position, Vector3.forward), Space.World);
+        targetLaneRot += new Vector3(0, 0, Vector3.SignedAngle(from - transform.position, to - transform.position, Vector3.forward));
+        //transform.Rotate(0, 0, Vector3.SignedAngle(from-transform.position, to - transform.position, Vector3.forward), Space.World);
         //transform.rotation = transform.rotation * Quaternion.FromToRotation(Vector3.up, to);
     }
     #endregion
