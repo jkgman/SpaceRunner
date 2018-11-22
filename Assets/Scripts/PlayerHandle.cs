@@ -24,6 +24,7 @@ public class PlayerHandle : MonoBehaviour {
     public Animator anim;
     public bool sliding = false;
     public bool jumping = false;
+    public bool invincible = false;
     private LevelController controller;
     #endregion
 
@@ -85,24 +86,27 @@ public class PlayerHandle : MonoBehaviour {
         }
     }
     private void MovementCalc() {
-        if(control)
-        {
-            if(moveVector.x > -movementDeadZone && moveVector.x < movementDeadZone)
-            {
-                moveVector.x = 0;
-            }
-            moveVector.y = -gravity;
-            Vector3 target = new Vector3(transform.position.x, transform.position.y + moveVector.y, z);
-            var offset = target - transform.position;
-            //Get the difference.
-            if(offset.magnitude > .1f)
-            {
-                //If we're further away than .1 unit, move towards the target.
-                offset = offset.normalized * speed;
-                //normalize it and account for movement speed.
-                character.Move(offset * Time.deltaTime * 10);
-            }
-        }
+        //if(control)
+        //{
+        //    if(moveVector.x > -movementDeadZone && moveVector.x < movementDeadZone)
+        //    {
+        //        moveVector.x = 0;
+        //    }
+        //    moveVector.y = -gravity;
+        //    Vector3 target = new Vector3(transform.position.x, transform.position.y + moveVector.y, z);
+        //    var offset = target - transform.position;
+        //    //Get the difference.
+        //    if(offset.magnitude > .1f)
+        //    {
+        //        //If we're further away than .1 unit, move towards the target.
+        //        offset = offset.normalized * speed;
+        //        //normalize it and account for movement speed.
+        //        character.Move(offset * Time.deltaTime * 10);
+        //    }
+        //}
+    }
+    private void RotAround(Vector3 eul, float angle, Transform planet) {
+        transform.RotateAround(planet.position, eul.normalized, -eul.x);
     }
     #endregion
 
@@ -124,7 +128,8 @@ public class PlayerHandle : MonoBehaviour {
         if(!godMode)
         {
             speedLevel++;
-            z = z - speedLevelOffset;
+            //z = z - speedLevelOffset;
+            StartCoroutine("Hit");
         }
     }
     /// <summary>
@@ -165,6 +170,21 @@ public class PlayerHandle : MonoBehaviour {
             yield return null;
         }
         jumping = false;
+    }
+    IEnumerator Hit()
+    {
+        LevelController.instance.GetCurrentPlanet().onPlanetRot += RotAround;
+        float time = 0;
+        anim.Play("Impact");
+        invincible = true;
+        while(anim.GetCurrentAnimatorStateInfo(0).length > time)
+        {
+            Debug.Log("hit");
+            time += Time.deltaTime;
+            yield return null;
+        }
+        invincible = false;
+        LevelController.instance.GetCurrentPlanet().onPlanetRot -= RotAround;
     }
     #endregion
 }

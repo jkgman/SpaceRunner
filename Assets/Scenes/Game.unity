@@ -2229,10 +2229,11 @@ MonoBehaviour:
   speed: 3.56
   gravity: 3.71
   movementDeadZone: 1
-  godMode: 1
+  godMode: 0
   anim: {fileID: 808172690}
   sliding: 0
   jumping: 0
+  invincible: 0
 --- !u!143 &1334375366
 CharacterController:
   m_ObjectHideFlags: 0
