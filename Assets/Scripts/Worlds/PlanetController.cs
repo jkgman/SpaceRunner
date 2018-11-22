@@ -133,7 +133,7 @@ public class PlanetController : MonoBehaviour {
         track = false;
         PlanetExit exitPrefab = Instantiate(exit);
         exitPrefab.transform.parent = controller.GetCurrentPlanet().transform;
-        exitPrefab.transform.position = LaneGenerator.instance.LanePositions[2];
+        exitPrefab.transform.localPosition = LaneGenerator.instance.LanePositions[2];
         exitPrefab.transform.rotation = Quaternion.LookRotation(Vector3.up, exitPrefab.transform.position - controller.GetCurrentPlanet().transform.position);
     }
 
