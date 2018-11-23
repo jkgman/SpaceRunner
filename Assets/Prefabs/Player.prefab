@@ -1071,11 +1071,12 @@ MonoBehaviour:
   maxSpeedLevel: 3
   speed: 3.56
   gravity: 3.71
-  maxMovePerSecond: 1.03
+  maxMovePerSecond: 0
   movementDeadZone: 1
-  godMode: 0
+  godMode: 1
   anim: {fileID: 95181578541511628}
-  Sliding: 0
+  sliding: 0
+  jumping: 0
 --- !u!114 &114381316580442220
 MonoBehaviour:
   m_ObjectHideFlags: 1

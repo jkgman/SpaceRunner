@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// Handles movement, dying and such
 /// </summary>
-public class PlayerHandle : MonoBehaviour {
+public class PlayerHandle : MonoBehaviour, IitemEvents {
 
     #region Variables
     //TODO: add descriptions for exposed vars
@@ -50,6 +51,7 @@ public class PlayerHandle : MonoBehaviour {
         controller = LevelController.instance;
         input = InputHandle.instance;
         input.onMovement += MovementCalc;
+        EventSystemListeners.main.AddListener(gameObject);
     }
 
     /// <summary>
@@ -187,4 +189,36 @@ public class PlayerHandle : MonoBehaviour {
         LevelController.instance.GetCurrentPlanet().onPlanetRot -= RotAround;
     }
     #endregion
+
+
+    //Do the stuff that powerups do
+    //Or use as a waypoint to somewhere where logic is done
+    public void ItemCollected(Collectable _collectable)
+    {
+        Debug.Log("playerhandle: Message received " + _collectable.type.ToString());
+        Collectable.CollectableType itemType = _collectable.type;
+        //Ignore Coins
+        switch(itemType) {
+
+            case Collectable.CollectableType.SlowDown:
+                //Time.timeScale = 0.25f;
+                break;
+            case Collectable.CollectableType.Magnet:
+
+                break;
+            case Collectable.CollectableType.Invincibility:
+
+                break;
+            case Collectable.CollectableType.Shield:
+
+                break;
+            case Collectable.CollectableType.Refresh:
+
+                break;
+            case Collectable.CollectableType.Resurrect:
+
+                break;
+        }
+
+    }
 }
