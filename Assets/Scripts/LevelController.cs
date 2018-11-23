@@ -205,7 +205,7 @@ public class LevelController : MonoBehaviour {
         transitionController.ToWorld(planet, player);
     }
 
-    private void MovementCalc(Vector2 endPos, Vector2 direction, float distance)
+    public void MovementCalc(Vector2 endPos, Vector2 direction, float distance)
     {
         if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {

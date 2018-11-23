@@ -25,7 +25,7 @@ public class PlayerHandle : MonoBehaviour {
     public bool sliding = false;
     public bool jumping = false;
     public bool invincible = false;
-    private LevelController controller;
+    public LevelController controller;
     #endregion
 
     #region Singleton
@@ -70,7 +70,7 @@ public class PlayerHandle : MonoBehaviour {
     /// <summary>
     /// Gets inputs and moves character accordingly
     /// </summary>
-    private void MovementCalc( Vector2 endPos, Vector2 direction, float distance) {
+    public void MovementCalc( Vector2 endPos, Vector2 direction, float distance) {
         if(control)
         {
             if(Mathf.Abs(direction.x) < Mathf.Abs(direction.y))
