@@ -104,7 +104,7 @@ public class PlanetController : MonoBehaviour {
         }
         if(targetLaneRot.z != 0)
         {
-            float target = targetLaneRot.z * Time.deltaTime * speed;
+            float target = targetLaneRot.z * Time.deltaTime * lanespeed;
             if(targetLaneRot.z >= 0)
             {
                 target = Mathf.Min(targetLaneRot.z, target);

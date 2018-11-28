@@ -198,10 +198,19 @@ public class HazardSpawner : MonoBehaviour
             {
                 Hazard hazard = Instantiate(hazardsToSpawn[finalLocations[i]-1]);
                 hazard.transform.position = lane.LanePositions[i];
-                hazard.transform.RotateAround(LevelController.instance.GetCurrentPlanet().transform.position,new Vector3(0,0,1), Vector3.SignedAngle(lane.LanePositions[2] - LevelController.instance.GetCurrentPlanet().transform.position, lane.LanePositions[LevelController.instance.currentLane] - LevelController.instance.GetCurrentPlanet().transform.position, Vector3.forward));
+                float angle = Vector3.SignedAngle(lane.LanePositions[2] - LevelController.instance.GetCurrentPlanet().transform.position, lane.LanePositions[LevelController.instance.currentLane] - LevelController.instance.GetCurrentPlanet().transform.position, new Vector3(0, -1, 0));
+                hazard.transform.RotateAround(LevelController.instance.GetCurrentPlanet().transform.position,
+                    new Vector3(0,0,1), angle);
+                float x = 0, y = 1;
+                x = Mathf.Sin(Mathf.Deg2Rad * -angle);
+                y = Mathf.Cos(Mathf.Deg2Rad * -angle);
+                Vector3 forward = new Vector3(x,y,0);
+                Vector3 up = (hazard.transform.position - controller.GetCurrentPlanet().transform.position).normalized;
+                Debug.Log(forward +" "+ up);
+                hazard.transform.rotation = Quaternion.LookRotation(forward, up);
                 hazard.transform.parent = controller.GetCurrentPlanet().transform;
-                hazard.transform.rotation = Quaternion.LookRotation(Vector3.up, hazard.transform.position - controller.GetCurrentPlanet().transform.position);
             }
+
         }
     }
     #endregion
