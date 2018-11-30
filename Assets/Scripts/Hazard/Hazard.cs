@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// How the hazard will interact with the player
 /// </summary>
-public enum HazardType { Death, Slow }
+public enum HazardType { Death, Slow, Collectible }
 /// <summary>
 /// Holds data for how the hazard will spawn and interact with player
 /// </summary>
@@ -18,14 +18,8 @@ public class Hazard : MonoBehaviour {
     private bool canSlideUnder = false;
     [SerializeField, Tooltip("Can the player jump over this hazard")]
     private bool canJumpOver = false;
-    [SerializeField, Tooltip("How many lanes this object wants to use")]
-    private int length;
-    [SerializeField, Tooltip("Determines if more than one instance of this can be spawned in a set")]
-    private bool useOnlyOnce;
-    [SerializeField, Tooltip("Determines if object will spawn on a certain lane")]
-    private bool hasPreferedLane;
     [SerializeField, Tooltip("If hasPreferedLane it will pull the lane number here")]
-    private int preferedLane;
+    private int lane;
     private PlayerHandle player;
 
     #region Getters and Setters
@@ -53,33 +47,14 @@ public class Hazard : MonoBehaviour {
             canJumpOver = value;
         }
     }
-    public int Length
+
+    public int Lane
     {
         get {
-            return length;
+            return lane;
         }
     }
 
-    public bool UseOnlyOnce
-    {
-        get {
-            return useOnlyOnce;
-        }
-    }
-
-    public bool HasPreferedLane
-    {
-        get {
-            return hasPreferedLane;
-        }
-    }
-
-    public int PreferedLane
-    {
-        get {
-            return preferedLane;
-        }
-    }
     #endregion
 
     #endregion
