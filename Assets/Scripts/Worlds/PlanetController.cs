@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlanetController : MonoBehaviour {
 
     #region Variables
+    public HazardChunck[] chunks;
     [SerializeField, Tooltip("amount of playable lanes to use")]
     private int laneCount;
     [SerializeField, Tooltip("Distance to use for spawning hazards, this variable will be affected by scale")]
