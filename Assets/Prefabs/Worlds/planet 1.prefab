@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1724643152847970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -53.2, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 4907289300122486}
@@ -172,16 +172,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunks:
-  - {fileID: 114218349044615880, guid: 558f274e9624d1a4ab9fa1d677f1bb56, type: 2}
-  - {fileID: 114522438513350484, guid: d3439dd8738eca540b520ebcb9127056, type: 2}
+  - {fileID: 114494201437631668, guid: 6b6191a84b250394193a55bc15f100d6, type: 2}
+  - {fileID: 114601386618351200, guid: e107666b715887d459871ad07ca1ea7f, type: 2}
+  - {fileID: 114768751886283370, guid: b021c46a9779abc4e9d6e5b04e00d859, type: 2}
+  - {fileID: 114096519363469776, guid: 6d04a52ab4a795a4f97bd0ec858118c9, type: 2}
+  - {fileID: 114872485311926080, guid: 470caf53f613d8042bf13b544d42dabd, type: 2}
   laneCount: 5
   gutterWidth: 0.6
   rotVec: {x: 0, y: 0, z: 1}
   speed: 20
   lanespeed: 1
   planetRadius: 10
-  hazardSet: {fileID: 114843751915788868, guid: 2c6a815f85c3eda4893af84f2533f70f,
-    type: 2}
+  hazardSet: {fileID: 0}
   playerPoint: {x: 0, y: 0.5, z: -0.25}
   modifier: 0.1
   exit: {fileID: 114749065643201848, guid: ad93abc8c2effa842a09622f59795617, type: 2}

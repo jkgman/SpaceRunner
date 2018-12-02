@@ -33,6 +33,7 @@ ModelImporter:
     100054: Sphere
     100056: Thigh_L
     100058: Thigh_R
+    100060: UFO
     400000: Antenna_1
     400002: Antenna_2
     400004: Antenna_3
@@ -63,19 +64,27 @@ ModelImporter:
     400054: Sphere
     400056: Thigh_L
     400058: Thigh_R
+    400060: UFO
     2100000: Material_001__TT_checker_2048x2048_UV_GRID
     2100002: Material__TT_checker_2048x2048_UV_GRID
     2100004: unnamed
+    2100006: Material
     2300000: Sphere
+    2300002: UFO
     3300000: Sphere
+    3300002: UFO
     4300000: body
     4300002: Sphere
+    4300004: UFO
     7400000: Default Take
     7400002: JUMP
     7400004: RUN
     7400006: Slide
     7400008: SLIDE
     7400010: Impact
+    7400012: Switch-start
+    7400014: Switch
+    7400016: Switch-end
     9500000: //RootNode
     13700000: body
     2186277476908879412: ImportLogs
@@ -108,10 +117,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: SLIDE
-      takeName: SLIDE
+      name: Impact
+      takeName: Impact
       firstFrame: -1
-      lastFrame: 39
+      lastFrame: 16
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -192,10 +201,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Impact
-      takeName: Impact
+      name: SLIDE
+      takeName: SLIDE
       firstFrame: -1
-      lastFrame: 16
+      lastFrame: 39
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -215,6 +224,98 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Switch-start
+      takeName: Switch
+      firstFrame: -1
+      lastFrame: 18
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Switch
+      takeName: Switch
+      firstFrame: 18
+      lastFrame: 96
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Switch-end
+      takeName: Switch
+      firstFrame: 96
+      lastFrame: 139
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 1
+        functionName: Dust
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 316d3499259fc8f4fb2bedb6c93012be,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
