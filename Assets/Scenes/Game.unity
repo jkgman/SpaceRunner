@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.015554899, g: 0.015063122, b: 0.014816758, a: 1}
+  m_IndirectSpecularColor: {r: 0.015554532, g: 0.015063206, b: 0.014816795, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -90,7 +90,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -820,6 +820,12 @@ Transform:
   m_Father: {fileID: 1334284327}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &584461958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114737993585213554, guid: 7945766bd7b5d4743a4733ffed7bc297,
+    type: 2}
+  m_PrefabInternal: {fileID: 568351843}
+  m_Script: {fileID: 11500000, guid: 55eb5d7860b47e74d80c43ac8920e6cd, type: 3}
 --- !u!1 &604759758
 GameObject:
   m_ObjectHideFlags: 0
@@ -2522,8 +2528,8 @@ MonoBehaviour:
   powerUpSlot_s: {fileID: 1386343171}
   text: {fileID: 704567828}
   itemSlots:
-  - {fileID: 114543050148370830, guid: c18b96f30849f75408ea0809b1fa32b4, type: 2}
-  - {fileID: 114495110765681150, guid: 7e388072a420bb1488dfe853cb1f6bf0, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1251469340
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,14 +2587,14 @@ RectTransform:
   m_GameObject: {fileID: 1268318734}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children: []
   m_Father: {fileID: 1231164566}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 49.999996, y: -50}
+  m_AnchoredPosition: {x: 40, y: -58}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1268318736
@@ -2801,7 +2807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54da61413bb4cd438349ec9a14f383e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointerParticle: {fileID: 0}
   _swipeDeadzone: 0.1
   _pause: {fileID: 1407205554}
 --- !u!114 &1334375365
@@ -2821,12 +2826,12 @@ MonoBehaviour:
   speed: 3.56
   gravity: 3.71
   movementDeadZone: 1
-  godMode: 1
+  godMode: 0
   anim: {fileID: 808172690}
   sliding: 0
   jumping: 0
   invincible: 0
-  controller: {fileID: 0}
+  controller: {fileID: 584461958}
 --- !u!143 &1334375366
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2887,14 +2892,14 @@ RectTransform:
   m_GameObject: {fileID: 1386343169}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children: []
   m_Father: {fileID: 1231164566}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -172}
+  m_AnchoredPosition: {x: 40, y: -180}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1386343171

@@ -218,6 +218,9 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             case Collectable.CollectableType.Resurrect:
 
                 break;
+            case Collectable.CollectableType.Heart:
+
+                break;
         }
 
     }

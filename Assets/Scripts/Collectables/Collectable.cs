@@ -23,7 +23,10 @@ public class Collectable : MonoBehaviour {
         Invincibility,
         Refresh,
         Resurrect,
-        Shield
+        Shield,
+        Heart,
+        Gem,
+        Battery
 
     }
 

@@ -5,7 +5,6 @@ using UnityEngine;
 public class InputHandle : MonoBehaviour {
 
     #region public variables
-    public ParticleSystem _pointerParticle;
     [Tooltip("Multiplier for minimum swipe length based on screen width")]
     public float _swipeDeadzone;
     public GameObject _pause;

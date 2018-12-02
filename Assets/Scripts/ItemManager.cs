@@ -25,12 +25,14 @@ public class ItemManager : MonoBehaviour, IitemEvents
     private void Start()
     {
         items = new GameObject[2];
-        if (GameManager.Instance.itemSlots!=null) { 
+        if (GameManager.Instance.itemSlots != null)
+        {
             itemSlots = GameManager.Instance.itemSlots;
         }
         EventSystemListeners.main.AddListener(gameObject);
 
-        if(itemSlots!=null) { 
+        if (itemSlots != null)
+        {
             powerUpSlot_f.onClick.AddListener(delegate { ConsumeItem(0); });
             powerUpSlot_s.onClick.AddListener(delegate { ConsumeItem(1); });
 
