@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 /// <summary>
 /// Holds a list of Hazardgroups to spawn a chunk and
 /// the functionality of spawning them
@@ -81,6 +83,7 @@ public class HazardChunk : MonoBehaviour {
     #endregion
 
     #region Editor
+#if UNITY_EDITOR
     //Make button to call gen
     [CustomEditor(typeof(HazardChunk))]
     public class HazardEditor : Editor
@@ -95,5 +98,6 @@ public class HazardChunk : MonoBehaviour {
             }
         }
     }
-    #endregion
+#endif
+#endregion
 }

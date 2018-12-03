@@ -179,11 +179,8 @@ MonoBehaviour:
   - {fileID: 114872485311926080, guid: 470caf53f613d8042bf13b544d42dabd, type: 2}
   laneCount: 5
   gutterWidth: 0.6
-  rotVec: {x: 0, y: 0, z: 1}
   speed: 20
-  lanespeed: 1
   planetRadius: 10
-  hazardSet: {fileID: 0}
   playerPoint: {x: 0, y: 0.5, z: -0.25}
   modifier: 0.1
   exit: {fileID: 114749065643201848, guid: ad93abc8c2effa842a09622f59795617, type: 2}

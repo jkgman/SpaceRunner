@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 /// <summary>
 /// Handles movement, dying and such
 /// </summary>
@@ -229,6 +231,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         }
 
     }
+#if UNITY_EDITOR
     [CustomEditor(typeof(PlayerHandle))]
     public class PlayerEditor : Editor
     {
@@ -259,4 +262,5 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             }
         }
     }
+#endif
 }

@@ -8,6 +8,7 @@ public class InputHandle : MonoBehaviour {
     [Tooltip("Multiplier for minimum swipe length based on screen width")]
     public float _swipeDeadzone;
     public GameObject _pause;
+    public GameObject resumeButton;
     #endregion
 
     #region private variables
@@ -116,6 +117,10 @@ public class InputHandle : MonoBehaviour {
 
     public void Pause() {
         _pause.SetActive(true);
+    }
+    public void Fail() {
+        _pause.SetActive(true);
+        resumeButton.SetActive(false);
     }
 
     private void BackButton()

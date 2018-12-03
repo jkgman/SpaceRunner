@@ -60,6 +60,8 @@ public class LevelController : MonoBehaviour {
         transitionController = GetComponent<TransitionController>();
         hazardSpawner = FindObjectOfType<HazardSpawner>();
         player = FindObjectOfType<PlayerHandle>();
+        player.anim.Play("FlyLoop");
+        player.dust.Stop();
         spawnCollider = GetComponent<BoxCollider>();
         ShufflePlanets(desiredLevelLength);
         GenerateLevelField(planetsToSpawn, spawnCollider);
