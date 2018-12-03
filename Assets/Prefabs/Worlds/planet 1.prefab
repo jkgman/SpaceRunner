@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c196bc87e7aac3419c25245a5c4dc8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   chunks:
   - {fileID: 114494201437631668, guid: 6b6191a84b250394193a55bc15f100d6, type: 2}
   - {fileID: 114601386618351200, guid: e107666b715887d459871ad07ca1ea7f, type: 2}
