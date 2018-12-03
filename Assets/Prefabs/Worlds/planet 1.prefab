@@ -169,14 +169,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c196bc87e7aac3419c25245a5c4dc8f, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   chunks:
   - {fileID: 114494201437631668, guid: 6b6191a84b250394193a55bc15f100d6, type: 2}
-  - {fileID: 114601386618351200, guid: e107666b715887d459871ad07ca1ea7f, type: 2}
-  - {fileID: 114768751886283370, guid: b021c46a9779abc4e9d6e5b04e00d859, type: 2}
-  - {fileID: 114096519363469776, guid: 6d04a52ab4a795a4f97bd0ec858118c9, type: 2}
   - {fileID: 114872485311926080, guid: 470caf53f613d8042bf13b544d42dabd, type: 2}
+  - {fileID: 114768751886283370, guid: b021c46a9779abc4e9d6e5b04e00d859, type: 2}
   laneCount: 5
   gutterWidth: 0.6
   speed: 20

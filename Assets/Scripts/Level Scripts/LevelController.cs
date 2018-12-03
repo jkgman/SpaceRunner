@@ -60,6 +60,7 @@ public class LevelController : MonoBehaviour {
         transitionController = GetComponent<TransitionController>();
         hazardSpawner = FindObjectOfType<HazardSpawner>();
         player = FindObjectOfType<PlayerHandle>();
+        player.fire.Play();
         player.anim.Play("FlyLoop");
         player.dust.Stop();
         spawnCollider = GetComponent<BoxCollider>();
@@ -111,6 +112,7 @@ public class LevelController : MonoBehaviour {
     {
         planetsInLevel[currentPlanet].Begin();
         hazardSpawner.Begin();
+        player.fire.Stop();
         player.anim.Play("Land");
         player.ActivateControl();
         currentLane = 2;

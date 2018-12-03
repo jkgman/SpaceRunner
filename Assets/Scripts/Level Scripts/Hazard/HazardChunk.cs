@@ -47,7 +47,6 @@ public class HazardChunk : MonoBehaviour {
         bool anyLeftToSpawn = false;
         foreach(HazardRow item in groups)
         {
-            Debug.Log(item.dist + " - " + (LevelController.instance.Distance - startDist));
             if(!item.active && item.dist <= (LevelController.instance.Distance - startDist))
             {
                 Debug.Log("spawn");

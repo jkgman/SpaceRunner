@@ -120,7 +120,7 @@ ModelImporter:
       name: Impact
       takeName: Impact
       firstFrame: -1
-      lastFrame: 16
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -203,8 +203,8 @@ ModelImporter:
     - serializedVersion: 16
       name: SLIDE
       takeName: SLIDE
-      firstFrame: -1
-      lastFrame: 39
+      firstFrame: 2
+      lastFrame: 20.8
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

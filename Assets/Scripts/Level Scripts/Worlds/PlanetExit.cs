@@ -15,6 +15,7 @@ public class PlanetExit : MonoBehaviour {
         {
             PlayerHandle.instance.DeactivateControl();
             PlayerHandle.instance.anim.Play("Fly");
+            PlayerHandle.instance.dust.Stop();
             LevelController.instance.NextPlanet();
         }
     }

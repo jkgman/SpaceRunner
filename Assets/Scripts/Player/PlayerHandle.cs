@@ -31,6 +31,9 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     public bool invincible = false;
     public LevelController controller;
     public ParticleSystem dust;
+    public ParticleSystem JumpDust;
+    public ParticleSystem fire;
+    public Magnetize mag;
     #endregion
 
     #region Singleton
@@ -151,6 +154,11 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     public void Dust() {
         dust.Play();
     }
+
+    public void Magnet(float time) {
+        mag.Activate(time);
+    }
+
     #endregion
 
     #region Coroutines
@@ -171,6 +179,9 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     IEnumerator Jump()
     {
         float time = 0;
+        dust.Stop();
+        JumpDust.Play();
+        
         anim.Play("Jump");
         jumping = true;
         while(anim.GetCurrentAnimatorStateInfo(0).length > time)
@@ -178,6 +189,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             time += Time.deltaTime;
             yield return null;
         }
+        dust.Play();
         jumping = false;
     }
     IEnumerator Hit()
@@ -259,6 +271,10 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             if(GUILayout.Button("Slide"))
             {
                 script.MovementCalc(Vector2.zero, new Vector2(0, -1), 0f);
+            }
+            if(GUILayout.Button("Magnetize"))
+            {
+                script.Magnet(10);
             }
         }
     }

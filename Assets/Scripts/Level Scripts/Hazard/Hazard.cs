@@ -79,12 +79,14 @@ public class Hazard : MonoBehaviour {
             if(Haztype == HazardType.Slow)
             {
                 PlayerHandle.instance.Slow();
+                Destroy(gameObject);
             }
             else if(Haztype == HazardType.Death)
             {
                 PlayerHandle.instance.Die();
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
+            
             //TODO: (Mandatory) Make call to levelcontroller for a particle
             //levelcontroller.Poof();
         }

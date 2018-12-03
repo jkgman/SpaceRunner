@@ -24,9 +24,12 @@ GameObject:
   - component: {fileID: 135132042334507960}
   - component: {fileID: 54667351669832592}
   - component: {fileID: 114452991699291462}
+  - component: {fileID: 114117175357881344}
+  - component: {fileID: 114801926848353264}
+  - component: {fileID: 114963983668925640}
   m_Layer: 0
   m_Name: coin
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,13 +40,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1854876810890320}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!23 &23891545487305158
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -101,6 +104,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114117175357881344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1854876810890320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311e06e76f5424148a2b63b85fb043d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eulers: {x: 0, y: 0, z: 1}
 --- !u!114 &114452991699291462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,6 +129,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   UiTexture: {fileID: 21300000, guid: cdf3bc737f2296e42bdb31c816156cac, type: 3}
+--- !u!114 &114801926848353264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1854876810890320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa43410f561fee341bae7d115c41372e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chanceToSleep: 75
+--- !u!114 &114963983668925640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1854876810890320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9bfa59726deef42967afb09878e674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: {x: 0, y: 0.1, z: 0}
+  frequency: {x: 1, y: 0.25, z: 1}
 --- !u!135 &135132042334507960
 SphereCollider:
   m_ObjectHideFlags: 1

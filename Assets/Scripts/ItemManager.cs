@@ -24,6 +24,7 @@ public class ItemManager : MonoBehaviour, IitemEvents
     //Spaghetti
     private void Start()
     {
+        EventSystemListeners.main.AddListener(gameObject);
         if (GameManager.Instance!= null)
         {
             AddItems();
@@ -82,6 +83,10 @@ public class ItemManager : MonoBehaviour, IitemEvents
         if (_collectable.type == Collectable.CollectableType.Coin)
         {
             coinQ++;
+        }
+        if(_collectable.type == Collectable.CollectableType.Magnet)
+        {
+            PlayerHandle.instance.Magnet(10f);
         }
         //for now
         text.text = coinQ.ToString();

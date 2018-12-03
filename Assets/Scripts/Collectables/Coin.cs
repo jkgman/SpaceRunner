@@ -19,7 +19,6 @@ public class Coin : Collectable {
         // OR listen with player and do stuff then 
 
         base.Pickup();
-        
     }
 
 }
