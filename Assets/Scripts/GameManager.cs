@@ -5,7 +5,6 @@ using System.IO;
 using System.Text;
 using System;
 using System.Security.Cryptography;
-using System.Xml.Serialization;
 
 /// <summary>
 /// Class for inventory, energy, level and rating tracking.
@@ -80,6 +79,10 @@ public class GameManager : MonoBehaviour {
         {
             SaveData(gData);
         }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            gData = LoadData();
+        }
     }
 
 
@@ -94,9 +97,18 @@ public class GameManager : MonoBehaviour {
         string filePath = Path.Combine(Application.persistentDataPath, gameDataFileName + ".json").Replace("\\", "/");
         if (File.Exists(filePath))
         {
-            byte[] dataAsJson = File.ReadAllBytes(filePath);
-            string stringData = Decrypt(dataAsJson);
-            loadedData = JsonUtility.FromJson<GameData>(stringData);
+            Rijndael crypto = new Rijndael();
+
+            //byte[] dataAsJson = File.ReadAllBytes(filePath);
+            //string stringData = Decrypt(dataAsJson);
+            //loadedData = JsonUtility.FromJson<GameData>(stringData);
+
+            byte[] soupBackIn = File.ReadAllBytes(filePath);
+            string jsonFromFile = crypto.Decrypt(soupBackIn, hash);
+
+            GameData copy = JsonUtility.FromJson<GameData>(jsonFromFile);
+            Debug.Log(copy.energy);
+            loadedData = copy;
         }
         else
         {
@@ -117,61 +129,23 @@ public class GameManager : MonoBehaviour {
         string filePath = Path.Combine(Application.persistentDataPath, gameDataFileName + ".json");
         string jsonData = JsonUtility.ToJson(gdata);
 
-        File.WriteAllBytes(filePath, Encrypt(jsonData));
+        Rijndael crypto = new Rijndael();
+        byte[] soup = crypto.Encrypt(jsonData, hash);
+
+        //string filename = Path.Combine(Application.persistentDataPath, SAVE_FILE);
+
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+        }
+
+        File.WriteAllBytes(filePath, soup);
         Debug.Log("Saved!");
     }
 
     //Encryption key
-    private static string hash = "sp4c3runn3r!";
+    private static string hash = "sp4c3runn3r!sp4c3runn3r!";
 
-    //Encrypt
-    /// <summary>
-    /// Encrypts serialized string data as byte array data to the json save file
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    private byte[] Encrypt(string input)
-    {
-
-        byte[] data = UTF8Encoding.UTF8.GetBytes(input);
-        using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
-        {
-            byte[] key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(hash));
-            using (TripleDESCryptoServiceProvider trip = new TripleDESCryptoServiceProvider() { Key = key, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
-            {
-                ICryptoTransform tr = trip.CreateEncryptor();
-                byte[] results = tr.TransformFinalBlock(data, 0, data.Length);
-                return results;
-            }
-        }
-
-
-    }
-
-    //Decrypt
-    /// <summary>
-    /// Decrypts encrypted byte array data back to json data
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    private string Decrypt(byte[] input)
-    {
-        byte[] data = input;
-        
-        using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
-        {
-            byte[] key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(hash));
-            using (TripleDESCryptoServiceProvider trip = new TripleDESCryptoServiceProvider() { Key = key, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
-            {
-                ICryptoTransform tr = trip.CreateDecryptor();
-                byte[] results = tr.TransformFinalBlock(data, 0, data.Length);
-                //return results;
-                return UTF8Encoding.UTF8.GetString(results);
-            }
-        }
-
-
-    }
 
 
 }

@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
+#if UNITY_EDITOR
 [CustomEditor(typeof(PlayerHandle))]
 public class PlayerEditor : Editor {
 
@@ -30,3 +33,4 @@ public class PlayerEditor : Editor {
         }
     }
 }
+#endif

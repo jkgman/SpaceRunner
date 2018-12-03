@@ -24,6 +24,30 @@ public class ItemManager : MonoBehaviour, IitemEvents
     //Spaghetti
     private void Start()
     {
+        if (GameManager.Instance!= null)
+        {
+            AddItems();
+        }
+        text.text = "0";
+    }
+
+    /// <summary>
+    /// Use item in the level inventory slot
+    /// </summary>
+    /// <param name="slot"></param>
+    void ConsumeItem(int slot)
+    {
+         if (itemSlots[slot]!=null) { 
+            LevelController.instance.SendConsumeMessage(itemSlots[slot]);
+            itemSlots[slot] = null;
+            Destroy(items[slot]);
+
+        }
+    }
+    
+
+    private void AddItems()
+    {
         items = new GameObject[2];
         if (GameManager.Instance.itemSlots != null)
         {
@@ -47,20 +71,6 @@ public class ItemManager : MonoBehaviour, IitemEvents
         text.text = coinQ.ToString();
     }
 
-    /// <summary>
-    /// Use item in the level inventory slot
-    /// </summary>
-    /// <param name="slot"></param>
-    void ConsumeItem(int slot)
-    {
-         if (itemSlots[slot]!=null) { 
-            LevelController.instance.SendConsumeMessage(itemSlots[slot]);
-            itemSlots[slot] = null;
-            Destroy(items[slot]);
-
-        }
-    }
-    
     /// <summary>
     /// Item was collected
     /// </summary>
