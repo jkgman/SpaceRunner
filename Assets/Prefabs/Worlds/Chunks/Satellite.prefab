@@ -308,6 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eulers: {x: 0, y: 0, z: 1}
+  space: 1
 --- !u!114 &114246599836319290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dea5900b941d8947a19a7afac071c2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  haztype: 0
+  haztype: 1
   canSlideUnder: 1
   canJumpOver: 0
   lane: 1

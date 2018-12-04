@@ -5,7 +5,8 @@ using UnityEngine;
 public class Rotater : MonoBehaviour {
 
     public Vector3 eulers;
+    public Space space = Space.Self;
 	void Update () {
-        transform.Rotate(eulers);
+        transform.Rotate(eulers.x, eulers.y, eulers.z, space);
 	}
 }
