@@ -6,6 +6,10 @@ using System.Text;
 using System;
 using System.Security.Cryptography;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 /// <summary>
 /// Class for inventory, energy, level and rating tracking.
 /// Saving gamedata as json 
@@ -18,14 +22,20 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region public variables
+    [HideInInspector]
     public Collectable[] itemSlots;
+    [HideInInspector]
     public GameData gData;
+    public int LevelQuantity;
+
+    public GameData DebugData;
+    public GameData newGameData;
     #endregion
 
     #region singleton
     public static GameManager Instance = null;
 
-    // Initialize singleton instance.
+    // Initialize singleton instance and load data
     private void Awake()
     {
         // If there is not already an instance of SoundManager, set it to this.
@@ -41,24 +51,21 @@ public class GameManager : MonoBehaviour {
 
         //Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
+
+        
     }
     #endregion
 
     private void Start()
     {
         itemSlots = null;
-        if (LoadData() != null) { 
         gData = LoadData();
-        } else
-        {
-            GameData newData = new GameData();
-            newData.energy = 100;
-            newData.inventorySize = 5;
-            newData.levelProgression = new int[0];
-            newData.inventorySize = 3;
 
-            InitNewData( newData );
-            gData = newData;
+
+        if (gData == null)
+        {
+            gData = newGameData;
+            SaveData(gData);
         }
     }
 
@@ -66,23 +73,17 @@ public class GameManager : MonoBehaviour {
     /// Initialize new save data
     /// </summary>
     /// <param name="newData"></param>
-    private void InitNewData(GameData newData)
+    private GameData InitNewData()
     {
+        GameData newData = new GameData();
+
+        newData.energy = 0;
+        newData.levelProgression = new int[LevelQuantity];
+        
+
         SaveData(newData);
-    }
-
-
-    private void Update()
-    {
-        //for save testing
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SaveData(gData);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            gData = LoadData();
-        }
+        return newData;
+        
     }
 
 
@@ -107,12 +108,12 @@ public class GameManager : MonoBehaviour {
             string jsonFromFile = crypto.Decrypt(soupBackIn, hash);
 
             GameData copy = JsonUtility.FromJson<GameData>(jsonFromFile);
-            Debug.Log(copy.energy);
             loadedData = copy;
+
         }
         else
         {
-            Debug.LogError("Cannot find gamedata file!");
+            //Debug.LogError("Cannot find gamedata file!");
             return null;
         }
         return loadedData;
@@ -146,7 +147,28 @@ public class GameManager : MonoBehaviour {
     //Encryption key
     private static string hash = "sp4c3runn3r!sp4c3runn3r!";
 
+#if UNITY_EDITOR
+    [CustomEditor(typeof(GameManager))]
+    public class GameDataEditor : Editor
+    {
+        
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+            GameManager script = (GameManager)target;
+            if (GUILayout.Button("Save Data"))
+            {
+                script.SaveData(script.DebugData);
+            }
+        }
+    }
+#endif
 
+    //Save for those nasty quitters
+    private void OnApplicationQuit()
+    {
+        SaveData(gData);
+    }
 
 }
 

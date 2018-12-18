@@ -10,25 +10,22 @@ using TMPro;
 /// </summary>
 public class ItemManager : MonoBehaviour, IitemEvents
 {
-
-    
     #region public variables
-    public Button powerUpSlot_f;
-    public Button powerUpSlot_s;
+    public Button[] buttons;
     public TextMeshProUGUI text;
-    public Collectable[] itemSlots;
+    public Collectable[] lvlItems;
     #endregion
     private int coinQ;
-    private GameObject[] items;
 
-    //Spaghetti
+
     private void Start()
     {
         EventSystemListeners.main.AddListener(gameObject);
-        if (GameManager.Instance!= null)
-        {
+        if (GameManager.Instance != null && GameManager.Instance.itemSlots != null) {
+            lvlItems = GameManager.Instance.itemSlots;
             AddItems();
         }
+
         text.text = "0";
     }
 
@@ -38,37 +35,29 @@ public class ItemManager : MonoBehaviour, IitemEvents
     /// <param name="slot"></param>
     void ConsumeItem(int slot)
     {
-         if (itemSlots[slot]!=null) { 
-            LevelController.instance.SendConsumeMessage(itemSlots[slot]);
-            itemSlots[slot] = null;
-            Destroy(items[slot]);
-
+         if ( lvlItems[slot] !=null) { 
+            LevelController.instance.SendConsumeMessage(lvlItems[slot]);
+            lvlItems[slot] = null;
+            Destroy(buttons[slot].gameObject);
         }
     }
-    
+
 
     private void AddItems()
     {
-        items = new GameObject[2];
-        if (GameManager.Instance.itemSlots != null)
+        for (int i = 0; i < lvlItems.Length; i++)
         {
-            itemSlots = GameManager.Instance.itemSlots;
+            if (lvlItems[i]!= null )
+            {
+                //Index for button listener as separate int as delegation returns here when event triggers,
+                // thus parameter "i" would point to wrong value
+                int index = i;
+                buttons[i].onClick.AddListener(delegate { ConsumeItem( index ); });
+                buttons[i].gameObject.GetComponent<Image>().sprite = lvlItems[i].UiTexture;
+                buttons[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            }
         }
-        EventSystemListeners.main.AddListener(gameObject);
 
-        if (itemSlots != null)
-        {
-            powerUpSlot_f.onClick.AddListener(delegate { ConsumeItem(0); });
-            powerUpSlot_s.onClick.AddListener(delegate { ConsumeItem(1); });
-
-            items[0] = powerUpSlot_f.gameObject;
-            items[1] = powerUpSlot_s.gameObject;
-
-            powerUpSlot_f.gameObject.GetComponent<Image>().sprite = itemSlots[0].UiTexture;
-            powerUpSlot_s.gameObject.GetComponent<Image>().sprite = itemSlots[1].UiTexture;
-            powerUpSlot_f.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            powerUpSlot_s.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        }
         text.text = coinQ.ToString();
     }
 
@@ -83,10 +72,6 @@ public class ItemManager : MonoBehaviour, IitemEvents
         if (_collectable.type == Collectable.CollectableType.Coin)
         {
             coinQ++;
-        }
-        if(_collectable.type == Collectable.CollectableType.Magnet)
-        {
-            PlayerHandle.instance.Magnet(10f);
         }
         //for now
         text.text = coinQ.ToString();

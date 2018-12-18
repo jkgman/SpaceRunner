@@ -90,7 +90,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1342,7 +1342,7 @@ GameObject:
   - component: {fileID: 828077254}
   - component: {fileID: 828077253}
   m_Layer: 5
-  m_Name: TextMeshPro Text (1)
+  m_Name: Collection info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1675,7 +1675,7 @@ GameObject:
   - component: {fileID: 1015341491}
   - component: {fileID: 1015341490}
   m_Layer: 5
-  m_Name: TextMeshPro Text
+  m_Name: Distance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2070,12 +2070,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2190df532012a5459aa92691cdaea6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpSlot_f: {fileID: 1268318736}
-  powerUpSlot_s: {fileID: 1386343171}
+  buttons:
+  - {fileID: 1268318736}
+  - {fileID: 1386343171}
   text: {fileID: 704567828}
-  itemSlots:
-  - {fileID: 0}
-  - {fileID: 0}
+  lvlItems: []
 --- !u!1001 &1246118732
 Prefab:
   m_ObjectHideFlags: 0

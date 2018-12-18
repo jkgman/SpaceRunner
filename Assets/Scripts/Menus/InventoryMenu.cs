@@ -13,31 +13,24 @@ using UnityEngine.UI;
 public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDropHandler, IInitializePotentialDragHandler*/
 {
     #region public variables
-    public Collectable[] _items;
-    public int _itemSlotQ;
-    public GameObject item_f, item_s;
+    public CollectableData[] _items;
     #endregion
 
     #region private variables
-    private GameObject _selectedObject;
-    private Vector2 _ogPosition;
-    private Collectable[] itemSlots;
+    public Collectable[] itemSlots;
+    public int targetSlot = 0;
+    private Transform[] itemTransforms;
     #endregion
 
     private void Start()
     {
+
+        GameManager.Instance.gData = GameManager.Instance.LoadData();
         _items = GameManager.Instance.gData.inventoryData;
-        PopulateInventoryUI(_items);
         itemSlots = new Collectable[2];
     }
     
 
-    // Remove level items from saved game inventory
-    // check that moved to level and not back to menu
-    private void OnDisable()
-    {
-        GameManager.Instance.itemSlots = itemSlots;
-    }
 
     #region Drag code if needed
 
@@ -85,32 +78,96 @@ public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDro
 
 
     /// <summary>
-    /// Placeholder function for handling moving items from inventory to level item slots
+    /// function that moves items from inventory to level item slots and creates and adds listeners to their corresponding buttons
     /// </summary>
     /// <param name="item"></param>
     public void AddItemToSlot(Collectable item)
     {
-        if (itemSlots[0]== null)
+        if (itemSlots[targetSlot] != null)
         {
-            itemSlots[0] = item;
-            item_f.GetComponent<Image>().sprite = item.UiTexture;
-            item_f.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        } else if (itemSlots[1] == null)
-        {
-            itemSlots[1] = item;
-            item_s.GetComponent<Image>().sprite = item.UiTexture;
-            item_s.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            if (item.type == itemSlots[targetSlot].type)
+            {
+                Debug.Log("Same type item already in item slot!");
+                return;
+            }
+            else
+            {
+                foreach (var powerup in _items)
+                {
+                    if (powerup.Collectable.type == itemSlots[targetSlot].type)
+                    {
+                        Debug.Log(" Switch and return item quantity ");
+                        powerup.Quantity++;
+                    }
+                }
+            }
         }
 
+
+        foreach (var powerup in _items)
+        {
+            if (powerup.Collectable.type == item.type)
+            {
+                if (powerup.Quantity > 0)
+                {
+                    powerup.Quantity--;
+                    itemSlots[targetSlot] = powerup.Collectable;
+
+                    //Sprite and alpha change
+                    itemTransforms[targetSlot].gameObject.GetComponent<Image>().sprite = itemSlots[targetSlot].UiTexture;
+                    itemTransforms[targetSlot].gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+
+                    //set the item slot number to next automatically from 1st => 2nd for ease of use
+                    if (targetSlot == 0)
+                    {
+                            targetSlot = 1;
+                    }
+                }
+                else
+
+                {
+                    Debug.Log("No Collectables of type! " + powerup.Collectable.type);
+                    return;
+                }
+            }
+        }
     }
 
 
-    private void PopulateInventoryUI(Collectable[] items)
+    #region Item slot functions for UI
+    public void SetItemSlot1Transform(Transform target)
     {
+        itemTransforms = new Transform[2];
+        if (itemTransforms[0] == null)
+        {
+            itemTransforms[0] = target;
+        }
+    }
+    public void SetItemSlot2Transform(Transform target)
+    {
+        if (itemTransforms != null)
+        {
+            if (itemTransforms[1] == null)
+            {
+                itemTransforms[1] = target;
+            }
+        }
+    }
+    public void setTargetSlot1()
+    {
+        targetSlot = 0;
+    }
+    public void setTargetSlot2()
+    {
+        targetSlot = 1;
+    }
+    #endregion
 
-
-
-
+    private void OnDisable()
+    {
+        GameManager.Instance.itemSlots = itemSlots;
+        GameManager.Instance.gData.inventoryData = _items;
+        GameManager.Instance.SaveData(GameManager.Instance.gData);
     }
 
 }
