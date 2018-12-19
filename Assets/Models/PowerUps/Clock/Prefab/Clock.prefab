@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23954942159646208}
   - component: {fileID: 135904029638569388}
   - component: {fileID: 54174118565209154}
-  - component: {fileID: 114227732017457358}
+  - component: {fileID: 114794927721024950}
   m_Layer: 0
   m_Name: Clock
   m_TagString: Untagged
@@ -101,7 +101,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114227732017457358
+--- !u!114 &114794927721024950
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1269456799061424}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80239093d0c16eb499b89f29436ce721, type: 3}
+  m_Script: {fileID: 11500000, guid: 944652a26c96b734b8db60156eb56d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1

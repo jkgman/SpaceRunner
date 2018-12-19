@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+[RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class Collectable : MonoBehaviour {
 
     #region public variables
@@ -28,6 +29,14 @@ public class Collectable : MonoBehaviour {
         Gem,
         Battery
 
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Pickup();
+        }
     }
 
     public virtual void Pickup()

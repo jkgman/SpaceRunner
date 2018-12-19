@@ -23,7 +23,6 @@ public class InventoryItemButton : MonoBehaviour {
         
         button = GetComponent<Button>();
         qText = GetComponentInChildren<TMP_Text>();
-        //GameManager.Instance.gData = GameManager.Instance.LoadData();
 
         CollectableData[] inventoryData = GameManager.Instance.gData.inventoryData;
             

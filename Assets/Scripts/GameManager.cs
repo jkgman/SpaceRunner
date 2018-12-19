@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System;
 using System.Security.Cryptography;
+using TMPro;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -30,6 +31,9 @@ public class GameManager : MonoBehaviour {
 
     public GameData DebugData;
     public GameData newGameData;
+    public TextMeshProUGUI text;
+
+    public bool useDebugData;
     #endregion
 
     #region singleton
@@ -58,15 +62,25 @@ public class GameManager : MonoBehaviour {
 
     private void Start()
     {
+        gData = null;
         itemSlots = null;
-        gData = LoadData();
 
+        //if (useDebugData)
+        //{
+        //    gData = DebugData;
+        //}
+        //else
+        //{
+            gData = LoadData();
+        //}
 
-        if (gData == null)
+        if (gData == null && !useDebugData)
         {
+            text.text = "New data!";
             gData = newGameData;
             SaveData(gData);
         }
+
     }
 
     /// <summary>
@@ -109,11 +123,12 @@ public class GameManager : MonoBehaviour {
 
             GameData copy = JsonUtility.FromJson<GameData>(jsonFromFile);
             loadedData = copy;
-
+            text.text = "LOADED!";
         }
         else
         {
             //Debug.LogError("Cannot find gamedata file!");
+            text.text = "No file!";
             return null;
         }
         return loadedData;

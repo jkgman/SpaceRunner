@@ -25,11 +25,14 @@ public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDro
     private void Start()
     {
 
-        GameManager.Instance.gData = GameManager.Instance.LoadData();
+        
+    }
+
+    private void OnEnable()
+    {
         _items = GameManager.Instance.gData.inventoryData;
         itemSlots = new Collectable[2];
     }
-    
 
 
     #region Drag code if needed

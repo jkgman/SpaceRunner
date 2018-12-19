@@ -109,11 +109,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1414462615507762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79081435d1c8ce642a52975c1806fc24, type: 3}
+  m_Script: {fileID: 11500000, guid: 944652a26c96b734b8db60156eb56d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  UiTexture: {fileID: 21300000, guid: 1481aa93693b72a4eab4175bc060197d, type: 3}
+  UiTexture: {fileID: 21300000, guid: 276721133848f994c90d06cf23df42f3, type: 3}
 --- !u!136 &136296139187237472
 CapsuleCollider:
   m_ObjectHideFlags: 1

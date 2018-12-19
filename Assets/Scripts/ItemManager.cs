@@ -67,6 +67,7 @@ public class ItemManager : MonoBehaviour, IitemEvents
     /// <param name="_collectable"></param>
     public void ItemCollected(Collectable _collectable)
     {
+        
         Debug.Log("itemmanager: message received " + _collectable.type.ToString());
 
         if (_collectable.type == Collectable.CollectableType.Coin)
