@@ -65,14 +65,15 @@ public class GameManager : MonoBehaviour {
         gData = null;
         itemSlots = null;
 
-        //if (useDebugData)
-        //{
-        //    gData = DebugData;
-        //}
-        //else
-        //{
+        if (useDebugData)
+        {
+            gData = DebugData;
+            SaveData(gData);
+        }
+        else
+        {
             gData = LoadData();
-        //}
+        }
 
         if (gData == null && !useDebugData)
         {
