@@ -49,7 +49,6 @@ public class HazardChunk : MonoBehaviour {
         {
             if(!item.active && item.dist <= (LevelController.instance.Distance - startDist))
             {
-                Debug.Log("spawn");
                 Spawner.Spawn(item);
                 item.active = true;
             }

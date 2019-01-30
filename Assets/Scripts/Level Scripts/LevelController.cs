@@ -61,7 +61,7 @@ public class LevelController : MonoBehaviour {
         hazardSpawner = FindObjectOfType<HazardSpawner>();
         player = FindObjectOfType<PlayerHandle>();
         player.fire.Play();
-        player.anim.Play("FlyLoop");
+        player.anim.Play("PlanetSwitchLoop");
         player.dust.Stop();
         spawnCollider = GetComponent<BoxCollider>();
         ShufflePlanets(desiredLevelLength);
@@ -113,7 +113,7 @@ public class LevelController : MonoBehaviour {
         planetsInLevel[currentPlanet].Begin();
         hazardSpawner.Begin();
         player.fire.Stop();
-        player.anim.Play("Land");
+        player.anim.Play("PlanetSwitchEnd");
         player.ActivateControl();
         currentLane = 2;
         onWorld = true;
@@ -228,7 +228,9 @@ public class LevelController : MonoBehaviour {
     {
         transitionController.ToWorld(planet, player);
     }
-
+    public void StopPlanet() {
+        planetsInLevel[currentPlanet].Stop();
+    }
     public void MovementCalc(Vector2 endPos, Vector2 direction, float distance)
     {
         if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))

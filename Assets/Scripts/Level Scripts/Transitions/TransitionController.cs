@@ -45,19 +45,5 @@ public class TransitionController : MonoBehaviour {
             }
         }
     }
-    #region Coroutines
-    //IEnumerator Mover(PlanetController planet, PlayerHandle player) {
-    //    //float time = 0;
-    //    //Vector3 start = player.transform.position;
-    //    //Vector3 end = planet.transform.position + planet.playerPoint * planet.transform.localScale.x;
-    //    //float totalDist = (end - start).magnitude;
-    //    while(player.transform.position != end)
-    //    {
-            
-    //        yield return null;
-    //    }
-    //    //TODO: call a landdown animation here
-        
-    //}
-    #endregion
+
 }

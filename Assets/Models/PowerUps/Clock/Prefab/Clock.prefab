@@ -21,9 +21,6 @@ GameObject:
   - component: {fileID: 4155890535703244}
   - component: {fileID: 33062346717119592}
   - component: {fileID: 23954942159646208}
-  - component: {fileID: 135904029638569388}
-  - component: {fileID: 54174118565209154}
-  - component: {fileID: 114794927721024950}
   m_Layer: 0
   m_Name: Clock
   m_TagString: Untagged
@@ -86,43 +83,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1269456799061424}
   m_Mesh: {fileID: 4300000, guid: 75561efabd4a03e41b0143d3871753f7, type: 3}
---- !u!54 &54174118565209154
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1269456799061424}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &114794927721024950
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1269456799061424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 944652a26c96b734b8db60156eb56d33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
-  UiTexture: {fileID: 21300000, guid: 61addb0508d290a47aaed9b7d85b71ad, type: 3}
---- !u!135 &135904029638569388
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1269456799061424}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.005182835
-  m_Center: {x: 0, y: 0.0007385984, z: 0.00000010718941}
