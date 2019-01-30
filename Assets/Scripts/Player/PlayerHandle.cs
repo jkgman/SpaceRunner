@@ -29,10 +29,13 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     public bool sliding = false;
     public bool jumping = false;
     public bool invincible = false;
+    bool dying = false;
     public LevelController controller;
+
     public ParticleSystem dust;
     public ParticleSystem JumpDust;
     public ParticleSystem fire;
+
     public Magnetize mag;
     #endregion
 
@@ -71,7 +74,6 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         {
             Die();
         }
-        MovementCalc();
     }
     #endregion
 
@@ -80,40 +82,30 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     /// Gets inputs and moves character accordingly
     /// </summary>
     public void MovementCalc( Vector2 endPos, Vector2 direction, float distance) {
-        if(control)
+        if(control&&!dying)
         {
             if(Mathf.Abs(direction.x) < Mathf.Abs(direction.y))
             {
                 if(direction.y > 0)
                 {
-                    StartCoroutine("Jump");
+                    invincible = false;
+                    sliding = false;
+                    anim.Play("JumpBlend");
+                    StopDust();
+                    JumpDust.Play();
+                    jumping = true;
                 } else if(direction.y < 0)
                 {
-                    StartCoroutine("Slide");
+                    invincible = false;
+                    jumping = false;
+                    anim.Play("SlideBlend");
+                    StopDust();
+                    sliding = true;
                 }
             }
         }
     }
-    private void MovementCalc() {
-        //if(control)
-        //{
-        //    if(moveVector.x > -movementDeadZone && moveVector.x < movementDeadZone)
-        //    {
-        //        moveVector.x = 0;
-        //    }
-        //    moveVector.y = -gravity;
-        //    Vector3 target = new Vector3(transform.position.x, transform.position.y + moveVector.y, z);
-        //    var offset = target - transform.position;
-        //    //Get the difference.
-        //    if(offset.magnitude > .1f)
-        //    {
-        //        //If we're further away than .1 unit, move towards the target.
-        //        offset = offset.normalized * speed;
-        //        //normalize it and account for movement speed.
-        //        character.Move(offset * Time.deltaTime * 10);
-        //    }
-        //}
-    }
+
     private void RotAround(Vector3 eul, float angle, Transform planet) {
         transform.RotateAround(planet.position, eul.normalized, -eul.x);
     }
@@ -137,8 +129,9 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         if(!godMode)
         {
             speedLevel++;
-            //z = z - speedLevelOffset;
-            StartCoroutine("Hit");
+            anim.Play("Impact");
+            StopDust();
+            invincible = true;
         }
     }
     /// <summary>
@@ -147,69 +140,49 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     public void Die() {
         if(!godMode)
         {
-            controller.FailPlanet();
-            Destroy(gameObject);
+            //if ressurect in inventory call resurect
+            StopDust();
+            controller.StopPlanet();
+            anim.Play("Death");
+            dying = true;
         }
     }
     public void Dust() {
         dust.Play();
     }
-
+    public void StopDust() {
+        dust.Stop();
+    }
     public void Magnet(float time) {
         mag.Activate(time);
     }
 
     #endregion
-
-    #region Coroutines
-    //todo: see if i can make this with passing in the animation name and a reference to a bool
-    //These both play an animation and set a bool on while doing so
-    IEnumerator Slide()
-    {
-        float time = 0;
-        anim.Play("Slide");
-        sliding = true;
-        while(anim.GetCurrentAnimatorStateInfo(0).length > time)
-        {
-            time += Time.deltaTime;
-            yield return null;
-        }
+    public void EndSlide() {
         sliding = false;
+        Dust();
     }
-    IEnumerator Jump()
-    {
-        float time = 0;
-        dust.Stop();
-        JumpDust.Play();
-        
-        anim.Play("Jump");
-        jumping = true;
-        while(anim.GetCurrentAnimatorStateInfo(0).length > time)
-        {
-            time += Time.deltaTime;
-            yield return null;
-        }
-        dust.Play();
+    public void StartFlame() {
+        fire.Play();
+    }
+    public void EndJump() {
         jumping = false;
+        Dust();
     }
-    IEnumerator Hit()
+    public void EndImpact()
     {
-        LevelController.instance.GetCurrentPlanet().onPlanetRot += RotAround;
-        float time = 0;
-        anim.Play("Impact");
-        invincible = true;
-        while(anim.GetCurrentAnimatorStateInfo(0).length > time)
-        {
-            Debug.Log("hit");
-            time += Time.deltaTime;
-            yield return null;
-        }
+        Dust();
         invincible = false;
-        LevelController.instance.GetCurrentPlanet().onPlanetRot -= RotAround;
     }
-    #endregion
+    public void EndDeath() {
+        controller.FailPlanet();
+        Destroy(gameObject);
+    }
 
-
+    public void ChangeBlendTrees(float direction) {
+        direction = Mathf.Lerp(direction, anim.GetFloat("Blend"), .5f);
+        anim.SetFloat("Blend", direction);
+    }
     //Do the stuff that powerups do
     //Or use as a waypoint to somewhere where logic is done
     public void ItemCollected(Collectable _collectable)
@@ -220,13 +193,15 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         switch(itemType) {
 
             case Collectable.CollectableType.SlowDown:
-                //Time.timeScale = 0.25f;
+                // slow or speed up
+                //start slow time effect
+
                 break;
             case Collectable.CollectableType.Magnet:
-
+                mag.Activate(10);
                 break;
             case Collectable.CollectableType.Invincibility:
-
+                GodMode(5);
                 break;
             case Collectable.CollectableType.Shield:
 
@@ -243,7 +218,20 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         }
 
     }
-#if UNITY_EDITOR
+    public void GodMode(float time) {
+        godMode = true;
+        StartCoroutine(God(time));
+    }
+    IEnumerator God(float time) {
+        float t = Time.time;
+        while(Time.time - t < time)
+        {
+            yield return null;
+        }
+        godMode = false;
+    }
+    
+    #if UNITY_EDITOR
     [CustomEditor(typeof(PlayerHandle))]
     public class PlayerEditor : Editor
     {
@@ -275,6 +263,10 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             if(GUILayout.Button("Magnetize"))
             {
                 script.Magnet(10);
+            }
+            if(GUILayout.Button("GOD"))
+            {
+                script.GodMode(5);
             }
         }
     }

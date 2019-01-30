@@ -31,13 +31,12 @@ public class CamerController : MonoBehaviour {
         }
         else
         {
-            //transform.position = player.transform.position + offset;
-            transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, _speed * Time.deltaTime);
-            transform.LookAt(player.transform);
-
+            if(player)
+            {
+                //transform.position = player.transform.position + offset;
+                transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, _speed * Time.deltaTime);
+                transform.LookAt(player.transform);
+            }
         }
-
-
-
     }
 }

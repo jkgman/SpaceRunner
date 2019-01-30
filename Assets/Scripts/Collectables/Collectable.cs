@@ -35,6 +35,7 @@ public class Collectable : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
+            Debug.Log("Pickup");
             Pickup();
         }
     }

@@ -28,6 +28,7 @@ public class PlanetController : MonoBehaviour {
     private float circumfrence;
     private LevelController controller;
     private Vector3 targetLaneRot = Vector3.zero;
+    private bool stop;
 
     public delegate void OnPlanetRot(Vector3 eul, float angle, Transform planet);
     public OnPlanetRot onPlanetRot;
@@ -90,29 +91,39 @@ public class PlanetController : MonoBehaviour {
     /// </summary>
     /// <param name="currentSpeed"></param>
     private void Rotate(float currentSpeed) {
-        Vector3 eulerrot = new Vector3(-1 * currentSpeed * Time.deltaTime, 0, 0);
-        transform.Rotate(eulerrot);
-        if(onPlanetRot != null)
+        if(!stop)
         {
-            onPlanetRot.Invoke(eulerrot, (eulerrot.x / circumfrence) * 360, transform);
-        }
-        if(targetLaneRot.z != 0)
-        {
-            float target = targetLaneRot.z * Time.deltaTime * laneChangeSpeed;
-            if(targetLaneRot.z >= 0)
+            Vector3 eulerrot = new Vector3(-1 * currentSpeed * Time.deltaTime, 0, 0);
+            transform.Rotate(eulerrot);
+            if(onPlanetRot != null)
             {
-                target = Mathf.Min(targetLaneRot.z, target);
-            } else if(targetLaneRot.z <= 0)
-            {
-                target = Mathf.Max(targetLaneRot.z, target);
+                onPlanetRot.Invoke(eulerrot, (eulerrot.x / circumfrence) * 360, transform);
+                PlayerHandle.instance.ChangeBlendTrees(.5f);
             }
-            targetLaneRot = new Vector3(0,0, targetLaneRot.z - target);
-            transform.Rotate(0, 0, target, Space.World);
+            if(targetLaneRot.z != 0)
+            {
+                float target = targetLaneRot.z * Time.deltaTime * laneChangeSpeed;
+                if(targetLaneRot.z >= 0)
+                {
+                    target = Mathf.Min(targetLaneRot.z, target);
+                } else if(targetLaneRot.z <= 0)
+                {
+                    target = Mathf.Max(targetLaneRot.z, target);
+                }
+                targetLaneRot = new Vector3(0, 0, targetLaneRot.z - target);
+                transform.Rotate(0, 0, target, Space.World);
+                PlayerHandle.instance.ChangeBlendTrees((Mathf.Clamp(target, -1, 1) + 1) / 2);
+            }
         }
+        
+        
     }
     #endregion
 
     #region Public Functions
+    public void Stop() {
+        stop = true;
+    }
     /// <summary>
     /// Activates tracking of rotation distance
     /// </summary>
@@ -125,12 +136,20 @@ public class PlanetController : MonoBehaviour {
     /// </summary>
     public void End(){
         track = false;
+        StartCoroutine(Endtimer(2));
+    }
+    IEnumerator Endtimer(float time)
+    {
+        float t = Time.time;
+        while(Time.time - t < time)
+        {
+            yield return null;
+        }
         PlanetExit exitPrefab = Instantiate(exit);
         exitPrefab.transform.position = LaneGenerator.instance.LanePositions[2];
         exitPrefab.transform.parent = controller.GetCurrentPlanet().transform;
         exitPrefab.transform.rotation = Quaternion.LookRotation(Vector3.up, exitPrefab.transform.position - controller.GetCurrentPlanet().transform.position);
     }
-
     /// <summary>
     /// sets the target z rotation of the planet by the difference between from - to
     /// </summary>
