@@ -28,7 +28,7 @@ public class InventoryItemButton : MonoBehaviour {
             
         for (int i = 0; i < GameManager.Instance.gData.inventoryData.Length; i++)
         {
-            if (inventoryData[i].Collectable.type == refbagItemtype)
+            if (inventoryData[i] != null && inventoryData[i].Collectable.type == refbagItemtype)
             {
                 bagItem = inventoryData[i];
                 itemQuantity = bagItem.Quantity;
@@ -47,7 +47,9 @@ public class InventoryItemButton : MonoBehaviour {
 
     private void Update()
     {
-        itemQuantity = bagItem.Quantity;
-        qText.text = "x" + itemQuantity.ToString();
+        if (bagItem!= null) { 
+            itemQuantity = bagItem.Quantity;
+            qText.text = "x" + itemQuantity.ToString();
+        }
     }
 }

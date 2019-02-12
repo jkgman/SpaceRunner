@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MainMenu : MonoBehaviour {
 
-    public AudioClip onPress;
 
     /// <summary>
     /// Loads the first scene
@@ -16,7 +15,6 @@ public class MainMenu : MonoBehaviour {
     /// </summary>
     public void StartGame()
     {
-        SoundManager.Instance.PlaySfx(onPress);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

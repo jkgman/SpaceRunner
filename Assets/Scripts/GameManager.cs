@@ -91,11 +91,16 @@ public class GameManager : MonoBehaviour {
     private GameData InitNewData()
     {
         GameData newData = new GameData();
-
+        newData.runTutoPrompt = true;
         newData.energy = 0;
         newData.levelProgression = new int[LevelQuantity];
-        
-
+        for (int i = 0; i < newData.levelProgression.Length; i++)
+        {
+            i = 4;
+        }
+        if (newData.levelProgression!=null) { 
+            newData.levelProgression[0] = 0;
+        }
         SaveData(newData);
         return newData;
         
