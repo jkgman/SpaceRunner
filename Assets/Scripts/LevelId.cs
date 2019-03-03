@@ -11,10 +11,10 @@ public class LevelId : MonoBehaviour{
     public int score;
     private bool locked = true;
 
-    public Image[] stars;
-    public Sprite goldStar;
-
+    public Transform[] stars;
     public TextMeshProUGUI scoreText;
+
+    public GameObject grayStar, goldStar;
 
     private void Start()
     {
@@ -28,8 +28,9 @@ public class LevelId : MonoBehaviour{
                 scoreText.text = score.ToString();
                 for (int i = 0; i < starRating; i++)
                 {
-                    stars[i].sprite = goldStar;
                     
+                    Instantiate(goldStar, stars[i]);
+
                 }
             }
 
