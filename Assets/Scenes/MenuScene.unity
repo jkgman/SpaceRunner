@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 2
   starRating: 0
-  score: 5200
+  score: 0
   stars:
   - {fileID: 1650401756}
   - {fileID: 745748513}
@@ -1139,7 +1139,6 @@ RectTransform:
   - {fileID: 2107127583}
   - {fileID: 1237453672}
   - {fileID: 796425803}
-  - {fileID: 1282298642}
   m_Father: {fileID: 73383634}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2324,8 +2323,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelNumber: 0
-  starRating: 2
-  score: 5000
+  starRating: 0
+  score: 0
   stars:
   - {fileID: 1337778670}
   - {fileID: 1702953540}
@@ -5380,7 +5379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 1
   starRating: 0
-  score: 3000
+  score: 0
   stars:
   - {fileID: 677058416}
   - {fileID: 1873560584}
@@ -5668,7 +5667,7 @@ GameObject:
   - component: {fileID: 1282298644}
   - component: {fileID: 1282298643}
   m_Layer: 5
-  m_Name: TextMeshPro Text
+  m_Name: InventoryText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5680,17 +5679,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1282298641}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9992006, y: 0.9992006, z: 0.9992006}
   m_Children: []
-  m_Father: {fileID: 281698473}
-  m_RootOrder: 9
+  m_Father: {fileID: 1935349545}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 352}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 4.2965627, y: 327.43805}
+  m_SizeDelta: {x: 438.3, y: 100.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1282298643
 MonoBehaviour:
@@ -5711,7 +5710,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: New Text
+  m_text: 'Inventory
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f8da310d1fcc26b4d91fafbf5da72c2b, type: 2}
   m_sharedMaterial: {fileID: 21455599091732936, guid: f8da310d1fcc26b4d91fafbf5da72c2b,
@@ -5739,14 +5740,14 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_textAlignment: 258
+  m_fontStyle: 1
+  m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -5777,13 +5778,13 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -195.78235, y: 0, z: -275.1536, w: -29.102852}
+  m_margin: {x: -2.3695476, y: 0, z: 6.8715787, w: -2.7295055}
   m_textInfo:
     textComponent: {fileID: 1282298643}
-    characterCount: 8
+    characterCount: 10
     spriteCount: 0
     spaceCount: 1
-    wordCount: 2
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -5927,23 +5928,24 @@ MonoBehaviour:
     inventoryData: []
     runTutoPrompt: 0
   LevelQuantity: 4
+  currentLevel: 0
   DebugData:
     energy: 0
-    levelProgression: 03000000020000000100000000000000
-    levelScores: 8813000070170000401f000000000000
+    levelProgression: 00000000000000000000000000000000
+    levelScores: 00000000000000000000000000000000
     inventoryData:
     - Collectable: {fileID: 114811747563183152, guid: 14c4c4eeae7c16a4aac974617e482b42,
         type: 2}
-      Quantity: 99
+      Quantity: 5
     - Collectable: {fileID: 114311710794547930, guid: 6c94995dc8d0d7f4bb3de3bf38439b4c,
         type: 2}
-      Quantity: 99
+      Quantity: 5
     - Collectable: {fileID: 114497986792221274, guid: 3c7935200d2f9e046a59a7c6f37574d8,
         type: 2}
-      Quantity: 99
+      Quantity: 5
     - Collectable: {fileID: 114821383633291278, guid: b0fbb55c5f09f7d4e8c6bc2ea67f3c52,
         type: 2}
-      Quantity: 99
+      Quantity: 5
     runTutoPrompt: 0
   newGameData:
     energy: 0
@@ -5960,7 +5962,7 @@ MonoBehaviour:
       Quantity: 4
     runTutoPrompt: 0
   text: {fileID: 1282298643}
-  useDebugData: 1
+  useDebugData: 0
 --- !u!1001 &1326561150
 Prefab:
   m_ObjectHideFlags: 0
@@ -8831,6 +8833,7 @@ RectTransform:
   m_LocalScale: {x: 1.0008, y: 1.0008, z: 1.0008}
   m_Children:
   - {fileID: 2013283543}
+  - {fileID: 1282298642}
   m_Father: {fileID: 281698473}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

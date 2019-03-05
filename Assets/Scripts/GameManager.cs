@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
     [HideInInspector]
     public GameData gData;
     public int LevelQuantity;
-
+    public int currentLevel;
     public GameData DebugData;
     public GameData newGameData;
     public TextMeshProUGUI text;

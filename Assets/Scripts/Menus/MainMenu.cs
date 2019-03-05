@@ -11,10 +11,13 @@ public class MainMenu : MonoBehaviour {
 
     /// <summary>
     /// Loads the first scene
-    /// sfx for funzies
+    ///
     /// </summary>
     public void StartGame()
     {
+        // Change to point to the specific level
+        GameManager.Instance.currentLevel = 0;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

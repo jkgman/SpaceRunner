@@ -17,8 +17,8 @@ public class ItemManager : MonoBehaviour, IitemEvents
     public Collectable debugRefresh;
     #endregion
 
-    #region public variables
-    private int coinQ;
+    #region private variables
+    public int coinQ { private set; get; }
     private Collectable[] lvlItemCopy;
     #endregion
 

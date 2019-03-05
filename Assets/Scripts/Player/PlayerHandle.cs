@@ -31,7 +31,8 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     public bool invincible = false;
     bool dying = false;
     public LevelController controller;
-
+    [HideInInspector]
+    public int hitCount;
     public ParticleSystem dust;
     public ParticleSystem JumpDust;
     public ParticleSystem fire;
@@ -132,6 +133,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             anim.Play("Impact");
             StopDust();
             invincible = true;
+            hitCount++;
         }
     }
     /// <summary>
