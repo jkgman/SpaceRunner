@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.47621238, g: 0.28152332, b: 0.8567638, a: 1}
+  m_IndirectSpecularColor: {r: 0.46173692, g: 0.28279328, b: 0.8531805, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1080,13 +1080,13 @@ Prefab:
         type: 2}
       propertyPath: planets.Array.data[1]
       value: 
-      objectReference: {fileID: 1724643152847970, guid: c8340a90d6f12f842abdaafce76e9968,
+      objectReference: {fileID: 1736092810621904, guid: 6551300188b64174298464ce896b1911,
         type: 2}
     - target: {fileID: 114737993585213554, guid: 7945766bd7b5d4743a4733ffed7bc297,
         type: 2}
       propertyPath: planets.Array.data[2]
       value: 
-      objectReference: {fileID: 1724643152847970, guid: c8340a90d6f12f842abdaafce76e9968,
+      objectReference: {fileID: 1599707754930016, guid: 14003e55852ea6c43b3c65188282a0b7,
         type: 2}
     - target: {fileID: 114737993585213554, guid: 7945766bd7b5d4743a4733ffed7bc297,
         type: 2}
@@ -1108,6 +1108,12 @@ Prefab:
       propertyPath: scaler
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114737993585213554, guid: 7945766bd7b5d4743a4733ffed7bc297,
+        type: 2}
+      propertyPath: planets.Array.data[0]
+      value: 
+      objectReference: {fileID: 1588219373812920, guid: 7a265b5e97eb4e349af7ae367c9a38d6,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7945766bd7b5d4743a4733ffed7bc297, type: 2}
   m_IsPrefabAsset: 0
