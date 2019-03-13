@@ -29,11 +29,9 @@ public class GameManager : MonoBehaviour {
     public GameData gData;
     public int LevelQuantity;
     public int currentLevel;
-    public GameData DebugData;
+    //public GameData DebugData;
     public GameData newGameData;
     public TextMeshProUGUI text;
-
-    public bool useDebugData;
     #endregion
 
     #region singleton
@@ -42,7 +40,7 @@ public class GameManager : MonoBehaviour {
     // Initialize singleton instance and load data
     private void Awake()
     {
-        // If there is not already an instance of SoundManager, set it to this.
+        // If there is not already an instance of Gamemanager, set it to this.
         if (Instance == null)
         {
             Instance = this;
@@ -53,7 +51,7 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        //Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
+        //Set Gamemanager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
         DontDestroyOnLoad(gameObject);
 
         
@@ -65,19 +63,12 @@ public class GameManager : MonoBehaviour {
         gData = null;
         itemSlots = null;
 
-        if (useDebugData)
-        {
-            gData = DebugData;
-            SaveData(gData);
-        }
-        else
-        {
-            gData = LoadData();
-        }
+        gData = LoadData();
 
-        if (gData == null && !useDebugData)
+        if (gData == null)
         {
             text.text = "New data!";
+            Debug.Log("Initialized new data");
             gData = newGameData;
             SaveData(gData);
         }
@@ -179,7 +170,7 @@ public class GameManager : MonoBehaviour {
             GameManager script = (GameManager)target;
             if (GUILayout.Button("Save Data"))
             {
-                script.SaveData(script.DebugData);
+                script.SaveData(script.newGameData);
             }
         }
     }

@@ -56,6 +56,7 @@ public class LevelController : MonoBehaviour {
 
     #region Implementations
     void Start () {
+        //ChooseLevel(GameManager.Instance.currentLevel);
         lane = GetComponent<LaneGenerator>();
         transitionController = GetComponent<TransitionController>();
         hazardSpawner = FindObjectOfType<HazardSpawner>();
@@ -173,13 +174,15 @@ public class LevelController : MonoBehaviour {
     void ShufflePlanets(int levelLength){
         planetsToSpawn = new GameObject[levelLength];
         planetsInLevel = new PlanetController[levelLength];
-        for(int i = 0; i < planets.Length; i++){
+        for (int i = 0; i < planets.Length; i++)
+        {
             GameObject planet = planets[i];
             int rndPos = Random.Range(0, i);
             planets[i] = planets[rndPos];
             planets[rndPos] = planet;
         }
-        for(int i = 0; i < desiredLevelLength; i++){
+
+        for (int i = 0; i < desiredLevelLength; i++){
             planetsToSpawn[i] = planets[i];
         }
     }

@@ -21,7 +21,6 @@ public class LevelEndMenu : MonoBehaviour {
 
     // Use this for initialization
     void OnEnable () {
-        //Time.timeScale = 0;
         itm = FindObjectOfType<ItemManager>();
         currentLevel = GameManager.Instance.currentLevel;
         levelScore = itm.coinQ * 100;
@@ -36,8 +35,10 @@ public class LevelEndMenu : MonoBehaviour {
         if (itm.coinQ >= 5)
         {
             starScore++;
-            Instantiate(goldStarPrefab, star3);
+            Instantiate(goldStarPrefab, star2);
         }
+
+
 
         GameManager.Instance.gData.levelProgression[currentLevel] = starScore;
         GameManager.Instance.SaveData(GameManager.Instance.gData);

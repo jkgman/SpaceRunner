@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlanetSelectMenu : MonoBehaviour {
 
+
     #region Private variables
     private Camera mainCam;
     private Transform target;
@@ -23,6 +24,8 @@ public class PlanetSelectMenu : MonoBehaviour {
 
     public void CloseUpOnPlanet(Transform planet)
     {
+        int targetLevel = planet.parent.GetComponent<LevelId>().levelNumber;
+        GameManager.Instance.currentLevel = targetLevel;
         target = planet;
         closeUp = true;
     }

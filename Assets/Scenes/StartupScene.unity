@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.47621238, g: 0.28152332, b: 0.8567638, a: 1}
+  m_IndirectSpecularColor: {r: 0.46173692, g: 0.28279328, b: 0.8531805, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -504,9 +504,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Super Awesome Title
-
-'
+  m_text: Space Runner
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f8da310d1fcc26b4d91fafbf5da72c2b, type: 2}
   m_sharedMaterial: {fileID: 21455599091732936, guid: f8da310d1fcc26b4d91fafbf5da72c2b,
@@ -534,13 +532,13 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 18
   m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
@@ -575,12 +573,12 @@ MonoBehaviour:
   m_margin: {x: 4.383419, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 993922584}
-    characterCount: 20
+    characterCount: 12
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 3
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
-    lineCount: 3
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
