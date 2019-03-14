@@ -10,11 +10,6 @@ public class LevelController : MonoBehaviour {
 
     #region Variables
     public GameObject levelend;
-    [SerializeField]
-    private int desiredLevelLength;
-    [SerializeField]
-    private GameObject[] planets;//pool of total planets
-    private GameObject[] planetsToSpawn;//planets selected to spawn
     private PlanetController[] planetsInLevel;//planets once spawned
     private BoxCollider spawnCollider;
     private LaneGenerator lane;
@@ -69,7 +64,7 @@ public class LevelController : MonoBehaviour {
         player.anim.Play("PlanetSwitchLoop");
         player.dust.Stop();
         spawnCollider = GetComponent<BoxCollider>();
-        GenerateLevelField(planets, spawnCollider);
+        GenerateLevelField(GetLevelsPlanets(), spawnCollider);
         BeginPlanet(planetsInLevel[0], player);
         InputHandle.instance.onMovement += MovementCalc;
     }
@@ -179,25 +174,6 @@ public class LevelController : MonoBehaviour {
         //get level number from game manager
         //return levelList[ln];
         return levels[GameManager.Instance.currentLevel].levelObject;
-    }
-
-    /// <summary>
-    /// Shuffles our list of planets and calls generate
-    /// </summary>
-    void ShufflePlanets(int levelLength){
-        planetsToSpawn = new GameObject[levelLength];
-        planetsInLevel = new PlanetController[levelLength];
-        for (int i = 0; i < planets.Length; i++)
-        {
-            GameObject planet = planets[i];
-            int rndPos = Random.Range(0, i);
-            planets[i] = planets[rndPos];
-            planets[rndPos] = planet;
-        }
-
-        for (int i = 0; i < desiredLevelLength; i++){
-            planetsToSpawn[i] = planets[i];
-        }
     }
 
     /// <summary>
