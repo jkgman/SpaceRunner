@@ -145,10 +145,23 @@ public class PlanetController : MonoBehaviour {
         {
             yield return null;
         }
+        LaneGenerator lane = LaneGenerator.instance;
         PlanetExit exitPrefab = Instantiate(exit);
-        exitPrefab.transform.position = LaneGenerator.instance.LanePositions[2];
+        exitPrefab.transform.position = lane.LanePositions[2];
+
+
+        float angle = Vector3.SignedAngle(
+                lane.LanePositions[2] - LevelController.instance.GetCurrentPlanet().transform.position,
+                lane.LanePositions[LevelController.instance.currentLane] - LevelController.instance.GetCurrentPlanet().transform.position,
+                new Vector3(0, -1, 0));
+        exitPrefab.transform.RotateAround(LevelController.instance.GetCurrentPlanet().transform.position, new Vector3(0, 0, 1), angle);
+        float x = 0, y = 1;
+        x = Mathf.Sin(Mathf.Deg2Rad * -angle);
+        y = Mathf.Cos(Mathf.Deg2Rad * -angle);
+        Vector3 forward = new Vector3(x, y, 0);
+        Vector3 up = (exitPrefab.transform.position - controller.GetCurrentPlanet().transform.position).normalized;
+        exitPrefab.transform.rotation = Quaternion.LookRotation(forward, up);
         exitPrefab.transform.parent = controller.GetCurrentPlanet().transform;
-        exitPrefab.transform.rotation = Quaternion.LookRotation(Vector3.up, exitPrefab.transform.position - controller.GetCurrentPlanet().transform.position);
     }
     /// <summary>
     /// sets the target z rotation of the planet by the difference between from - to

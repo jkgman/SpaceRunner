@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 public class LevelController : MonoBehaviour {
 
     #region Variables
+    public GameObject levelend;
     [SerializeField]
     private int desiredLevelLength;
     [SerializeField]
@@ -29,6 +30,9 @@ public class LevelController : MonoBehaviour {
     [HideInInspector]
     public int currentLane = 2;
     private bool exitspawned = false;
+    [SerializeField]
+    public Level[] levels;
+
     public float Distance
     {
         get {
@@ -78,6 +82,9 @@ public class LevelController : MonoBehaviour {
             if(planetsInLevel.Length > currentPlanet + 1 && !exitspawned)
             {
                 EndPlanet();
+            } else if(planetsInLevel.Length == currentPlanet + 1)
+            {
+                EndLevel();
             }
         }
     }
@@ -168,8 +175,10 @@ public class LevelController : MonoBehaviour {
 
     #region Private Functions
 
-    void GetLevelsPlanets() {
-        //get level number 
+    GameObject[] GetLevelsPlanets() {
+        //get level number from game manager
+        //return levelList[ln];
+        return levels[GameManager.Instance.currentLevel].levelObject;
     }
 
     /// <summary>
@@ -258,6 +267,15 @@ public class LevelController : MonoBehaviour {
             //if space 
                 //player move x right or left
         }
+    }
+
+    void EndLevel() {
+        //stop planet rot
+        EndPlanet();
+        player.StopDust();
+        StopPlanet();
+        levelend.SetActive(true);
+        //open end screen
     }
     #endregion
 
