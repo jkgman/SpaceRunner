@@ -111,10 +111,6 @@ public class GameManager : MonoBehaviour {
         {
             Rijndael crypto = new Rijndael();
 
-            //byte[] dataAsJson = File.ReadAllBytes(filePath);
-            //string stringData = Decrypt(dataAsJson);
-            //loadedData = JsonUtility.FromJson<GameData>(stringData);
-
             byte[] soupBackIn = File.ReadAllBytes(filePath);
             string jsonFromFile = crypto.Decrypt(soupBackIn, hash);
 

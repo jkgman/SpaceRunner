@@ -5672,8 +5672,8 @@ MonoBehaviour:
   currentLevel: 0
   newGameData:
     energy: 0
-    levelProgression: 
-    levelScores: 
+    levelProgression: 00000000000000000000000000000000
+    levelScores: 00000000000000000000000000000000
     inventoryData:
     - Collectable: {fileID: 114811747563183152, guid: 14c4c4eeae7c16a4aac974617e482b42,
         type: 2}

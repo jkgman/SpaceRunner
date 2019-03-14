@@ -32,10 +32,10 @@ public class LevelEndMenu : MonoBehaviour {
             Instantiate(goldStarPrefab, star2);
         }
 
-        if (itm.coinQ >= 5)
+        if (itm.coinQ >= 10)
         {
             starScore++;
-            Instantiate(goldStarPrefab, star2);
+            Instantiate(goldStarPrefab, star3);
         }
 
 
