@@ -64,8 +64,7 @@ public class LevelController : MonoBehaviour {
         player.anim.Play("PlanetSwitchLoop");
         player.dust.Stop();
         spawnCollider = GetComponent<BoxCollider>();
-        ShufflePlanets(desiredLevelLength);
-        GenerateLevelField(planetsToSpawn, spawnCollider);
+        GenerateLevelField(planets, spawnCollider);
         BeginPlanet(planetsInLevel[0], player);
         InputHandle.instance.onMovement += MovementCalc;
     }
@@ -167,6 +166,11 @@ public class LevelController : MonoBehaviour {
     #endregion
 
     #region Private Functions
+
+    void GetLevelsPlanets() {
+        //get level number 
+    }
+
     /// <summary>
     /// Shuffles our list of planets and calls generate
     /// </summary>
@@ -191,6 +195,7 @@ public class LevelController : MonoBehaviour {
     /// <param name="spawnArea"></param>
     void GenerateLevelField(GameObject[] planets, BoxCollider spawnArea)
     {
+        planetsInLevel = new PlanetController[planets.Length];
         //TODO: make sure the planets dont spawn closer than radius
         Vector3[] planetsPos = new Vector3[planets.Length];
         for(int i = 0; i < planets.Length; i++)

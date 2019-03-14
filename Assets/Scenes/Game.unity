@@ -1091,7 +1091,7 @@ Prefab:
     - target: {fileID: 114737993585213554, guid: 7945766bd7b5d4743a4733ffed7bc297,
         type: 2}
       propertyPath: initialDistBetweenWorldChange
-      value: 75
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114737993585213554, guid: 7945766bd7b5d4743a4733ffed7bc297,
         type: 2}
