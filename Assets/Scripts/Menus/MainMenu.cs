@@ -15,9 +15,6 @@ public class MainMenu : MonoBehaviour {
     /// </summary>
     public void StartGame()
     {
-        // Change to point to the specific level
-        GameManager.Instance.currentLevel = 0;
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

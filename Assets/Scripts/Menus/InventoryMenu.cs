@@ -22,11 +22,6 @@ public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDro
     private Transform[] itemTransforms;
     #endregion
 
-    private void Start()
-    {
-
-        
-    }
 
     private void OnEnable()
     {

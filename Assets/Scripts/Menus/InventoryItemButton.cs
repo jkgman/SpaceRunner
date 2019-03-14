@@ -39,11 +39,6 @@ public class InventoryItemButton : MonoBehaviour {
     }
 
 
-    //void InventoryItem()
-    //{
-    //    itemQuantity = bagItem.Quantity;
-    //    qText.text = "x" + itemQuantity.ToString();
-    //}
 
     private void Update()
     {
