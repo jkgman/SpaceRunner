@@ -36,6 +36,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     public ParticleSystem dust;
     public ParticleSystem JumpDust;
     public ParticleSystem fire;
+    public GameObject ufo;
 
     public Magnetize mag;
     #endregion
@@ -146,6 +147,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             StopDust();
             controller.StopPlanet();
             anim.Play("Death");
+            Instantiate(ufo, transform);
             dying = true;
         }
     }

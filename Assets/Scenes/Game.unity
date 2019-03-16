@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.22155908, g: 0.103057876, b: 0.82599473, a: 1}
+  m_IndirectSpecularColor: {r: 0.46173692, g: 0.28279328, b: 0.8531805, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -332,6 +332,7 @@ MonoBehaviour:
   dust: {fileID: 1001578372}
   JumpDust: {fileID: 1443796365}
   fire: {fileID: 1318131611}
+  ufo: {fileID: 1437263571926128, guid: 0846814f0950d574b9962b828418565d, type: 2}
   mag: {fileID: 100203122}
 --- !u!143 &86115766
 CharacterController:
