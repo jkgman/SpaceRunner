@@ -9,7 +9,7 @@ public class GameData {
     public int[] levelProgression;
     public int[] levelScores;
     public CollectableData[] inventoryData;
-    public bool runTutoPrompt;
+    public bool firstRun =true;
 
 }
 

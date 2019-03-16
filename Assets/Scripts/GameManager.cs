@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour {
         gData = null;
         itemSlots = null;
 
+        
         gData = LoadData();
 
         if (gData == null)
@@ -70,32 +71,12 @@ public class GameManager : MonoBehaviour {
             text.text = "New data!";
             Debug.Log("Initialized new data");
             gData = newGameData;
+            gData.firstRun = false;
             SaveData(gData);
         }
 
     }
 
-    /// <summary>
-    /// Initialize new save data
-    /// </summary>
-    /// <param name="newData"></param>
-    private GameData InitNewData()
-    {
-        GameData newData = new GameData();
-        newData.runTutoPrompt = true;
-        newData.energy = 0;
-        newData.levelProgression = new int[LevelQuantity];
-        for (int i = 0; i < newData.levelProgression.Length; i++)
-        {
-            i = 4;
-        }
-        if (newData.levelProgression!=null) { 
-            newData.levelProgression[0] = 0;
-        }
-        SaveData(newData);
-        return newData;
-        
-    }
 
 
     /// <summary>
@@ -117,6 +98,10 @@ public class GameManager : MonoBehaviour {
             GameData copy = JsonUtility.FromJson<GameData>(jsonFromFile);
             loadedData = copy;
             text.text = "LOADED!";
+            if (loadedData.firstRun == true)
+            {
+                return null;
+            }
         }
         else
         {
