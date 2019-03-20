@@ -5,8 +5,6 @@ using UnityEngine;
 /// Follows player based on their distance when game starts
 /// </summary>
 public class CamerController : MonoBehaviour {
-
-    //TODO: make this way more dynamic RIP
     [Tooltip("Camera offset from player")]
     public Vector3 offset;
     public float _speed;

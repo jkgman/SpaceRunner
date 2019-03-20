@@ -555,7 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hazards:
   - {fileID: 114963897979537548}
-  dist: 5
+  dist: 6
   active: 0
 --- !u!114 &114307357373133560
 MonoBehaviour:
@@ -599,7 +599,7 @@ MonoBehaviour:
   hazards:
   - {fileID: 114307357373133560}
   - {fileID: 114254562377438898}
-  dist: 7
+  dist: 8
   active: 0
 --- !u!114 &114872093710091536
 MonoBehaviour:

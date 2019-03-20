@@ -87,7 +87,7 @@ public class Hazard : MonoBehaviour {
                 Destroy(gameObject);
             }
             
-            //TODO: (Mandatory) Make call to levelcontroller for a particle
+            //Make call to levelcontroller for a particle
             //levelcontroller.Poof();
         }
     }

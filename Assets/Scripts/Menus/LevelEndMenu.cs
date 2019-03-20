@@ -9,6 +9,8 @@ public class LevelEndMenu : MonoBehaviour {
     public TextMeshProUGUI scoreText;
     public GameObject goldStarPrefab;
     public Transform star1, star2, star3;
+    public float scoreTimeLength = 1;
+    private float scoreTimerStart;
     #endregion
 
     #region private variables
@@ -42,14 +44,19 @@ public class LevelEndMenu : MonoBehaviour {
 
         GameManager.Instance.gData.levelProgression[currentLevel] = starScore;
         GameManager.Instance.SaveData(GameManager.Instance.gData);
+        scoreTimerStart = Time.time;
     }
 
-
+    
     // Update is called once per frame
     void Update () {
-        if (score < levelScore) { 
-            score++;
+        if (score < levelScore) {
+            score = Mathf.Clamp(Mathf.RoundToInt(Mathf.Lerp(0,levelScore, (Time.time - scoreTimerStart)/scoreTimeLength)),0, levelScore);
+            scoreText.text = score.ToString();
+        } else
+        {
+            scoreText.text = levelScore.ToString();
         }
-        scoreText.text = score.ToString(); 
+        
 	}
 }

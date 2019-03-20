@@ -685,7 +685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hazards:
   - {fileID: 114600743072553384}
-  dist: 10
+  dist: 12
   active: 0
 --- !u!114 &114260104155261150
 MonoBehaviour:
@@ -788,7 +788,7 @@ MonoBehaviour:
   - {fileID: 114539250752377850}
   - {fileID: 114822340380380332}
   - {fileID: 114260104155261150}
-  dist: 5
+  dist: 7
   active: 0
 --- !u!135 &135190845624373022
 SphereCollider:

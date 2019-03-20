@@ -2483,7 +2483,7 @@ MonoBehaviour:
   - {fileID: 114314201284800516}
   - {fileID: 114498403469383746}
   - {fileID: 114586789709090972}
-  dist: 5
+  dist: 7
   active: 0
 --- !u!114 &114416608143182718
 MonoBehaviour:
@@ -2499,7 +2499,7 @@ MonoBehaviour:
   hazards:
   - {fileID: 114063311661003220}
   - {fileID: 114956092010508730}
-  dist: 11
+  dist: 13
   active: 0
 --- !u!114 &114461792321477940
 MonoBehaviour:
@@ -2600,7 +2600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hazards:
   - {fileID: 114335446869906086}
-  dist: 9
+  dist: 11
   active: 0
 --- !u!114 &114709451245327222
 MonoBehaviour:
@@ -2616,7 +2616,7 @@ MonoBehaviour:
   hazards:
   - {fileID: 114305190718452710}
   - {fileID: 114183841813869910}
-  dist: 7
+  dist: 9
   active: 0
 --- !u!114 &114750844201447466
 MonoBehaviour:
@@ -2693,7 +2693,7 @@ MonoBehaviour:
   - {fileID: 114329505660800476}
   - {fileID: 114762057352543548}
   - {fileID: 114484078769143348}
-  dist: 20
+  dist: 22
   active: 0
 --- !u!114 &114956092010508730
 MonoBehaviour:
@@ -2740,7 +2740,7 @@ MonoBehaviour:
   - {fileID: 114516872436450450}
   - {fileID: 114979389835772108}
   - {fileID: 114750844201447466}
-  dist: 13
+  dist: 15
   active: 0
 --- !u!135 &135966261770803896
 SphereCollider:

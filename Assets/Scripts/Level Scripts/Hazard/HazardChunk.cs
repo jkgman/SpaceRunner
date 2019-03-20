@@ -38,7 +38,6 @@ public class HazardChunk : MonoBehaviour {
         groups = GetComponentsInChildren<HazardRow>();
         startDist = LevelController.instance.Distance;
         activeChunk = true;
-        
     }
 
     //if there are elements not spawned try to spawn
@@ -64,7 +63,10 @@ public class HazardChunk : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-
+    public void DestroyChunck() {
+        Spawner.NewChunck();
+        Destroy(gameObject);
+    }
     #endregion
 
     #region Public Functions

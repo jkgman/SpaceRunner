@@ -19,6 +19,8 @@ public class LevelController : MonoBehaviour {
     private int currentPlanet;
     private float distance;
     public float initialDistBetweenWorldChange;
+    [SerializeField]
+    private int testLevelNumber = 0;
     [HideInInspector]
     public bool onWorld;
     public float worldChangeScaler;
@@ -151,7 +153,6 @@ public class LevelController : MonoBehaviour {
     /// </summary>
     public void FailPlanet()
     {
-        //TODO: add a fail state
         InputHandle.instance.Pause();
     }
 
@@ -173,7 +174,11 @@ public class LevelController : MonoBehaviour {
     GameObject[] GetLevelsPlanets() {
         //get level number from game manager
         //return levelList[ln];
-        return levels[GameManager.Instance.currentLevel].levelObject;
+        if(GameManager.Instance)
+        {
+            return levels[GameManager.Instance.currentLevel].levelObject;
+        }
+        return levels[testLevelNumber].levelObject;
     }
 
     /// <summary>
@@ -184,7 +189,6 @@ public class LevelController : MonoBehaviour {
     void GenerateLevelField(GameObject[] planets, BoxCollider spawnArea)
     {
         planetsInLevel = new PlanetController[planets.Length];
-        //TODO: make sure the planets dont spawn closer than radius
         Vector3[] planetsPos = new Vector3[planets.Length];
         for(int i = 0; i < planets.Length; i++)
         {

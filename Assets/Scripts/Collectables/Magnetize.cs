@@ -12,6 +12,7 @@ public class Magnetize : MonoBehaviour {
         box = GetComponent<BoxCollider>();
     }
     public void Activate(float time) {
+        //play mag particle for 10
         Active = true;
         justActivated = true;
         activeFor = time;

@@ -419,7 +419,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1908903332569562}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -11.999996}
+  m_LocalPosition: {x: 0, y: 0, z: -12.999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4237623366507656}
@@ -435,7 +435,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1681050178949286}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -7}
+  m_LocalPosition: {x: 0, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4308533526660284}
@@ -506,7 +506,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1814342792093038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6}
+  m_LocalPosition: {x: 0, y: 0, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4786639336140864}
@@ -998,7 +998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hazards:
   - {fileID: 114128072706257086}
-  dist: 6
+  dist: 7
   active: 0
 --- !u!114 &114357779991452540
 MonoBehaviour:
@@ -1029,7 +1029,7 @@ MonoBehaviour:
   hazards:
   - {fileID: 114520231741472154}
   - {fileID: 114357779991452540}
-  dist: 7
+  dist: 8
   active: 0
 --- !u!114 &114435297385731278
 MonoBehaviour:
@@ -1074,7 +1074,7 @@ MonoBehaviour:
   - {fileID: 114929028780409064}
   - {fileID: 114012494540349226}
   - {fileID: 114816253771002932}
-  dist: 12
+  dist: 13
   active: 0
 --- !u!114 &114816253771002932
 MonoBehaviour:

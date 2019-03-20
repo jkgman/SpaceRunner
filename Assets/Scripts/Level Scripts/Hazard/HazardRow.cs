@@ -16,6 +16,7 @@ public class HazardRow : MonoBehaviour {
     private void Start()
     {
         hazards = GetComponentsInChildren<Hazard>();
+        gameObject.SetActive(false);
     }
     #endregion
 

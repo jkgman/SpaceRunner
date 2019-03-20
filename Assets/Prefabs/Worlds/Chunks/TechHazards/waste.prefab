@@ -448,7 +448,7 @@ MonoBehaviour:
   hazards:
   - {fileID: 114770536708643020}
   - {fileID: 114262756424053948}
-  dist: 5
+  dist: 7
   active: 0
 --- !u!135 &135487839120177112
 SphereCollider:

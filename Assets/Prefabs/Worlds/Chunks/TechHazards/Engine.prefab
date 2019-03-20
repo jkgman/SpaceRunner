@@ -414,7 +414,7 @@ MonoBehaviour:
   hazards:
   - {fileID: 114361178202961948}
   - {fileID: 114724867800439198}
-  dist: 5
+  dist: 7
   active: 0
 --- !u!114 &114724867800439198
 MonoBehaviour:

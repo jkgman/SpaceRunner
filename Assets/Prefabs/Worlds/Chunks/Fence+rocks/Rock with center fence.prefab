@@ -385,7 +385,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1482159261727418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6}
+  m_LocalPosition: {x: 0, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4681164211641246}
@@ -427,7 +427,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1137885254378004}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8.999996}
+  m_LocalPosition: {x: 0, y: 0, z: -10.999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4425851131741114}
@@ -496,7 +496,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1166078568409202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4537143075717910}
@@ -581,7 +581,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1664664735437440}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -11.999996}
+  m_LocalPosition: {x: 0, y: 0, z: -13.999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4239022843128170}
@@ -1272,7 +1272,7 @@ MonoBehaviour:
   hazards:
   - {fileID: 114030275375905822}
   - {fileID: 114635281150485274}
-  dist: 9
+  dist: 11
   active: 0
 --- !u!114 &114454411700863740
 MonoBehaviour:
@@ -1316,7 +1316,7 @@ MonoBehaviour:
   hazards:
   - {fileID: 114460775817447922}
   - {fileID: 114077980923846296}
-  dist: 6
+  dist: 8
   active: 0
 --- !u!114 &114592461281233942
 MonoBehaviour:
@@ -1383,7 +1383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hazards:
   - {fileID: 114240929880873026}
-  dist: 3
+  dist: 5
   active: 0
 --- !u!114 &114703665668420538
 MonoBehaviour:
@@ -1412,7 +1412,7 @@ MonoBehaviour:
   hazards:
   - {fileID: 114064096999829318}
   - {fileID: 114043361539857864}
-  dist: 12
+  dist: 14
   active: 0
 --- !u!114 &114773880331052626
 MonoBehaviour:

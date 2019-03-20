@@ -11,7 +11,6 @@ using UnityEditor;
 public class PlayerHandle : MonoBehaviour, IitemEvents {
 
     #region Variables
-    //TODO: add descriptions for exposed vars
     private CharacterController character;
     private Vector3 moveVector;
     private float z;
@@ -37,8 +36,9 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     public ParticleSystem JumpDust;
     public ParticleSystem fire;
     public GameObject ufo;
-
+    private bool slowGod;
     public Magnetize mag;
+    public bool Speedup = false;
     #endregion
 
     #region Singleton
@@ -128,7 +128,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     /// Adds count to speedlevel and adjusts the locked z
     /// </summary>
     public void Slow() {
-        if(!godMode)
+        if(!godMode && !slowGod)
         {
             speedLevel++;
             anim.Play("Impact");
@@ -141,9 +141,11 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     /// Destroys game object and call game over sequence
     /// </summary>
     public void Die() {
-        if(!godMode)
+        if(false)//TODO: check if inventory has resurect
         {
-            //if ressurect in inventory call resurect
+            //play resurect particle
+        } else if(!godMode)
+        {
             StopDust();
             controller.StopPlanet();
             anim.Play("Death");
@@ -195,11 +197,8 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         Collectable.CollectableType itemType = _collectable.type;
         //Ignore Coins
         switch(itemType) {
-
             case Collectable.CollectableType.SlowDown:
-                // slow or speed up
-                //start slow time effect
-
+                SpeedUp(5);
                 break;
             case Collectable.CollectableType.Magnet:
                 mag.Activate(10);
@@ -208,21 +207,49 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
                 GodMode(5);
                 break;
             case Collectable.CollectableType.Shield:
-
+                SlowGodMode(5);
                 break;
             case Collectable.CollectableType.Refresh:
-
+                Refresh();
                 break;
             case Collectable.CollectableType.Resurrect:
-
                 break;
             case Collectable.CollectableType.Heart:
-
+                GainHit();
                 break;
         }
 
     }
+
+    public void Refresh() {
+        //play refresh particle
+        //TODO: refresh items
+    }
+    public void GainHit() {
+        //play heart particle
+        if(hitCount > 0)
+        {
+            hitCount--;
+            speedLevel--;
+        }
+    }
+    public void SpeedUp(int time) {
+        //time particle for time
+        Speedup = true;
+        StartCoroutine(Speed(time));
+    }
+    IEnumerator Speed(float time)
+    {
+        float t = Time.time;
+        while(Time.time - t < time)
+        {
+            yield return null;
+        }
+        Speedup = false;
+    }
+
     public void GodMode(float time) {
+        //play god particle for 5
         godMode = true;
         StartCoroutine(God(time));
     }
@@ -234,8 +261,25 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         }
         godMode = false;
     }
+
+    public void SlowGodMode(float time)
+    {
+        //play slow god for 5
+        slowGod = true;
+        StartCoroutine(SlowGod(time));
+    }
+    IEnumerator SlowGod(float time)
+    {
+        float t = Time.time;
+        while(Time.time - t < time)
+        {
+            yield return null;
+        }
+        slowGod = false;
+    }
     
-    #if UNITY_EDITOR
+
+#if UNITY_EDITOR
     [CustomEditor(typeof(PlayerHandle))]
     public class PlayerEditor : Editor
     {
@@ -271,6 +315,18 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             if(GUILayout.Button("GOD"))
             {
                 script.GodMode(5);
+            }
+            if(GUILayout.Button("Slow God"))
+            {
+                script.SlowGodMode(5);
+            }
+            if(GUILayout.Button("Speed Up"))
+            {
+                script.SpeedUp(5);
+            }
+            if(GUILayout.Button("Regain Hit Point"))
+            {
+                script.GainHit();
             }
         }
     }

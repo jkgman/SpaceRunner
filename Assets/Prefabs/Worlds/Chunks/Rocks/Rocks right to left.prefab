@@ -967,7 +967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hazards:
   - {fileID: 0}
-  dist: 12
+  dist: 15
   active: 0
 --- !u!114 &114455785952060006
 MonoBehaviour:

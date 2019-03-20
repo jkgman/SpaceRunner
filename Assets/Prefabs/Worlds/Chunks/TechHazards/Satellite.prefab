@@ -380,7 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hazards:
   - {fileID: 114533815018240636}
-  dist: 5
+  dist: 7
   active: 0
 --- !u!114 &114343028313693794
 MonoBehaviour:

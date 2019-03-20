@@ -15,6 +15,7 @@ public class PlanetExit : MonoBehaviour {
         {
             PlayerHandle.instance.DeactivateControl();
             PlayerHandle.instance.anim.Play("PlanetSwitchStart");
+            PlayerHandle.instance.fire.Play();
             PlayerHandle.instance.dust.Stop();
             LevelController.instance.NextPlanet();
         }

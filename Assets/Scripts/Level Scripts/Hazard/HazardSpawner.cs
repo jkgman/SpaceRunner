@@ -14,6 +14,7 @@ public class HazardSpawner : MonoBehaviour
     private BoxCollider garbageCollector;
     private LaneGenerator lane;
     private LevelController controller;
+    private HazardChunk lastChunck;
     #endregion
 
     #region Implementations
@@ -26,7 +27,7 @@ public class HazardSpawner : MonoBehaviour
     //Garbage Collecting
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Hazard")
+        if(other.tag == "Hazard" || other.tag == "Coin" || other.tag == "Collectable")
         {
             Destroy(other.gameObject);
         }
@@ -61,6 +62,7 @@ public class HazardSpawner : MonoBehaviour
     /// </summary>
     public void Stop() {
         isSpawning = false;
+        currentchunk.DestroyChunck();
     }
 
     /// <summary>
@@ -69,11 +71,17 @@ public class HazardSpawner : MonoBehaviour
     public void NewChunck() {
         if(isSpawning)
         {
-            currentchunk = controller.GetCurrentPlanet().chunks[Random.Range(0, controller.GetCurrentPlanet().chunks.Length)];
-            
+            for(int i = 0; i < 4; i++)
+            {
+                currentchunk = controller.GetCurrentPlanet().chunks[Random.Range(0, controller.GetCurrentPlanet().chunks.Length)];
+                if(lastChunck == null || currentchunk.gameObject.name != lastChunck.gameObject.name)
+                {
+                    break;
+                }
+            }
             currentchunk = Instantiate(currentchunk);
             currentchunk.Spawner = this;
-
+            lastChunck = currentchunk;
         }
     }
 

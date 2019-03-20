@@ -76,7 +76,14 @@ public class PlanetController : MonoBehaviour {
 	
     //Calculates the current target speed and calls rotate
 	void Update () {
-        float currentSpeed = Speed + (controller.Distance * modifier);
+        float currentSpeed;
+        if(PlayerHandle.instance.Speedup)
+        {
+            currentSpeed = Speed + 10 + (controller.Distance * modifier);
+        } else
+        {
+            currentSpeed = Speed + (controller.Distance * modifier);
+        }
         if(track)
         {
             controller.Distance += circumfrence * (currentSpeed * Time.deltaTime / 360);
