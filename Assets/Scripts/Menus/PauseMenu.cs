@@ -32,6 +32,7 @@ public class PauseMenu : MonoBehaviour {
     public void QuitGame()
     {
         Time.timeScale = 1;
+        GameManager.Instance.itemSlots = null;
         SceneManager.LoadScene(0);
 
         //Application.Quit();
