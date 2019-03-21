@@ -28,14 +28,13 @@ public class InventoryItemButton : MonoBehaviour {
             
         for (int i = 0; i < GameManager.Instance.gData.inventoryData.Length; i++)
         {
-            if (inventoryData[i] != null && inventoryData[i].Collectable.type == refbagItemtype)
+            if (inventoryData[i] != null && inventoryData[i].Collectable == refbagItemtype)
             {
                 bagItem = inventoryData[i];
                 itemQuantity = bagItem.Quantity;
                 qText.text = "x" + itemQuantity.ToString();
             }
         }
-        //button.onClick.AddListener(InventoryItem);
     }
 
 

@@ -14,6 +14,7 @@ public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDro
 {
     #region public variables
     public CollectableData[] _items;
+    public Collectable[] powerupPrefabs;
     #endregion
 
     #region private variables
@@ -92,7 +93,7 @@ public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDro
             {
                 foreach (var powerup in _items)
                 {
-                    if (powerup.Collectable.type == itemSlots[targetSlot].type)
+                    if (powerup.Collectable == itemSlots[targetSlot].type)
                     {
                         Debug.Log(" Switch and return item quantity ");
                         powerup.Quantity++;
@@ -104,12 +105,12 @@ public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDro
 
         foreach (var powerup in _items)
         {
-            if (powerup.Collectable.type == item.type)
+            if (powerup.Collectable == item.type)
             {
                 if (powerup.Quantity > 0)
                 {
                     powerup.Quantity--;
-                    itemSlots[targetSlot] = powerup.Collectable;
+                    itemSlots[targetSlot] = getItemByType( powerup.Collectable);
 
                     //Sprite and alpha change
                     itemTransforms[targetSlot].gameObject.GetComponent<Image>().sprite = itemSlots[targetSlot].UiTexture;
@@ -124,7 +125,7 @@ public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDro
                 else
 
                 {
-                    Debug.Log("No Collectables of type! " + powerup.Collectable.type);
+                    Debug.Log("No Collectables of type! " + getItemByType( powerup.Collectable));
                     return;
                 }
             }
@@ -166,6 +167,16 @@ public class InventoryMenu : MonoBehaviour /*IDragHandler, IEndDragHandler, IDro
         GameManager.Instance.itemSlots = itemSlots;
         GameManager.Instance.gData.inventoryData = _items;
         GameManager.Instance.SaveData(GameManager.Instance.gData);
+    }
+
+    private Collectable getItemByType(Collectable.CollectableType type)
+    {
+        foreach (var item in powerupPrefabs)
+        {
+            if (item.type == type)
+                return item;
+        }
+        return null;
     }
 
 }

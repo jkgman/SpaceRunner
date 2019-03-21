@@ -19,6 +19,7 @@ public class ItemManager : MonoBehaviour, IitemEvents
 
     #region private variables
     public int coinQ { private set; get; }
+    
     private Collectable[] lvlItemCopy;
     #endregion
 

@@ -19,13 +19,13 @@ using UnityEditor;
 public class GameManager : MonoBehaviour {
 
     #region private variables
-    private string gameDataFileName = "gamedata";
+    private string gameDataFileName = "spacedata";
     #endregion
 
     #region public variables
     [HideInInspector]
     public Collectable[] itemSlots;
-    [HideInInspector]
+    //[HideInInspector]
     public GameData gData;
     public int LevelQuantity;
     public int currentLevel;

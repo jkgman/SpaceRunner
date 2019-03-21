@@ -3,6 +3,6 @@
 [System.Serializable]
 public class CollectableData
 {
-    public Collectable Collectable;
+    public Collectable.CollectableType Collectable;
     public int Quantity;
 }
