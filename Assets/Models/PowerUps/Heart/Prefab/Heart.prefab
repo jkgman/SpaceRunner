@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944652a26c96b734b8db60156eb56d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 7
+  type: 5
   UiTexture: {fileID: 21300000, guid: a687af56797ef9149af57a8855eac69f, type: 3}
 --- !u!135 &135986566160544746
 SphereCollider:

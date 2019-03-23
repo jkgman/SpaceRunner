@@ -13,7 +13,7 @@ public class ItemManager : MonoBehaviour, IitemEvents
     #region public variables
     public Button[] buttons;
     public TextMeshProUGUI text;
-    public Collectable[] lvlItems;
+    public Collectable[] lvlItems { private set; get; }
     public Collectable debugRefresh;
     #endregion
 
@@ -39,16 +39,26 @@ public class ItemManager : MonoBehaviour, IitemEvents
     /// Use item in the level inventory slot
     /// </summary>
     /// <param name="slot"></param>
-    void ConsumeItem(int slot)
+    public void ConsumeItem(int slot)
     {
-         if ( lvlItems[slot] !=null) { 
+         if ( lvlItems[slot] !=null && lvlItems[slot].type != Collectable.CollectableType.Resurrect) { 
             LevelController.instance.SendConsumeMessage(lvlItems[slot]);
-            //lvlItems[slot] = null;
             buttons[slot].gameObject.SetActive(false);
-            //Destroy(buttons[slot].gameObject);
-        }
+        } 
     }
 
+    public void ConsumeItem()
+    {
+        for (int i = 0; i < lvlItems.Length; i++)
+        {
+            if (lvlItems[i]!= null && lvlItems[i].type == Collectable.CollectableType.Resurrect)
+            {
+                buttons[i].gameObject.SetActive(false);
+                lvlItems[i] = null;
+                return;
+            }
+        }
+    }
 
     private void AddItems(Collectable[] levelItems)
     {
@@ -63,7 +73,7 @@ public class ItemManager : MonoBehaviour, IitemEvents
                 buttons[i].onClick.AddListener(delegate { ConsumeItem( index ); });
                 buttons[i].gameObject.GetComponent<Image>().sprite = levelItems[i].UiTexture;
                 buttons[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            }
+            } 
         }
 
         text.text = coinQ.ToString();
@@ -88,8 +98,20 @@ public class ItemManager : MonoBehaviour, IitemEvents
         {
             if (lvlItemCopy!=null)
             {
+                for (int i = 0; i < lvlItemCopy.Length; i++)
+                {
+                    if (lvlItems[i] == null)
+                    {
+                        lvlItemCopy[i] = null;
+                    }
+                }
+
                 AddItems(lvlItemCopy);
             }
+        }
+        if (_collectable.type == Collectable.CollectableType.Resurrect)
+        {
+            ConsumeItem();
         }
 
         //for now

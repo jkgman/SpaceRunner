@@ -18,6 +18,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     [Range(1, 10)]
     public int maxSpeedLevel;
     private int speedLevel = 0;
+    public int resurrects;
     public float speed;
     public float gravity;
     private InputHandle input;
@@ -64,6 +65,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         input = InputHandle.instance;
         input.onMovement += MovementCalc;
         EventSystemListeners.main.AddListener(gameObject);
+        resurrects = CountResurrects();
     }
 
     /// <summary>
@@ -108,6 +110,21 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         }
     }
 
+    private int CountResurrects()
+    {
+        int count = 0;
+        if (GameManager.Instance.itemSlots != null) { 
+            for (int i = 0; i < GameManager.Instance.itemSlots.Length; i++)
+            {
+                if (GameManager.Instance.itemSlots[i].type == Collectable.CollectableType.Resurrect)
+                { 
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     private void RotAround(Vector3 eul, float angle, Transform planet) {
         transform.RotateAround(planet.position, eul.normalized, -eul.x);
     }
@@ -141,10 +158,19 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     /// Destroys game object and call game over sequence
     /// </summary>
     public void Die() {
-        if(false)//TODO: check if inventory has resurect
+        if ( resurrects > 0 && !godMode)
         {
+            Collectable Resurrect = new Collectable();
+            Resurrect.type = Collectable.CollectableType.Resurrect;
+            controller.SendConsumeMessage(Resurrect);
+            Debug.Log("resurrect");
+            resurrects--;
+            hitCount++;
             //play resurect particle
-        } else if(!godMode)
+            return;
+        }  
+            
+         if(!godMode)
         {
             StopDust();
             controller.StopPlanet();
@@ -327,6 +353,12 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             if(GUILayout.Button("Regain Hit Point"))
             {
                 script.GainHit();
+            }
+            if (GUILayout.Button("Refresh items"))
+            {
+                Collectable col = new Collectable();
+                col.type = Collectable.CollectableType.Refresh;
+                script.controller.SendConsumeMessage(col);
             }
         }
     }
