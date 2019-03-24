@@ -42,7 +42,7 @@ public class ItemManager : MonoBehaviour, IitemEvents
     public void ConsumeItem(int slot)
     {
          if ( lvlItems[slot] !=null && lvlItems[slot].type != Collectable.CollectableType.Resurrect) { 
-            LevelController.instance.SendConsumeMessage(lvlItems[slot]);
+            LevelController.instance.SendConsumeMessage(lvlItems[slot].type);
             buttons[slot].gameObject.SetActive(false);
         } 
     }
@@ -85,16 +85,16 @@ public class ItemManager : MonoBehaviour, IitemEvents
     /// Item was collected
     /// </summary>
     /// <param name="_collectable"></param>
-    public void ItemCollected(Collectable _collectable)
+    public void ItemCollected(Collectable.CollectableType _collectable)
     {
         
-        Debug.Log("itemmanager: message received " + _collectable.type.ToString());
+        Debug.Log("itemmanager: message received " + _collectable.ToString());
 
-        if (_collectable.type == Collectable.CollectableType.Coin)
+        if (_collectable == Collectable.CollectableType.Coin)
         {
             coinQ++;
         }
-        if (_collectable.type == Collectable.CollectableType.Refresh)
+        if (_collectable == Collectable.CollectableType.Refresh)
         {
             if (lvlItemCopy!=null)
             {
@@ -109,7 +109,7 @@ public class ItemManager : MonoBehaviour, IitemEvents
                 AddItems(lvlItemCopy);
             }
         }
-        if (_collectable.type == Collectable.CollectableType.Resurrect)
+        if (_collectable == Collectable.CollectableType.Resurrect)
         {
             ConsumeItem();
         }

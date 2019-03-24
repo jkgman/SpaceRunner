@@ -7,9 +7,9 @@ using System;
 public class UITest : MonoBehaviour, IitemEvents {
     private TextMeshProUGUI text;
 
-    public void ItemCollected(Collectable _collectable)
+    public void ItemCollected(Collectable.CollectableType _collectable)
     {
-        text.text = _collectable.type.ToString();
+        text.text = _collectable.ToString();
     }
 
 

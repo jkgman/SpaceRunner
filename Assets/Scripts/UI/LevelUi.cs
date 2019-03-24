@@ -9,9 +9,9 @@ public class LevelUi : MonoBehaviour, IitemEvents {
     private TextMeshProUGUI text;
     private Collectable[] levelInventory;
 
-    public void ItemCollected(Collectable _collectable)
+    public void ItemCollected(Collectable.CollectableType _collectable)
     {
-        text.text = _collectable.type.ToString();
+        text.text = _collectable.ToString();
         levelInventory = new Collectable[2];
     }
 

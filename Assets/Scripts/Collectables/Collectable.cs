@@ -43,7 +43,7 @@ public class Collectable : MonoBehaviour {
     public virtual void Pickup()
     {
         //SoundManager.Instance.PlaySfx(_cue);
-        LevelController.instance.SendConsumeMessage(this);
+        LevelController.instance.SendConsumeMessage(this.type);
         Destroy(gameObject);
     }
 }

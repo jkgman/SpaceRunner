@@ -66,6 +66,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         input.onMovement += MovementCalc;
         EventSystemListeners.main.AddListener(gameObject);
         resurrects = CountResurrects();
+        Debug.Log(CountResurrects());
     }
 
     /// <summary>
@@ -116,7 +117,8 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         if (GameManager.Instance.itemSlots != null) { 
             for (int i = 0; i < GameManager.Instance.itemSlots.Length; i++)
             {
-                if (GameManager.Instance.itemSlots[i].type == Collectable.CollectableType.Resurrect)
+                if (GameManager.Instance.itemSlots[i] != null &&
+                    GameManager.Instance.itemSlots[i].type == Collectable.CollectableType.Resurrect)
                 { 
                     count++;
                 }
@@ -160,17 +162,13 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     public void Die() {
         if ( resurrects > 0 && !godMode)
         {
-            Collectable Resurrect = new Collectable();
-            Resurrect.type = Collectable.CollectableType.Resurrect;
-            controller.SendConsumeMessage(Resurrect);
+            controller.SendConsumeMessage(Collectable.CollectableType.Resurrect);
             Debug.Log("resurrect");
             resurrects--;
             hitCount++;
             //play resurect particle
             return;
-        }  
-            
-         if(!godMode)
+        }  else if (!godMode)
         {
             StopDust();
             controller.StopPlanet();
@@ -178,6 +176,8 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             Instantiate(ufo, transform);
             dying = true;
         }
+
+
     }
     public void Dust() {
         dust.Play();
@@ -217,10 +217,10 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     }
     //Do the stuff that powerups do
     //Or use as a waypoint to somewhere where logic is done
-    public void ItemCollected(Collectable _collectable)
+    public void ItemCollected(Collectable.CollectableType _collectable)
     {
-        Debug.Log("playerhandle: Message received " + _collectable.type.ToString());
-        Collectable.CollectableType itemType = _collectable.type;
+        Debug.Log("playerhandle: Message received " + _collectable.ToString());
+        Collectable.CollectableType itemType = _collectable;
         //Ignore Coins
         switch(itemType) {
             case Collectable.CollectableType.SlowDown:
@@ -356,9 +356,9 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             }
             if (GUILayout.Button("Refresh items"))
             {
-                Collectable col = new Collectable();
-                col.type = Collectable.CollectableType.Refresh;
-                script.controller.SendConsumeMessage(col);
+                //Collectable col = new Collectable();
+                //col.type = Collectable.CollectableType.Refresh;
+                script.controller.SendConsumeMessage(Collectable.CollectableType.Refresh);
             }
         }
     }
