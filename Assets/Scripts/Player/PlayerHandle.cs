@@ -37,6 +37,9 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     public ParticleSystem JumpDust;
     public ParticleSystem fire;
     public GameObject ufo;
+    public GameObject shield;
+    public GameObject magnetPrefab;
+    public Transform boneTransform;
     private bool slowGod;
     public Magnetize mag;
     public bool Speedup = false;
@@ -66,7 +69,6 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         input.onMovement += MovementCalc;
         EventSystemListeners.main.AddListener(gameObject);
         resurrects = CountResurrects();
-        Debug.Log(CountResurrects());
     }
 
     /// <summary>
@@ -75,7 +77,8 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     /// </summary>
 	void Update()
     {
-        if(speedLevel >= maxSpeedLevel)
+        
+        if (speedLevel >= maxSpeedLevel)
         {
             Die();
         }
@@ -96,9 +99,12 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
                     invincible = false;
                     sliding = false;
                     anim.Play("JumpBlend");
+                    
                     StopDust();
                     JumpDust.Play();
                     jumping = true;
+                    
+
                 } else if(direction.y < 0)
                 {
                     invincible = false;
@@ -114,7 +120,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     private int CountResurrects()
     {
         int count = 0;
-        if (GameManager.Instance.itemSlots != null) { 
+        if (GameManager.Instance != null && GameManager.Instance.itemSlots != null) { 
             for (int i = 0; i < GameManager.Instance.itemSlots.Length; i++)
             {
                 if (GameManager.Instance.itemSlots[i] != null &&
@@ -269,6 +275,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         float t = Time.time;
         while(Time.time - t < time)
         {
+
             yield return null;
         }
         Speedup = false;
@@ -278,13 +285,21 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         //play god particle for 5
         godMode = true;
         StartCoroutine(God(time));
+        
     }
     IEnumerator God(float time) {
         float t = Time.time;
-        while(Time.time - t < time)
+
+        shield.SetActive(true);
+        while (Time.time - t < time)
         {
+            shield.transform.position = new Vector3(
+                boneTransform.position.x,
+                boneTransform.position.y+ 0.5f,
+                shield.transform.position.z);
             yield return null;
         }
+        shield.SetActive(false);
         godMode = false;
     }
 
@@ -337,6 +352,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             if(GUILayout.Button("Magnetize"))
             {
                 script.Magnet(10);
+                script.controller.SendConsumeMessage(Collectable.CollectableType.Magnet);
             }
             if(GUILayout.Button("GOD"))
             {
@@ -356,8 +372,6 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             }
             if (GUILayout.Button("Refresh items"))
             {
-                //Collectable col = new Collectable();
-                //col.type = Collectable.CollectableType.Refresh;
                 script.controller.SendConsumeMessage(Collectable.CollectableType.Refresh);
             }
         }

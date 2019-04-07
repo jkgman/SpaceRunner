@@ -7,6 +7,7 @@ public class Magnetize : MonoBehaviour {
     bool Active;
     bool justActivated;
     BoxCollider box;
+    public GameObject MagnetPrefab;
     private void Start()
     {
         box = GetComponent<BoxCollider>();
@@ -25,6 +26,13 @@ public class Magnetize : MonoBehaviour {
                 {
                     GoTo go = cols[i].gameObject.AddComponent<GoTo>();
                     go.target = PlayerHandle.instance.transform;
+
+                    //Tried to spawn it here but couldnt get things the right way
+                    //if (go.gameObject!= null) {
+                    //    GameObject mag = Instantiate(MagnetPrefab);
+                    //    mag.GetComponent<MagnetPath>().emitter = gameObject;
+                    //    mag.GetComponent<MagnetPath>().target = go.GetComponentInChildren<Collectable>().gameObject;
+                    //}
                 }
             }
         }
@@ -51,6 +59,7 @@ public class Magnetize : MonoBehaviour {
         {
             GoTo go = other.gameObject.AddComponent<GoTo>();
             go.target = PlayerHandle.instance.transform;
+            
         }
     }
 
