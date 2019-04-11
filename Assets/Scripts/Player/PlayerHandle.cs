@@ -39,6 +39,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     public ParticleSystem ressurectpart;
     public GameObject ufo;
     public GameObject shield;
+    private Material shieldMat;
     public GameObject magnetPrefab;
     public Transform boneTransform;
     private bool slowGod;
@@ -70,6 +71,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         input.onMovement += MovementCalc;
         EventSystemListeners.main.AddListener(gameObject);
         resurrects = CountResurrects();
+        shieldMat = shield.GetComponent<Renderer>().material;
     }
 
     /// <summary>
@@ -291,6 +293,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
         float t = Time.time;
 
         shield.SetActive(true);
+        shieldMat.color = new Color(0,1,0,0.75f);
         while (Time.time - t < time)
         {
             shield.transform.position = new Vector3(
@@ -312,10 +315,18 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     IEnumerator SlowGod(float time)
     {
         float t = Time.time;
-        while(Time.time - t < time)
+        shield.SetActive(true);
+        
+        shieldMat.color = new Color(0, 0,1, 0.75f);
+        while (Time.time - t < time)
         {
+            shield.transform.position = new Vector3(
+                boneTransform.position.x,
+                boneTransform.position.y + 0.5f,
+                shield.transform.position.z);
             yield return null;
         }
+        shield.SetActive(false);
         slowGod = false;
     }
     
