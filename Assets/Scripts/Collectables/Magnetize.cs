@@ -5,17 +5,17 @@ using UnityEngine;
 public class Magnetize : MonoBehaviour {
     float activeFor;
     bool Active;
-    bool justActivated;
     BoxCollider box;
     public GameObject MagnetPrefab;
+    public GameObject magnetvisual;
     private void Start()
     {
         box = GetComponent<BoxCollider>();
     }
     public void Activate(float time) {
         //play mag particle for 10
+        magnetvisual.SetActive(true);
         Active = true;
-        justActivated = true;
         activeFor = time;
         Collider[] cols = Physics.OverlapBox(transform.position, new Vector3(5, 5, 4));
         if(cols.Length > 0)
@@ -27,12 +27,12 @@ public class Magnetize : MonoBehaviour {
                     GoTo go = cols[i].gameObject.AddComponent<GoTo>();
                     go.target = PlayerHandle.instance.transform;
 
-                    //Tried to spawn it here but couldnt get things the right way
-                    //if (go.gameObject!= null) {
-                    //    GameObject mag = Instantiate(MagnetPrefab);
-                    //    mag.GetComponent<MagnetPath>().emitter = gameObject;
-                    //    mag.GetComponent<MagnetPath>().target = go.GetComponentInChildren<Collectable>().gameObject;
-                    //}
+                    if (go.gameObject != null)
+                    {
+                        GameObject mag = Instantiate(MagnetPrefab);
+                        mag.GetComponent<MagnetPath>().emitter = gameObject;
+                        mag.GetComponent<MagnetPath>().target = go.GetComponentInChildren<Collectable>().gameObject;
+                    }
                 }
             }
         }
@@ -46,7 +46,7 @@ public class Magnetize : MonoBehaviour {
             if(activeFor <= 0)
             {
                 Active = false;
-                
+                magnetvisual.SetActive(false);
 
             } 
         }
@@ -59,7 +59,12 @@ public class Magnetize : MonoBehaviour {
         {
             GoTo go = other.gameObject.AddComponent<GoTo>();
             go.target = PlayerHandle.instance.transform;
-            
+            if (go.gameObject != null)
+            {
+                GameObject mag = Instantiate(MagnetPrefab);
+                mag.GetComponent<MagnetPath>().emitter = gameObject;
+                mag.GetComponent<MagnetPath>().target = go.gameObject;
+            }
         }
     }
 

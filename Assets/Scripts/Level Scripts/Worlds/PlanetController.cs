@@ -79,7 +79,7 @@ public class PlanetController : MonoBehaviour {
         float currentSpeed;
         if(PlayerHandle.instance.Speedup)
         {
-            currentSpeed = Speed + 10 + (controller.Distance * modifier);
+            currentSpeed = (Speed + (controller.Distance * modifier))/2;
         } else
         {
             currentSpeed = Speed + (controller.Distance * modifier);

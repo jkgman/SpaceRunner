@@ -36,6 +36,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     public ParticleSystem dust;
     public ParticleSystem JumpDust;
     public ParticleSystem fire;
+    public ParticleSystem ressurectpart;
     public GameObject ufo;
     public GameObject shield;
     public GameObject magnetPrefab;
@@ -76,8 +77,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     /// and looks if weve lost too many speed levels to die
     /// </summary>
 	void Update()
-    {
-        
+    { 
         if (speedLevel >= maxSpeedLevel)
         {
             Die();
@@ -90,7 +90,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
     /// Gets inputs and moves character accordingly
     /// </summary>
     public void MovementCalc( Vector2 endPos, Vector2 direction, float distance) {
-        if(control&&!dying)
+        if(control && !dying)
         {
             if(Mathf.Abs(direction.x) < Mathf.Abs(direction.y))
             {
@@ -172,7 +172,7 @@ public class PlayerHandle : MonoBehaviour, IitemEvents {
             Debug.Log("resurrect");
             resurrects--;
             hitCount++;
-            //play resurect particle
+            ressurectpart.Play();
             return;
         }  else if (!godMode)
         {

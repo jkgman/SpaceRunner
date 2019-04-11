@@ -28,9 +28,9 @@ public class MagnetPath : MonoBehaviour {
         }
 
         //Could be destroyed here once the length between objects become miniscule
-        //if (scaleX < 0.1f or something)
-        //{
-        //    Destroy(gameObject);
-        //}
+        if (scaleX < 0.1f)
+        {
+            Destroy(gameObject);
+        }
     }
 }
